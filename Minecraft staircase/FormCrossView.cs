@@ -13,7 +13,8 @@ namespace Minecraft_staircase
 {
     public partial class FormCrossView : Form
     {
-        const string compassFile = @"North.png";
+        const string compassFile = @"data\North.png";
+        const string blockIDS = @"data\BlockIDS.txt";
         const int blockSize = 16;
 
         SettedBlock[,] blockMap;
@@ -46,8 +47,8 @@ namespace Minecraft_staircase
         {
             textures = new Dictionary<int, Bitmap>();
             blockNames = new Dictionary<int, string>();
-            textures.Add(-1, new Bitmap(@"Textures\" + blockSize + @"\overflow.png"));
-            using (FileStream fs = new FileStream("BlockIDS.txt", FileMode.Open))
+            textures.Add(-1, new Bitmap(@"data\Textures\" + blockSize + @"\overflow.png"));
+            using (FileStream fs = new FileStream(blockIDS, FileMode.Open))
             {
                 StreamReader reader = new StreamReader(fs);
                 string line = reader.ReadLine();
@@ -55,7 +56,7 @@ namespace Minecraft_staircase
                 {
                     if (line[0] != '/' && line[1] != '/')
                     {
-                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($"Textures\\{blockSize}\\{line.Split(new char[] { '-' })[1]}.png"));
+                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($@"data\Textures\{blockSize}\{line.Split(new char[] { '-' })[1]}.png"));
                         blockNames.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), line.Split(new char[] { '-' })[2]);
                     }
                     line = reader.ReadLine();
@@ -240,17 +241,17 @@ namespace Minecraft_staircase
         }
 
         int curSize = 1;
-        const int maxSize = 4;
+        const int maxSize = 3;
 
         private void WheelRolled(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0 && curSize > 1)
+            if (e.Delta < 0 && curSize > 1)
             {
                 --curSize;
                 pictureBox1.Width = pictureBox1.Width / 2;
                 pictureBox1.Height = pictureBox1.Height / 2;
             }
-            else if (e.Delta < 0 && curSize < maxSize)
+            else if (e.Delta > 0 && curSize < maxSize)
             {
                 ++curSize;
                 pictureBox1.Width = pictureBox1.Width * 2;

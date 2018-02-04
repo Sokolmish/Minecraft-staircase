@@ -19,7 +19,7 @@ namespace Minecraft_staircase
             Show();
             //for (int i = 0; i < listBox1.Items.Count; i++)
             //    listBox1.Items[i] = listBox1.Items[i] + Recources[i].ToString();
-            using (FileStream fs = new FileStream(@"BlockIDS.txt", FileMode.Open))
+            using (FileStream fs = new FileStream(@"data\BlockIDS.txt", FileMode.Open))
             {
                 StreamReader reader = new StreamReader(fs);
                 string line = reader.ReadLine();

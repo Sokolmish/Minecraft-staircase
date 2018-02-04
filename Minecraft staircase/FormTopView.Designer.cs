@@ -76,6 +76,7 @@
             this.label1.Size = new System.Drawing.Size(78, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
+            this.label1.Visible = false;
             // 
             // timer1
             // 

@@ -37,6 +37,7 @@
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.schematicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +47,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -109,7 +111,8 @@
             // 
             this.generateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.topViewToolStripMenuItem,
-            this.profileToolStripMenuItem});
+            this.profileToolStripMenuItem,
+            this.schematicToolStripMenuItem});
             this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
             this.generateToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.generateToolStripMenuItem.Text = "Generate";
@@ -127,6 +130,13 @@
             this.profileToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.profileToolStripMenuItem.Text = "Cross view";
             this.profileToolStripMenuItem.Click += new System.EventHandler(this.crossViewToolStripMenuItem_Click);
+            // 
+            // schematicToolStripMenuItem
+            // 
+            this.schematicToolStripMenuItem.Name = "schematicToolStripMenuItem";
+            this.schematicToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.schematicToolStripMenuItem.Text = "Schematic";
+            this.schematicToolStripMenuItem.Click += new System.EventHandler(this.schematicToolStripMenuItem_Click);
             // 
             // materialsToolStripMenuItem
             // 
@@ -156,21 +166,21 @@
             // discordToolStripMenuItem
             // 
             this.discordToolStripMenuItem.Name = "discordToolStripMenuItem";
-            this.discordToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.discordToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.discordToolStripMenuItem.Text = "Discord";
             this.discordToolStripMenuItem.Click += new System.EventHandler(this.discordToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -193,6 +203,12 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "schematic";
+            this.saveFileDialog1.FileName = "Staircase art 1";
+            this.saveFileDialog1.Title = "Сохранить как";
             // 
             // FormMain
             // 
@@ -235,6 +251,8 @@
         private System.Windows.Forms.ToolStripMenuItem discordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem schematicToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

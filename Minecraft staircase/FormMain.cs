@@ -5,15 +5,17 @@ using System.Windows.Forms;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
+using Substrate;
+using Substrate.ImportExport;
 
 namespace Minecraft_staircase
 {
     public partial class FormMain : Form
     {
-        const string colorsIDS = @"oldColorsIDS.txt";
-        const string waitingImage = @"Waiting.gif";
-        const string helpFile = @"help.txt";
+        const string colorsIDS = @"data/oldColorsIDS.txt";
+        const string blockIDS = @"data/BlockIDS.txt";
+        const string waitingImage = @"data/Waiting.gif";
+        const string helpFile = @"data/help.txt";
 
         List<PixelData> ColorsList;
 
@@ -200,6 +202,67 @@ namespace Minecraft_staircase
                     ids[i, j] = RawScheme[i, j].ID;
             new FormTopView().Show(ids);
         }
+
+        private void schematicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            convertTask?.Wait();
+            if (RawScheme == null)
+            {
+                MessageBox.Show("First convert an image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                SettedBlock[,] BlockMap = new SettedBlock[128, 129];
+                for (int i = 0; i < 128; i++)
+                    BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
+                int maximumHeigth = 0;
+                for (int i = 0; i < 128; i++)
+                {
+                    int minimalHeight = 0;
+                    for (int j = 1; j < 129; j++)
+                    {
+                        BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
+                        switch (RawScheme[i, j - 1].Set)
+                        {
+                            case ColorType.Normal:
+                                BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
+                                break;
+                            case ColorType.Dark:
+                                BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
+                                break;
+                            case ColorType.Light:
+                                BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
+                                break;
+                        }
+                        if (BlockMap[i, j].Height < minimalHeight)
+                            minimalHeight = BlockMap[i, j].Height;
+                        if (BlockMap[i, j].Height > maximumHeigth)
+                            maximumHeigth = BlockMap[i, j].Height;
+                    }
+                    for (int j = 0; j < 129; j++)
+                        BlockMap[i, j].Height = BlockMap[i, j].Height - minimalHeight;
+                }
+                Schematic schem = new Schematic(128, maximumHeigth + 1, 128);
+                List<int[]> blockIds = new List<int[]>();
+                using (FileStream fs = new FileStream(blockIDS, FileMode.Open))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    string line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        if (line[0] != '/' && line[1] != '/')
+                            blockIds.Add(new int[] { Convert.ToInt32(line.Split('-')[3]), Convert.ToInt32(line.Split('-')[4]) });
+                        line = reader.ReadLine();
+                    }
+                }
+                for (int i = 0; i < 128; i++)
+                    for (int j = 1; j < 129; j++)
+                        schem.Blocks.SetBlock(i, BlockMap[i, j].Height, j - 1, new AlphaBlock(blockIds[BlockMap[i, j].ID - 1][0], blockIds[BlockMap[i, j].ID - 1][1]));
+                schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
+            }
+        }
+
 
         private void discordToolStripMenuItem_Click(object sender, EventArgs e)
         {

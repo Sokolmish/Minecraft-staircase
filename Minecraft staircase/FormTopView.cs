@@ -13,9 +13,9 @@ namespace Minecraft_staircase
 {
     public partial class FormTopView : Form
     {
-        const string BlockIDS = @"BlockIDS.txt";
+        const string BlockIDS = @"data\BlockIDS.txt";
         const int blockSize = 16;
-        const int maxSize = 4;
+        const int maxSize = 3;
 
         int[,] blockMap;
         Dictionary<int, Bitmap> textures;
@@ -48,7 +48,7 @@ namespace Minecraft_staircase
         void LoadTextures()
         {
             textures = new Dictionary<int, Bitmap>();
-            textures.Add(-1, new Bitmap(@"Textures\" + blockSize + @"\overflow.png"));
+            textures.Add(-1, new Bitmap(@"data\Textures\" + blockSize + @"\overflow.png"));
             blockNames = new Dictionary<int, string>();
             using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
             {
@@ -58,7 +58,7 @@ namespace Minecraft_staircase
                 {
                     if (line[0] != '/' && line[1] != '/')
                     {
-                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($"Textures\\{blockSize}\\{line.Split(new char[] { '-' })[1]}.png"));
+                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($@"data\Textures\{blockSize}\{line.Split(new char[] { '-' })[1]}.png"));
                         blockNames.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), line.Split(new char[] { '-' })[2]);
                     }
                     line = reader.ReadLine();
@@ -176,14 +176,14 @@ namespace Minecraft_staircase
         {
             Point loc = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
             int k = (int)Math.Pow(2, curSize);
-            if (e.Delta > 0 && curSize > 1)
+            if (e.Delta < 0 && curSize > 1)
             {
                 loc = new Point(pictureBox1.Location.X /*+ ((Width - 15) / k)*/, pictureBox1.Location.Y /*+ ((Height - 38) / k)*/);
                 --curSize;
                 pictureBox1.Width = pictureBox1.Width / 2;
                 pictureBox1.Height = pictureBox1.Height / 2;               
             }
-            else if (e.Delta < 0 && curSize < maxSize)
+            else if (e.Delta > 0 && curSize < maxSize)
             {
                 loc = new Point(pictureBox1.Location.X /*- ((Width - 15) / k)*/, pictureBox1.Location.Y /*- ((Height - 38) / k)*/);
                 ++curSize;
