@@ -152,7 +152,6 @@
             this.serviceToolStripMenuItem.Name = "serviceToolStripMenuItem";
             this.serviceToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.serviceToolStripMenuItem.Text = "Service";
-            this.serviceToolStripMenuItem.Visible = false;
             this.serviceToolStripMenuItem.Click += new System.EventHandler(this.serviceToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem

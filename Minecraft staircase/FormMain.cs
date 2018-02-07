@@ -144,7 +144,7 @@ namespace Minecraft_staircase
 
         private void serviceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{originalImage.Width} {originalImage.Height}");
+            new NewFormMain().Show();
         }
 
         private void crossViewToolStripMenuItem_Click(object sender, EventArgs e)

@@ -102,6 +102,12 @@
     <Compile Include="FormTopView.Designer.cs">
       <DependentUpon>FormTopView.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewFormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFormMain.Designer.cs">
+      <DependentUpon>NewFormMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types.cs" />
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTopView.resx">
       <DependentUpon>FormTopView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFormMain.resx">
+      <DependentUpon>NewFormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -158,6 +167,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BlockIDS.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="oldColorsIDS.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

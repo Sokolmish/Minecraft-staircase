@@ -22,7 +22,7 @@ namespace Minecraft_staircase.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Minecraft_staircase.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Minecraft_staircase.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,51 @@ namespace Minecraft_staircase.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на //ColorID-Texture_name-Display name-Id-Data
+        ///1-grass_side-Grass-2-0
+        ///2-sandstone_bottom-Sandstone-24-0
+        ///3-web-Web (bed!)-30-0
+        ///4-redstone_block-Redstone, lava-152-0
+        ///5-ice_packed-Ice-174-0
+        ///6-iron_block-Iron (iron bars)-148-0
+        ///7-leaves_oak-Leaves-18-0
+        ///8-snow-Snow (white wool)-80-0
+        ///9-clay-Clay-82-0
+        ///10-dirt-Dirt, granite-3-0
+        ///11-stone-Stone-1-0
+        ///12-water_overlay-Water-9-0
+        ///13-planks_oak-Oak planks-5-0
+        ///14-stone_diorite-Quartz (diorite)-1-3
+        ///15-wool_colored_orange-Orange concrete, wool-251-1
+        ///16-purpur_bloc [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string BlockIDS {
+            get {
+                return ResourceManager.GetString("BlockIDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;ID&quot;:1,&quot;NormalColor&quot;:[109,153,48],&quot;DarkColor&quot;:[89,125,39],&quot;LightColor&quot;:[127,178,56]}
+        ///{&quot;ID&quot;:2,&quot;NormalColor&quot;:[213,201,140],&quot;DarkColor&quot;:[174,164,115],&quot;LightColor&quot;:[247,233,163]}
+        ///{&quot;ID&quot;:3,&quot;NormalColor&quot;:[171,171,171],&quot;DarkColor&quot;:[140,140,140],&quot;LightColor&quot;:[199,199,199]}
+        ///{&quot;ID&quot;:4,&quot;NormalColor&quot;:[220,0,0],&quot;DarkColor&quot;:[180,0,0],&quot;LightColor&quot;:[255,0,0]}
+        ///{&quot;ID&quot;:5,&quot;NormalColor&quot;:[138,138,220],&quot;DarkColor&quot;:[112,112,180],&quot;LightColor&quot;:[160,160,255]}
+        ///{&quot;ID&quot;:6,&quot;NormalColor&quot;:[144,144,144],&quot;DarkColor&quot;:[117,117,117],&quot;LightColor [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string ColorsIDS {
+            get {
+                return ResourceManager.GetString("ColorsIDS", resourceCulture);
             }
         }
     }

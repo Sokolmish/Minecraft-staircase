@@ -34,7 +34,7 @@ namespace Minecraft_staircase
             resources = new int[_colors.Count];
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                for (int j = 0; i < sourceImage.Height; j++)
+                for (int j = 0; j < sourceImage.Height; j++)
                 {
                     int betterID = 0;
                     ColorType betterSet = ColorType.Normal;
