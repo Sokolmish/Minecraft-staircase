@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using static Minecraft_staircase.FormMain;
 
 namespace Minecraft_staircase
 {
     public partial class FormCrossView : Form
     {
-        const string compassFile = @"data\North.png";
         const string blockIDS = @"data\BlockIDS.txt";
+        const string compassImage = @"data\North.png";
         const int blockSize = 16;
 
         SettedBlock[,] blockMap;
@@ -30,17 +29,15 @@ namespace Minecraft_staircase
         {
             InitializeComponent();
             MouseWheel += new MouseEventHandler(WheelRolled);
-            pictureBox2.Image = Image.FromFile(compassFile);
+            pictureBox2.Image = Image.FromFile(compassImage);
         }
 
         internal void Show(SettedBlock[,] data)
         {
             Show();
-            this.blockMap = data;
+            blockMap = data;
             LoadTextures();
-            //pictureBox1.Image = new Bitmap(129 * blockSize, 128 * blockSize); //?
             pictureBox1.Image = CreateLayer(0);
-            //CreateLayers();
         }
 
         void LoadTextures()
@@ -77,15 +74,9 @@ namespace Minecraft_staircase
             curLayer = 0;
         }
 
-
-
-
-        //void CreateLayer(int i)
         Image CreateLayer(int i)
         {
-            //LeftImage[i] = new Bitmap(128 * blockSize, 129 * blockSize);
             Image tempImg = new Bitmap(128 * blockSize, 129 * blockSize);
-            //Graphics graph = Graphics.FromImage(LeftImage[i]);
             Graphics graph = Graphics.FromImage(tempImg);
             for (int j = 0; j < 129; j++)
             {
@@ -100,7 +91,6 @@ namespace Minecraft_staircase
         private void buttonNext_Click(object sender, EventArgs e)
         {
             curLayer = curLayer != 127 ? curLayer + 1 : 0;
-            //pictureBox1.Image = LeftImage[curLayer];
             pictureBox1.Image = CreateLayer(curLayer);
             textBox1.Text = curLayer.ToString();
         }
@@ -108,7 +98,6 @@ namespace Minecraft_staircase
         private void buttonPrevious_Click(object sender, EventArgs e)
         {
             curLayer = curLayer != 0 ? curLayer - 1 : 127;
-            //pictureBox1.Image = LeftImage[curLayer];
             pictureBox1.Image = CreateLayer(curLayer);
             textBox1.Text = curLayer.ToString();
         }
@@ -132,7 +121,6 @@ namespace Minecraft_staircase
                     textBox1.Text = curLayer.ToString();
                     textBox1.SelectionStart = cursor;
                 }
-                //pictureBox1.Image = LeftImage[curLayer];
                 pictureBox1.Image = CreateLayer(curLayer);
             }
         }

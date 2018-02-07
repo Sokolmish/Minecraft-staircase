@@ -20,7 +20,7 @@ namespace Minecraft_staircase
         List<PixelData> ColorsList;
 
         Image originalImage;
-        Pixel[,] RawScheme;
+        UnsettedBlock[,] RawScheme;
 
         int[] Recources;
 
@@ -50,6 +50,7 @@ namespace Minecraft_staircase
             {
                 originalImage = new Bitmap(Image.FromFile(openFileDialog1.FileName), 128, 128);
                 pictureBox1.Image = originalImage;
+                label1.Visible = false;
             }
         }
 
@@ -71,23 +72,20 @@ namespace Minecraft_staircase
             convertTask = new Task(() =>
             {
                 Bitmap tempImg = new Bitmap(pictureBox1.Image);
-                RawScheme = new Pixel[tempImg.Height, tempImg.Width];
+                RawScheme = new UnsettedBlock[tempImg.Height, tempImg.Width];
                 Recources = new int[51];
-                //Parallel.For(0, tempImg.Height, i =>
                 for (int i = 0; i < tempImg.Height; i++)
                 {
-                    //Parallel.For(0, tempImg.Width, j =>
                     for (int j = 0; j < tempImg.Width; j++)
                     {
                         int betterID = 0;
                         ColorType betterSet = ColorType.Normal; //0-Down 1-Mid 2-Up
                         double betterSimilarity = 1000;
                         Color selectedColor = new Color();
-                        //Parallel.ForEach<PixelData>(DataBase, col =>
                         foreach (PixelData col in ColorsList)
                         {
                             if (Similarity(col.NormalColor[0], col.NormalColor[1], col.NormalColor[2],
-                                tempImg.GetPixel(i, j).R, tempImg.GetPixel(i, j).G, tempImg.GetPixel(i, j).B)
+                                tempImg.GetPixel(i, j).R, tempImg.GetPixel(i, j).G, tempImg.GetPixel(i, j).B) 
                                 < betterSimilarity)
                             {
                                 betterID = col.ID;
@@ -117,17 +115,17 @@ namespace Minecraft_staircase
                                     selectedColor = Color.FromArgb(col.LightColor[0], col.LightColor[1], col.LightColor[2]);
                                 }
                             }
-                        }//);
+                        }
                         RawScheme[i, j].ID = betterID;
                         RawScheme[i, j].Set = betterSet;
                         tempImg.SetPixel(i, j, selectedColor);
                         Recources[betterID - 1]++;
-                    }//);
-                }//);
+                    }
+                }
                 pictureBox2.Image = tempImg;
             });
             convertTask.Start();
-            ImageAnimator.Animate(pictureBox1.Image, delegate (object o, EventArgs args) { });
+            label2.Visible = false;
         }
 
         double Similarity(int r1, int g1, int b1, int r2, int g2, int b2) => 
@@ -183,7 +181,6 @@ namespace Minecraft_staircase
                 }
                 for (int j = 0; j < 129; j++)
                     BlockMap[i, j].Height = BlockMap[i, j].Height - minimalHeight;
-                //TODO: Bed matching
             }
             new FormCrossView().Show(BlockMap);
         }
@@ -274,37 +271,9 @@ namespace Minecraft_staircase
             System.Diagnostics.Process.Start(helpFile);
         }
 
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox1().Show();
         }
-
-        #region Types
-        struct PixelData
-        {
-            public int ID { get; set; }
-            public int[] NormalColor { get; set; }
-            public int[] DarkColor { get; set; }
-            public int[] LightColor { get; set; }
-        }
-
-        struct Pixel
-        {
-            public int ID { get; set; }
-            /// <summary>
-            /// 0-Down 1-Mid 2-Up
-            /// </summary>
-            public ColorType Set { get; set; }
-        }
-
-        internal struct SettedBlock
-        {
-            public int ID { get; set; }
-            public int Height { get; set; }
-        }
-
-        enum ColorType { Dark = 0, Normal = 1, Light = 2 };
-        #endregion
     }
 }
