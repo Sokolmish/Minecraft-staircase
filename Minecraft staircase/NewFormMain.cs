@@ -5,16 +5,19 @@ using System.Windows.Forms;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Substrate;
+using Substrate.ImportExport;
 
 namespace Minecraft_staircase
 {
     public partial class NewFormMain : Form
     {
         const int blockSize = 16;
+        const string BlockIDS = @"data\PossibleBlocks.txt";
 
         List<PixelData> colorsList;
-        Dictionary<int, Bitmap> textures;
-        Dictionary<int, string> blockNames;
 
         Image originalImage;
         Image rawImage;
@@ -22,13 +25,14 @@ namespace Minecraft_staircase
 
         SettedBlock[,] blockMap;
         int[] recourses;
+        int maxHeight;
+
+        Thread convertTask;     
 
         public NewFormMain()
         {
             InitializeComponent();
             LoadColors();
-            LoadTextures();
-            //button1.Location = new Point(12, 12);
         }
 
         void LoadColors()
@@ -43,27 +47,6 @@ namespace Minecraft_staircase
                 colorsList.Add((PixelData)serializer.Deserialize(reader.ReadLine(), typeof(PixelData)));
             }
             ms.Close();
-        }
-
-        void LoadTextures()
-        {
-            textures = new Dictionary<int, Bitmap>();
-            textures.Add(-1, new Bitmap(@"data\Textures\" + blockSize + @"\overflow.png"));
-            blockNames = new Dictionary<int, string>();
-            using (MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(Properties.Resources.BlockIDS)))
-            {
-                StreamReader reader = new StreamReader(ms);
-                string line = reader.ReadLine();
-                while (line != null)
-                {
-                    if (line[0] != '/' && line[1] != '/')
-                    {
-                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($@"data\Textures\{blockSize}\{line.Split(new char[] { '-' })[1]}.png"));
-                        blockNames.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), line.Split(new char[] { '-' })[2]);
-                    }
-                    line = reader.ReadLine();
-                }
-            }
         }
 
 
@@ -185,27 +168,44 @@ namespace Minecraft_staircase
 
         private void MaterialsButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Accept?", "Informator", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            MaterialsButton.Visible = false;
+            
         }
 
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            ArtGenerator gen = new ArtGenerator(colorsList);
-            convertedImage = rawImage;
-            ArtType type = ArtType.Flat;
-            if (radioButton2.Checked)
-                type = ArtType.Lite;
-            else if (radioButton3.Checked)
-                type = ArtType.Full;
-            blockMap = gen.CreateScheme(ref convertedImage, type, out recourses);
-            pictureBox1.Image = convertedImage;
-            FinalImageButton.Enabled = true;
-            TopViewButton.Enabled = true;
-            CrossViewButton.Enabled = true;
-            UsedMaterialsButton.Enabled = true;
-            SchematicButton.Enabled = true;
+            progressBar1.Maximum = rawImage.Width * rawImage.Height;
+            progressBar1.Value = 0;
+            convertTask?.Abort();
+            convertTask = new Thread(() =>
+            {
+                ArtGenerator gen = new ArtGenerator(colorsList);
+                gen.SetProgress(progressBar1);
+                convertedImage = rawImage.Clone() as Image; 
+                ArtType type = ArtType.Flat;
+                if (radioButton2.Checked)
+                    type = ArtType.Lite;
+                else if (radioButton3.Checked)
+                    type = ArtType.Full;
+                blockMap = gen.CreateScheme(ref convertedImage, type, out recourses, out maxHeight);
+                pictureBox1.Image = convertedImage;
+            });
+            convertTask.Start();
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (convertTask.ThreadState == ThreadState.Stopped)
+            {
+                timer1.Stop();
+                FinalImageButton.Enabled = true;
+                TopViewButton.Enabled = true;
+                CrossViewButton.Enabled = true;
+                UsedMaterialsButton.Enabled = true;
+                SchematicButton.Enabled = true;
+                MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
         private void FinalImageButton_Click(object sender, EventArgs e)
@@ -225,8 +225,6 @@ namespace Minecraft_staircase
             panel1.Size = new Size(512, 512);
             panel1.Location = new Point(223, 12);
         }
-
-
         private void TopViewButton_Click(object sender, EventArgs e)
         {
             int[,] ids = new int[blockMap.GetLength(0), blockMap.GetLength(1) - 1];
@@ -238,17 +236,37 @@ namespace Minecraft_staircase
 
         private void CrossViewButton_Click(object sender, EventArgs e)
         {
-            //TODO
+            new FormCrossView().Show(blockMap, maxHeight + 1);
         }
 
         private void UsedMaterialsButton_Click(object sender, EventArgs e)
         {
-            new FormMaterials().Show(Recources);
+            new FormMaterials().Show(recourses);
         }
 
         private void SchematicButton_Click(object sender, EventArgs e)
         {
-            //TODO
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
+                List<int[]> blockIds = new List<int[]>();
+                using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    string line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        line = line.Split(',')[0];
+                        if (line[0] != '/' && line[1] != '/')
+                            blockIds.Add(new int[] { Convert.ToInt32(line.Split('-')[2]), Convert.ToInt32(line.Split('-')[3]) });
+                        line = reader.ReadLine();
+                    }
+                }
+                for (int i = 0; i < blockMap.GetLength(0); i++)
+                    for (int j = 1; j < blockMap.GetLength(1); j++)
+                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1, new AlphaBlock(blockIds[blockMap[i, j].ID - 1][0], blockIds[blockMap[i, j].ID - 1][1]));
+                schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
+            }
         }
 
 

@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Minecraft_staircase
 {
     class ArtGenerator
     {
         List<PixelData> _colors;
+
+        ProgressBar progress;
+        public delegate void Del();
+        public event Del Inc;
 
         /// <summary>
         /// Initialize new ArtGenerator
@@ -18,6 +23,8 @@ namespace Minecraft_staircase
         public ArtGenerator(List<PixelData> colors)
         {
             _colors = colors;
+            progress = null;
+            Inc += () => { progress?.Increment(1); };
         }
 
         /// <summary>
@@ -27,7 +34,7 @@ namespace Minecraft_staircase
         /// <param name="type">Art type</param>
         /// <param name="resources">Array of resources required</param>
         /// <returns></returns>
-        public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int[] resources)
+        public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int[] resources, out int maxHeight)
         {
             UnsettedBlock[,] RawScheme = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             Bitmap tempImage = sourceImage as Bitmap;
@@ -83,13 +90,14 @@ namespace Minecraft_staircase
                     RawScheme[i, j].Set = betterSet;
                     tempImage.SetPixel(i, j, selectedColor);
                     resources[betterID - 1]++;
+                    progress.BeginInvoke(Inc);
                 }
             }
             sourceImage = tempImage;
             SettedBlock[,] BlockMap = new SettedBlock[sourceImage.Width, sourceImage.Height + 1];
             for (int i = 0; i < sourceImage.Width; i++)
                 BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-            int maxHeight = 0;
+            maxHeight = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 int minHeight = 0;
@@ -123,9 +131,17 @@ namespace Minecraft_staircase
         /// <param name="sourceImage">Image to create art. After creation will be modified!</param>
         /// <param name="type">Art type</param>
         /// <returns></returns>
-        public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type) => 
-            (CreateScheme(ref sourceImage, type, out int[] temp));
+        public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight) => 
+            (CreateScheme(ref sourceImage, type, out int[] temp, out maxHeight));
 
+        /// <summary>
+        /// Add progressBar
+        /// </summary>
+        /// <param name="progress">ProgressBar</param>
+        public void SetProgress(ProgressBar progress)
+        {
+            this.progress = progress;
+        }
 
         /// <summary>
         /// Get similarity of 2 colors

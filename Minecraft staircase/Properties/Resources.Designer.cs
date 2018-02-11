@@ -61,31 +61,6 @@ namespace Minecraft_staircase.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на //ColorID-Texture_name-Display name-Id-Data
-        ///1-grass_side-Grass-2-0
-        ///2-sandstone_bottom-Sandstone-24-0
-        ///3-web-Web (bed!)-30-0
-        ///4-redstone_block-Redstone, lava-152-0
-        ///5-ice_packed-Ice-174-0
-        ///6-iron_block-Iron (iron bars)-148-0
-        ///7-leaves_oak-Leaves-18-0
-        ///8-snow-Snow (white wool)-80-0
-        ///9-clay-Clay-82-0
-        ///10-dirt-Dirt, granite-3-0
-        ///11-stone-Stone-1-0
-        ///12-water_overlay-Water-9-0
-        ///13-planks_oak-Oak planks-5-0
-        ///14-stone_diorite-Quartz (diorite)-1-3
-        ///15-wool_colored_orange-Orange concrete, wool-251-1
-        ///16-purpur_bloc [остаток строки не уместился]&quot;;.
-        /// </summary>
-        public static string BlockIDS {
-            get {
-                return ResourceManager.GetString("BlockIDS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на {&quot;ID&quot;:1,&quot;NormalColor&quot;:[109,153,48],&quot;DarkColor&quot;:[89,125,39],&quot;LightColor&quot;:[127,178,56]}
         ///{&quot;ID&quot;:2,&quot;NormalColor&quot;:[213,201,140],&quot;DarkColor&quot;:[174,164,115],&quot;LightColor&quot;:[247,233,163]}
         ///{&quot;ID&quot;:3,&quot;NormalColor&quot;:[171,171,171],&quot;DarkColor&quot;:[140,140,140],&quot;LightColor&quot;:[199,199,199]}

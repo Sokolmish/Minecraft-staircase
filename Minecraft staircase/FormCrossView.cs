@@ -14,16 +14,20 @@ namespace Minecraft_staircase
     {
         const string blockIDS = @"data\BlockIDS.txt";
         const string compassImage = @"data\North.png";
+        const string BlockIDS = @"data\PossibleBlocks.txt";
         const int blockSize = 16;
 
         SettedBlock[,] blockMap;
-
-        Bitmap[] LeftImage;
+        int maxHeight;
 
         Dictionary<int, Bitmap> textures;
         Dictionary<int, string> blockNames;
 
         int curLayer;
+
+        Color defMeshColor = Color.Black;
+        Color chunkMeshColor = Color.Red;
+        Color mapMeshColor = Color.Purple;
 
         public FormCrossView()
         {
@@ -32,72 +36,89 @@ namespace Minecraft_staircase
             pictureBox2.Image = Image.FromFile(compassImage);
         }
 
-        internal void Show(SettedBlock[,] data)
+        internal void Show(SettedBlock[,] blockMap, int maxHeight)
         {
             Show();
-            blockMap = data;
+            this.blockMap = blockMap;
+            this.maxHeight = maxHeight;
             LoadTextures();
             pictureBox1.Image = CreateLayer(0);
+            label3.Text = $"Maximum height - {maxHeight}";
         }
 
         void LoadTextures()
         {
             textures = new Dictionary<int, Bitmap>();
+            textures.Add(-1, new Bitmap(@"data\Textures\overflow.png"));
             blockNames = new Dictionary<int, string>();
-            textures.Add(-1, new Bitmap(@"data\Textures\" + blockSize + @"\overflow.png"));
-            using (FileStream fs = new FileStream(blockIDS, FileMode.Open))
+            using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
             {
                 StreamReader reader = new StreamReader(fs);
                 string line = reader.ReadLine();
+                int id = 1;
                 while (line != null)
                 {
+                    line = line.Split(',')[0];
                     if (line[0] != '/' && line[1] != '/')
                     {
-                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($@"data\Textures\{blockSize}\{line.Split(new char[] { '-' })[1]}.png"));
-                        blockNames.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), line.Split(new char[] { '-' })[2]);
+                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}.png"));
+                        blockNames.Add(id++, line.Split(new char[] { '-' })[1]);
                     }
                     line = reader.ReadLine();
                 }
             }
         }
 
-        void CreateLayers()
-        {
-            LeftImage = new Bitmap[128];
-            for (int i =0; i < 128; i++)
-            {
-                CreateLayer(i);
-                LeftImage[i].RotateFlip(RotateFlipType.Rotate270FlipNone);
-                PrintMesh(LeftImage[i]);
-            }
-            pictureBox1.Image = LeftImage[0];
-            curLayer = 0;
-        }
-
         Image CreateLayer(int i)
         {
-            Image tempImg = new Bitmap(128 * blockSize, 129 * blockSize);
+            Image tempImg = new Bitmap(blockMap.GetLength(1) * blockSize, maxHeight > 3 ? maxHeight * blockSize : 3 * blockSize);
             Graphics graph = Graphics.FromImage(tempImg);
-            for (int j = 0; j < 129; j++)
+            for (int j = 0; j < (blockMap.GetLength(1)); j++)
             {
-                graph.DrawImage(textures[blockMap[i, j].ID], blockMap[i, j].Height * blockSize, j * blockSize);
+                graph.DrawImage(textures[blockMap[i, j].ID], j * blockSize, blockMap[i, j].Height * blockSize);
             }
-            tempImg.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            //tempImg.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            graph = Graphics.FromImage(tempImg);
             PrintMesh(tempImg);
-            PrintChunkBoundaries(tempImg, true);
+            PrintChunkMesh(tempImg);
+            PrintMapMesh(tempImg);
+            tempImg.RotateFlip(RotateFlipType.RotateNoneFlipY);
             return tempImg;
         }
 
+
+        void PrintMesh(Image image)
+        {
+            Graphics graph = Graphics.FromImage(image);
+            for (int i = 0; i < blockMap.GetLength(1); i++)
+                graph.DrawLine(new Pen(defMeshColor, 1), new Point(blockSize * (i + 1), 0), new Point(blockSize * (i + 1), image.Height));
+        }
+
+        void PrintChunkMesh(Image image)
+        {
+            Graphics graph = Graphics.FromImage(image);
+            for (int i = 0; i < blockMap.GetLength(1) / 16; i++)
+                graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize * 16 * (i + 1) + blockSize, 0), new Point(blockSize * 16 * (i + 1) + blockSize, image.Height));
+        }
+
+        void PrintMapMesh(Image image)
+        {
+            Graphics graph = Graphics.FromImage(image);
+            for (int i = 0; i < blockMap.GetLength(1) / 128; i++)
+                graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize * 128 * (i + 1) + blockSize, 0), new Point(blockSize * 128 * (i + 1) + blockSize, image.Height));
+        }
+
+
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            curLayer = curLayer != 127 ? curLayer + 1 : 0;
+            curLayer = curLayer != blockMap.GetLength(0) - 1 ? curLayer + 1 : 0;
             pictureBox1.Image = CreateLayer(curLayer);
             textBox1.Text = curLayer.ToString();
         }
 
         private void buttonPrevious_Click(object sender, EventArgs e)
         {
-            curLayer = curLayer != 0 ? curLayer - 1 : 127;
+            curLayer = curLayer != 0 ? curLayer - 1 : blockMap.GetLength(0) - 1;
             pictureBox1.Image = CreateLayer(curLayer);
             textBox1.Text = curLayer.ToString();
         }
@@ -107,9 +128,9 @@ namespace Minecraft_staircase
             curLayer = 0;
             if (Int32.TryParse(textBox1.Text, out curLayer))
             {
-                if (curLayer > 127)
+                if (curLayer > blockMap.GetLength(0) - 1)
                 {
-                    curLayer = 127;
+                    curLayer = blockMap.GetLength(0) - 1;
                     int cursor = textBox1.SelectionStart;
                     textBox1.Text = curLayer.ToString();
                     textBox1.SelectionStart = cursor;
@@ -125,38 +146,18 @@ namespace Minecraft_staircase
             }
         }
 
-
-        void PrintMesh(Image image)
-        {
-            Graphics g = Graphics.FromImage(image);
-            for (int i = 0; i < 127; i++)
-            {
-                g.DrawLine(new Pen(Color.Black), new Point((image.Width / 129 * (i + 1)), 0), new Point((image.Width / 129 * (i + 1)), image.Height));
-                g.DrawLine(new Pen(Color.Black), new Point(0, (image.Height / 128 * (i + 1))), new Point(image.Width, (image.Height / 128 * (i + 1))));
-            }
-            g.DrawLine(new Pen(Color.Black), new Point((image.Width / 129 * 129), 0), new Point((image.Width / 129 * 129), image.Height));
-        }
-
-        void PrintChunkBoundaries(Image image, bool set)
-        {
-            Graphics g = Graphics.FromImage(image);
-            for (int i = 0; i < 8; i++)
-            {
-                int pureWidth = image.Width - (image.Width / 129);
-                g.DrawLine(new Pen(set ? Color.Red : Color.Black), new Point(pureWidth / 8 * i + image.Width / 129, 0), new Point(pureWidth / 8 * i + image.Width / 129, image.Height));
-            }
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = checkBox1.Checked;
         }
 
         bool isNotFull = true;
+        Size naturalSize;
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             if (isNotFull)
             {
+                naturalSize = pictureBox1.Size;
                 isNotFull = false;
                 panel1.Dock = DockStyle.Fill;
                 Point loc = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
@@ -174,6 +175,7 @@ namespace Minecraft_staircase
             }
             else
             {
+                pictureBox1.Size = naturalSize;
                 isNotFull = true;
                 panel1.Dock = DockStyle.None;
                 Point loc = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);

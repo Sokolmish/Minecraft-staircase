@@ -48,10 +48,13 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.UsedMaterialsButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FinalImageButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.HelpButton = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -237,16 +240,16 @@
             this.UsedMaterialsButton.UseVisualStyleBackColor = true;
             this.UsedMaterialsButton.Click += new System.EventHandler(this.UsedMaterialsButton_Click);
             // 
-            // button1
+            // SettingsButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 340);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(201, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Advanced settings";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.SettingsButton.Location = new System.Drawing.Point(12, 340);
+            this.SettingsButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(201, 23);
+            this.SettingsButton.TabIndex = 17;
+            this.SettingsButton.Text = "Advanced settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // panel1
             // 
@@ -281,13 +284,35 @@
             this.FinalImageButton.UseVisualStyleBackColor = true;
             this.FinalImageButton.Click += new System.EventHandler(this.FinalImageButton_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(12, 369);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(201, 23);
+            this.HelpButton.TabIndex = 19;
+            this.HelpButton.Text = "Help";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(20, 501);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(193, 23);
+            this.progressBar1.TabIndex = 20;
+            // 
             // NewFormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 536);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.UsedMaterialsButton);
             this.Controls.Add(this.FinalImageButton);
             this.Controls.Add(this.SchematicButton);
@@ -337,9 +362,12 @@
         private System.Windows.Forms.Button UsedMaterialsButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showControlsToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SettingsButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button FinalImageButton;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button HelpButton;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

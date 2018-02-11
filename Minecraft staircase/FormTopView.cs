@@ -13,7 +13,7 @@ namespace Minecraft_staircase
 {
     public partial class FormTopView : Form
     {
-        const string BlockIDS = @"data\BlockIDS.txt";
+        const string BlockIDS = @"data\PossibleBlocks.txt";
         const int blockSize = 16;
         const int maxSize = 3;
 
@@ -53,18 +53,20 @@ namespace Minecraft_staircase
         void LoadTextures()
         {
             textures = new Dictionary<int, Bitmap>();
-            textures.Add(-1, new Bitmap(@"data\Textures\" + blockSize + @"\overflow.png"));
+            textures.Add(-1, new Bitmap(@"data\Textures\overflow.png"));
             blockNames = new Dictionary<int, string>();
             using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
             {
                 StreamReader reader = new StreamReader(fs);
                 string line = reader.ReadLine();
+                int id = 1;
                 while (line != null)
                 {
+                    line = line.Split(',')[0];
                     if (line[0] != '/' && line[1] != '/')
                     {
-                        textures.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), new Bitmap($@"data\Textures\{blockSize}\{line.Split(new char[] { '-' })[1]}.png"));
-                        blockNames.Add(Convert.ToInt32(line.Split(new char[] { '-' })[0]), line.Split(new char[] { '-' })[2]);
+                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}.png"));
+                        blockNames.Add(id++, line.Split(new char[] { '-' })[1]);
                     }
                     line = reader.ReadLine();
                 }

@@ -182,7 +182,7 @@ namespace Minecraft_staircase
                 for (int j = 0; j < 129; j++)
                     BlockMap[i, j].Height = BlockMap[i, j].Height - minimalHeight;
             }
-            new FormCrossView().Show(BlockMap);
+            new FormCrossView().Show(BlockMap, 128);
         }
 
         private void topViewToolStripMenuItem_Click(object sender, EventArgs e)
