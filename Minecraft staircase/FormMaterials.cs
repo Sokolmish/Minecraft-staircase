@@ -27,7 +27,7 @@ namespace Minecraft_staircase
                 {
                     line = line.Split('~')[1].Split(',')[0];
                     if (line[0] != '/' && line[1] != '/')
-                        listBox1.Items.Add($"{line.Split('-')[1]} - {id++ - 1}");
+                        listBox1.Items.Add($"{line.Split('-')[1]} - {Recources[id++ - 1]}");
                     line = reader.ReadLine();
                 }
             }

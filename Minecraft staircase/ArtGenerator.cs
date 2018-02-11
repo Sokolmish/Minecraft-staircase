@@ -11,6 +11,7 @@ namespace Minecraft_staircase
     class ArtGenerator
     {
         List<PixelData> _colors;
+        List<PixelData> _extendedColor;
 
         ProgressBar progress;
         public delegate void Del();
@@ -20,9 +21,10 @@ namespace Minecraft_staircase
         /// Initialize new ArtGenerator
         /// </summary>
         /// <param name="colors">List of colors</param>
-        public ArtGenerator(List<PixelData> colors)
+        public ArtGenerator(List<PixelData> colors, List<PixelData> extendedColors)
         {
             _colors = colors;
+            _extendedColor = extendedColors;
             progress = null;
             Inc += () => { progress?.Increment(1); };
         }
@@ -38,7 +40,7 @@ namespace Minecraft_staircase
         {
             UnsettedBlock[,] RawScheme = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             Bitmap tempImage = sourceImage as Bitmap;
-            resources = new int[_colors.Count];
+            resources = new int[_extendedColor.Count];
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 for (int j = 0; j < sourceImage.Height; j++)

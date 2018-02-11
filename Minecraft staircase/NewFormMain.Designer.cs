@@ -107,9 +107,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(131, 43);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(92, 17);
+            this.checkBox1.Size = new System.Drawing.Size(62, 17);
             this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Custom size";
+            this.checkBox1.Text = "Blocks";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -281,7 +281,7 @@
             this.FinalImageButton.Name = "FinalImageButton";
             this.FinalImageButton.Size = new System.Drawing.Size(201, 23);
             this.FinalImageButton.TabIndex = 15;
-            this.FinalImageButton.Text = "Image";
+            this.FinalImageButton.Text = "View image";
             this.FinalImageButton.UseVisualStyleBackColor = true;
             this.FinalImageButton.Click += new System.EventHandler(this.FinalImageButton_Click);
             // 
@@ -291,13 +291,13 @@
             // 
             // HelpButton
             // 
-            this.HelpButton.Enabled = false;
             this.HelpButton.Location = new System.Drawing.Point(12, 369);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(201, 23);
             this.HelpButton.TabIndex = 19;
             this.HelpButton.Text = "Help";
             this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
             // progressBar1
             // 

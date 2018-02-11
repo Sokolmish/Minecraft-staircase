@@ -196,7 +196,7 @@ namespace Minecraft_staircase
             convertTask?.Abort();
             convertTask = new Thread(() =>
             {
-                ArtGenerator gen = new ArtGenerator(colorsList);
+                ArtGenerator gen = new ArtGenerator(colorsList, extendedColorsList);
                 gen.SetProgress(progressBar1);
                 convertedImage = rawImage.Clone() as Image; 
                 ArtType type = ArtType.Flat;
@@ -294,6 +294,11 @@ namespace Minecraft_staircase
         {
             //Mesh colors
             //Compressing algorithm
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://discord.gg/CjErtQY");
         }
     }
 }
