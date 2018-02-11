@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -62,7 +57,7 @@ namespace Minecraft_staircase
                 int id = 1;
                 while (line != null)
                 {
-                    line = line.Split(',')[0];
+                    line = line.Split('~')[1].Split(',')[0];
                     if (line[0] != '/' && line[1] != '/')
                     {
                         textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}"));

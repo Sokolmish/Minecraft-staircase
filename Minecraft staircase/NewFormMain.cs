@@ -18,6 +18,7 @@ namespace Minecraft_staircase
         const string BlockIDS = @"data\PossibleBlocks.txt";
 
         List<PixelData> colorsList;
+        List<PixelData> extendedColorsList;
 
         Image originalImage;
         Image rawImage;
@@ -32,7 +33,6 @@ namespace Minecraft_staircase
         public NewFormMain()
         {
             InitializeComponent();
-            LoadColors();
         }
 
         void LoadColors()
@@ -47,6 +47,21 @@ namespace Minecraft_staircase
                 colorsList.Add((PixelData)serializer.Deserialize(reader.ReadLine(), typeof(PixelData)));
             }
             ms.Close();
+
+            extendedColorsList = new List<PixelData>(colorsList);
+            using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
+            {
+                reader = new StreamReader(fs);
+                string line = reader.ReadLine();
+                int id = 1;
+                while (line != null)
+                {
+                    if (line.Split('~')[0] == "False")
+                        colorsList.RemoveAll((e) => { return e.ID == id; });
+                    ++id;
+                    line = reader.ReadLine();
+                }
+            }
         }
 
 
@@ -168,12 +183,13 @@ namespace Minecraft_staircase
 
         private void MaterialsButton_Click(object sender, EventArgs e)
         {
-            new FormSelectMaterials().ShowDialog(colorsList);
+            new FormSelectMaterials().ShowDialog(extendedColorsList);
         }
 
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
+            LoadColors();
             progressBar1.Maximum = rawImage.Width * rawImage.Height;
             progressBar1.Value = 0;
             convertTask?.Abort();
@@ -259,7 +275,7 @@ namespace Minecraft_staircase
                     string line = reader.ReadLine();
                     while (line != null)
                     {
-                        line = line.Split(',')[0];
+                        line = line.Split('~')[1].Split(',')[0];
                         if (line[0] != '/' && line[1] != '/')
                             blockIds.Add(new int[] { Convert.ToInt32(line.Split('-')[2]), Convert.ToInt32(line.Split('-')[3]) });
                         line = reader.ReadLine();

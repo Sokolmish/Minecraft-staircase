@@ -19,6 +19,7 @@ namespace Minecraft_staircase
 
         List<PixelData> colorsList;
         List<BlockData[]> possibleBlocks;
+        List<bool> use;
 
         public FormSelectMaterials()
         {
@@ -44,6 +45,7 @@ namespace Minecraft_staircase
         {
             this.colorsList = colorsList;
             possibleBlocks = new List<BlockData[]>();
+            use = new List<bool>();
             int ColorID = 0;
             using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
             {
@@ -51,7 +53,9 @@ namespace Minecraft_staircase
                 string line = reader.ReadLine();
                 while (line != null)
                 {
-                    string[] temp = line.Split(',');
+                    string[] temp = line.Split('~');
+                    use.Add(temp[0] == "True");
+                    temp = temp[1].Split(',');
                     possibleBlocks.Add(new BlockData[temp.Length]);
                     ++ColorID;
                     for (int i = 0; i < temp.Length; i++)
@@ -70,6 +74,7 @@ namespace Minecraft_staircase
                 comboBox2.Items.Add(block.Name);
             comboBox1.Text = comboBox1.Items[0].ToString();
             comboBox2.Text = comboBox2.Items[0].ToString();
+            button4.Text = use[0] ? "Do not use" : "Use";
 
             textBoxName.Text = possibleBlocks[0][0].Name;
             textBoxTexture.Text = possibleBlocks[0][0].TextureName;
@@ -103,6 +108,7 @@ namespace Minecraft_staircase
             textBoxID.Text = possibleBlocks[index][0].ID.ToString();
             textBoxData.Text = possibleBlocks[index][0].Data.ToString();
             checkBox1.Checked = possibleBlocks[index][0].IsTransparent;
+            button4.Text = use[index] ? "Do not use" : "Use";
             pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{possibleBlocks[index][0].TextureName}");
 
             pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
@@ -164,9 +170,10 @@ namespace Minecraft_staircase
             using (FileStream fs = new FileStream(BlockIDS, FileMode.Create))
             {
                 StreamWriter writer = new StreamWriter(fs);
+                int index = 0;
                 foreach (BlockData[] bd in possibleBlocks)
                 {
-                    writer.Write($"{bd[0].TextureName}-{bd[0].Name}-{bd[0].ID}-{bd[0].Data}-{bd[0].IsTransparent.ToString()}");
+                    writer.Write($"{use[index++]}~{bd[0].TextureName}-{bd[0].Name}-{bd[0].ID}-{bd[0].Data}-{bd[0].IsTransparent.ToString()}");
                     bool skip = true;
                     foreach (BlockData block in bd)
                     {
@@ -181,6 +188,20 @@ namespace Minecraft_staircase
                     writer.Flush();
                 }
             }
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                textBoxTexture.Text = openFileDialog1.SafeFileName;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            use[comboBox1.SelectedIndex] = !use[comboBox1.SelectedIndex];
+            button4.Text = use[comboBox1.SelectedIndex] ? "Do not use" : "Use";
+            WriteFile();
         }
     }
 }
