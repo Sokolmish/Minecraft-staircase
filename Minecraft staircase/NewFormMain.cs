@@ -33,6 +33,7 @@ namespace Minecraft_staircase
         public NewFormMain()
         {
             InitializeComponent();
+            LoadColors();
         }
 
         void LoadColors()
@@ -293,7 +294,6 @@ namespace Minecraft_staircase
         {
             //Mesh colors
             //Compressing algorithm
-            //Textures
         }
     }
 }

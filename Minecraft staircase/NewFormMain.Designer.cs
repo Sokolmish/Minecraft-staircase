@@ -242,6 +242,7 @@
             // 
             // SettingsButton
             // 
+            this.SettingsButton.Enabled = false;
             this.SettingsButton.Location = new System.Drawing.Point(12, 340);
             this.SettingsButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.SettingsButton.Name = "SettingsButton";
@@ -290,6 +291,7 @@
             // 
             // HelpButton
             // 
+            this.HelpButton.Enabled = false;
             this.HelpButton.Location = new System.Drawing.Point(12, 369);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(201, 23);
