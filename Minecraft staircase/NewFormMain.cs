@@ -292,8 +292,7 @@ namespace Minecraft_staircase
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            //Mesh colors
-            //Compressing algorithm
+            new AboutBox1().Show();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)

@@ -242,13 +242,12 @@
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Enabled = false;
             this.SettingsButton.Location = new System.Drawing.Point(12, 340);
             this.SettingsButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.Size = new System.Drawing.Size(201, 23);
             this.SettingsButton.TabIndex = 17;
-            this.SettingsButton.Text = "Advanced settings";
+            this.SettingsButton.Text = "About";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.button1_Click_2);
             // 
