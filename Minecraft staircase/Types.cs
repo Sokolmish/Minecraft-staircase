@@ -50,4 +50,24 @@ namespace Minecraft_staircase
         Lite = 1,
         Full = 2
     }
+
+    public struct BlockData
+    {
+        public int ColorID { get; }
+        public string TextureName { get; }
+        public string Name { get; }
+        public int ID { get; }
+        public int Data { get; }
+        public bool IsTransparent { get; }
+
+        public BlockData(int colorID, string textureName, string name, int iD, int data, bool isTransparent)
+        {
+            ColorID = colorID;
+            TextureName = textureName;
+            Name = name;
+            ID = iD;
+            Data = data;
+            IsTransparent = isTransparent;
+        }
+    }
 }

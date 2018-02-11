@@ -61,7 +61,7 @@ namespace Minecraft_staircase
                     line = line.Split(',')[0];
                     if (line[0] != '/' && line[1] != '/')
                     {
-                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}.png"));
+                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}"));
                         blockNames.Add(id++, line.Split(new char[] { '-' })[1]);
                     }
                     line = reader.ReadLine();

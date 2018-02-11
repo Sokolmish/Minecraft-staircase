@@ -168,7 +168,7 @@ namespace Minecraft_staircase
 
         private void MaterialsButton_Click(object sender, EventArgs e)
         {
-            
+            new FormSelectMaterials().ShowDialog(colorsList);
         }
 
 
@@ -208,6 +208,7 @@ namespace Minecraft_staircase
             }
         }
 
+
         private void FinalImageButton_Click(object sender, EventArgs e)
         {
             //pictureBox1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
@@ -225,6 +226,8 @@ namespace Minecraft_staircase
             panel1.Size = new Size(512, 512);
             panel1.Location = new Point(223, 12);
         }
+
+
         private void TopViewButton_Click(object sender, EventArgs e)
         {
             int[,] ids = new int[blockMap.GetLength(0), blockMap.GetLength(1) - 1];

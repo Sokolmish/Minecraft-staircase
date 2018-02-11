@@ -110,7 +110,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(540, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Current layer: ";
             // 
@@ -119,7 +119,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(538, 94);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(92, 17);
+            this.checkBox1.Size = new System.Drawing.Size(104, 17);
             this.checkBox1.TabIndex = 11;
             this.checkBox1.Text = "Always on top";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -127,9 +127,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(618, 68);
+            this.textBox1.Location = new System.Drawing.Point(643, 68);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(76, 20);
+            this.textBox1.Size = new System.Drawing.Size(51, 20);
             this.textBox1.TabIndex = 12;
             this.textBox1.Text = "0";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -155,7 +155,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(539, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 13);
+            this.label3.Size = new System.Drawing.Size(115, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Maximum height - 0";
             // 
@@ -172,6 +172,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonPrevious);
             this.Controls.Add(this.buttonNext);
+            this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "FormCrossView";
