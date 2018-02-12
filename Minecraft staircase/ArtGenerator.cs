@@ -119,10 +119,12 @@ namespace Minecraft_staircase
                             break;
                     }
                     minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
-                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
                 }
                 for (int j = 0; j < sourceImage.Height + 1; j++)
+                {
                     BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
+                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
+                }
             }
             return BlockMap;
         }
