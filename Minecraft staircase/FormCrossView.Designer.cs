@@ -40,14 +40,16 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(538, 12);
+            this.buttonNext.Location = new System.Drawing.Point(-1, 0);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(156, 23);
             this.buttonNext.TabIndex = 5;
@@ -57,7 +59,7 @@
             // 
             // buttonPrevious
             // 
-            this.buttonPrevious.Location = new System.Drawing.Point(538, 41);
+            this.buttonPrevious.Location = new System.Drawing.Point(-1, 28);
             this.buttonPrevious.Name = "buttonPrevious";
             this.buttonPrevious.Size = new System.Drawing.Size(156, 23);
             this.buttonPrevious.TabIndex = 6;
@@ -108,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(540, 71);
+            this.label1.Location = new System.Drawing.Point(2, 58);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 8;
@@ -117,7 +119,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(538, 94);
+            this.checkBox1.Location = new System.Drawing.Point(5, 81);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(104, 17);
             this.checkBox1.TabIndex = 11;
@@ -127,7 +129,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(643, 68);
+            this.textBox1.Location = new System.Drawing.Point(104, 55);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(51, 20);
             this.textBox1.TabIndex = 12;
@@ -143,7 +145,7 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.ImageLocation = "";
-            this.pictureBox2.Location = new System.Drawing.Point(539, 368);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 355);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(157, 157);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -153,36 +155,44 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(539, 119);
+            this.label3.Location = new System.Drawing.Point(2, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(115, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Maximum height - 0";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.buttonNext);
+            this.panel2.Controls.Add(this.buttonPrevious);
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(538, 13);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(158, 512);
+            this.panel2.TabIndex = 15;
             // 
             // FormCrossView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 541);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.buttonPrevious);
-            this.Controls.Add(this.buttonNext);
+            this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.MaximizeBox = false;
             this.Name = "FormCrossView";
             this.Text = "3d viewer";
+            this.Resize += new System.EventHandler(this.FormCrossView_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -198,5 +208,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel2;
     }
 }

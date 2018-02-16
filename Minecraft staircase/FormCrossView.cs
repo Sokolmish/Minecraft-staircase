@@ -272,5 +272,13 @@ namespace Minecraft_staircase
             timer1.Stop();
             label2.Visible = false;
         }
+
+
+        private void FormCrossView_Resize(object sender, EventArgs e)
+        {
+            panel1.Width = Width - 204;
+            panel1.Height = Height - 68;
+            panel2.Location = new Point(Width - 186, panel2.Location.Y);
+        }
     }
 }

@@ -237,11 +237,14 @@ namespace Minecraft_staircase
             panel1.Location = new Point(0, 0);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            Size = new Size(763, 575);
-            panel1.Size = new Size(512, 512);
-            panel1.Location = new Point(223, 12);
+            if (e.Button == MouseButtons.Right)
+            {
+                Size = new Size(763, 575);
+                panel1.Size = new Size(512, 512);
+                panel1.Location = new Point(223, 12);
+            }
         }
 
 
@@ -298,6 +301,14 @@ namespace Minecraft_staircase
         private void HelpButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://discord.gg/CjErtQY");
+        }
+
+
+        private void NewFormMain_Resize(object sender, EventArgs e)
+        {
+            progressBar1.Location = new Point(progressBar1.Location.X, Height - 74);
+            panel1.Width = Width - 251;
+            panel1.Height = Height - 63;
         }
     }
 }
