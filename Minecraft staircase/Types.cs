@@ -2,12 +2,25 @@
 
 namespace Minecraft_staircase
 {
-    public struct PixelData
+    public class PixelData
     {
         public int ID { get; set; }
-        public int[] NormalColor { get; set; }
-        public int[] DarkColor { get; set; }
-        public int[] LightColor { get; set; }
+        public double[] NormalColor { get; set; }
+        public double[] DarkColor { get; set; }
+        public double[] LightColor { get; set; }
+
+        public PixelData()
+        {
+
+        }
+
+        public PixelData(PixelData copy)
+        {
+            ID = copy.ID;
+            NormalColor = copy.NormalColor.Clone() as double[];
+            DarkColor = copy.DarkColor.Clone() as double[];
+            LightColor = copy.LightColor.Clone() as double[];
+        }
     }
 
     /// <summary>

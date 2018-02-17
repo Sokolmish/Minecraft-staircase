@@ -1,6 +1,6 @@
 ﻿namespace Minecraft_staircase
 {
-    partial class NewFormMain
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -51,8 +51,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FinalImageButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.HelpButton = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -271,16 +271,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // HelpButton
-            // 
-            this.HelpButton.Location = new System.Drawing.Point(12, 369);
-            this.HelpButton.Name = "HelpButton";
-            this.HelpButton.Size = new System.Drawing.Size(201, 23);
-            this.HelpButton.TabIndex = 19;
-            this.HelpButton.Text = "Help";
-            this.HelpButton.UseVisualStyleBackColor = true;
-            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
-            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(20, 501);
@@ -288,12 +278,24 @@
             this.progressBar1.Size = new System.Drawing.Size(193, 23);
             this.progressBar1.TabIndex = 20;
             // 
-            // NewFormMain
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(12, 369);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(80, 17);
+            this.checkBox2.TabIndex = 21;
+            this.checkBox2.Text = "Chromatic";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 536);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.UsedMaterialsButton);
             this.Controls.Add(this.FinalImageButton);
@@ -311,11 +313,10 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpenButton);
-            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.progressBar1);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MinimumSize = new System.Drawing.Size(763, 575);
-            this.Name = "NewFormMain";
+            this.Name = "FormMain";
             this.Text = "Minecraft staircase";
             this.Resize += new System.EventHandler(this.NewFormMain_Resize);
             this.panel1.ResumeLayout(false);
@@ -348,7 +349,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button FinalImageButton;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button HelpButton;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

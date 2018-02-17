@@ -85,9 +85,9 @@ namespace Minecraft_staircase
 
             pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
             Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
-            Color dark = Color.FromArgb(colorsList[0].DarkColor[0], colorsList[0].DarkColor[1], colorsList[0].DarkColor[2]);
-            Color norm = Color.FromArgb(colorsList[0].NormalColor[0], colorsList[0].NormalColor[1], colorsList[0].NormalColor[2]);
-            Color light = Color.FromArgb(colorsList[0].LightColor[0], colorsList[0].LightColor[1], colorsList[0].LightColor[2]);
+            Color dark = Color.FromArgb((int)colorsList[0].DarkColor[0], (int)colorsList[0].DarkColor[1], (int)colorsList[0].DarkColor[2]);
+            Color norm = Color.FromArgb((int)colorsList[0].NormalColor[0], (int)colorsList[0].NormalColor[1], (int)colorsList[0].NormalColor[2]);
+            Color light = Color.FromArgb((int)colorsList[0].LightColor[0], (int)colorsList[0].LightColor[1], (int)colorsList[0].LightColor[2]);
             graph.FillRectangle(new SolidBrush(dark), new Rectangle(0, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(norm), new Rectangle(50, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(light), new Rectangle(100, 0, 50, 32));
@@ -113,9 +113,9 @@ namespace Minecraft_staircase
 
             pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
             Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
-            Color dark = Color.FromArgb(colorsList[index].DarkColor[0], colorsList[index].DarkColor[1], colorsList[index].DarkColor[2]);
-            Color norm = Color.FromArgb(colorsList[index].NormalColor[0], colorsList[index].NormalColor[1], colorsList[index].NormalColor[2]);
-            Color light = Color.FromArgb(colorsList[index].LightColor[0], colorsList[index].LightColor[1], colorsList[index].LightColor[2]);
+            Color dark = Color.FromArgb((int)colorsList[index].DarkColor[0], (int)colorsList[index].DarkColor[1], (int)colorsList[index].DarkColor[2]);
+            Color norm = Color.FromArgb((int)colorsList[index].NormalColor[0], (int)colorsList[index].NormalColor[1], (int)colorsList[index].NormalColor[2]);
+            Color light = Color.FromArgb((int)colorsList[index].LightColor[0], (int)colorsList[index].LightColor[1], (int)colorsList[index].LightColor[2]);
             graph.FillRectangle(new SolidBrush(dark), new Rectangle(0, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(norm), new Rectangle(50, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(light), new Rectangle(100, 0, 50, 32));

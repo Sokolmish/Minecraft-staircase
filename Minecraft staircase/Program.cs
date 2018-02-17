@@ -16,7 +16,7 @@ namespace Minecraft_staircase
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NewFormMain());
+            Application.Run(new FormMain());
         }
     }
 }

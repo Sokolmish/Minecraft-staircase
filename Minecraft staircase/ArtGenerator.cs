@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +8,7 @@ namespace Minecraft_staircase
     class ArtGenerator
     {
         List<PixelData> _colors;
-        List<PixelData> _extendedColor;
+        List<PixelData> _extendedColors;
 
         ProgressBar progress;
         public delegate void Del();
@@ -21,13 +18,30 @@ namespace Minecraft_staircase
         /// Initialize new ArtGenerator
         /// </summary>
         /// <param name="colors">List of colors</param>
-        public ArtGenerator(List<PixelData> colors, List<PixelData> extendedColors)
+        public ArtGenerator(List<PixelData> colors, List<PixelData> extendedColors, bool useXYZ)
         {
             _colors = colors;
-            _extendedColor = extendedColors;
-            progress = null;
+            _extendedColors = new List<PixelData>();
+            for (int i = 0; i < extendedColors.Count; i++)
+                _extendedColors.Add(new PixelData(extendedColors[i]));
             Inc += () => { progress?.Increment(1); };
+            if (useXYZ)
+                ConvertToXYZ();
         }
+
+        /// <summary>
+        /// Create array of XYZ colors
+        /// </summary>
+        void ConvertToXYZ()
+        {
+            for (int i = 0; i < _colors.Count; i++)
+            {
+                _colors[i].LightColor = RGBtoXYZ(_colors[i].LightColor);
+                _colors[i].DarkColor = RGBtoXYZ(_colors[i].DarkColor);
+                _colors[i].NormalColor = RGBtoXYZ(_colors[i].NormalColor);
+            }
+        }
+
 
         /// <summary>
         /// Create array of blocks
@@ -40,7 +54,7 @@ namespace Minecraft_staircase
         {
             UnsettedBlock[,] RawScheme = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             Bitmap tempImage = sourceImage as Bitmap;
-            resources = new int[_extendedColor.Count];
+            resources = new int[_extendedColors.Count];
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -59,7 +73,7 @@ namespace Minecraft_staircase
                             betterSet = ColorType.Normal;
                             betterSimilarity = Similarity(col.NormalColor[0], col.NormalColor[1], col.NormalColor[2],
                                 tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                            selectedColor = Color.FromArgb(col.NormalColor[0], col.NormalColor[1], col.NormalColor[2]);
+                            //selectedColor = Color.FromArgb((int)col.NormalColor[0], (int)col.NormalColor[1], (int)col.NormalColor[2]);
                         }
                         if (type != ArtType.Flat)
                         {
@@ -71,7 +85,7 @@ namespace Minecraft_staircase
                                 betterSet = ColorType.Light;
                                 betterSimilarity = Similarity(col.LightColor[0], col.LightColor[1], col.LightColor[2],
                                     tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                                selectedColor = Color.FromArgb(col.LightColor[0], col.LightColor[1], col.LightColor[2]);
+                                //selectedColor = Color.FromArgb((int)col.LightColor[0], (int)col.LightColor[1], (int)col.LightColor[2]);
                             }
                             if (type != ArtType.Lite)
                             {
@@ -83,14 +97,30 @@ namespace Minecraft_staircase
                                     betterSet = ColorType.Dark;
                                     betterSimilarity = Similarity(col.DarkColor[0], col.DarkColor[1], col.DarkColor[2],
                                         tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                                    selectedColor = Color.FromArgb(col.DarkColor[0], col.DarkColor[1], col.DarkColor[2]);
+                                    //selectedColor = Color.FromArgb((int)col.DarkColor[0], (int)col.DarkColor[1], (int)col.DarkColor[2]);
                                 }
                             }
                         }
                     }
                     RawScheme[i, j].ID = betterID;
                     RawScheme[i, j].Set = betterSet;
-                    tempImage.SetPixel(i, j, selectedColor);
+                    //tempImage.SetPixel(i, j, selectedColor);
+                    double[] arrColor;
+                    switch (betterSet)
+                    {
+                        case ColorType.Dark:
+                            arrColor = _extendedColors.Find((e) => { return e.ID == betterID; }).DarkColor;
+                            tempImage.SetPixel(i, j, Color.FromArgb((int)arrColor[0], (int)arrColor[1], (int)arrColor[2]));
+                            break;
+                        case ColorType.Normal:
+                            arrColor = _extendedColors.Find((e) => { return e.ID == betterID; }).NormalColor;
+                            tempImage.SetPixel(i, j, Color.FromArgb((int)arrColor[0], (int)arrColor[1], (int)arrColor[2]));
+                            break;
+                        case ColorType.Light:
+                            arrColor = _extendedColors.Find((e) => { return e.ID == betterID; }).LightColor;
+                            tempImage.SetPixel(i, j, Color.FromArgb((int)arrColor[0], (int)arrColor[1], (int)arrColor[2]));
+                            break;
+                    }
                     resources[betterID - 1]++;
                     progress.BeginInvoke(Inc);
                 }
@@ -129,23 +159,6 @@ namespace Minecraft_staircase
             return BlockMap;
         }
 
-        /// <summary>
-        /// Create array of blocks
-        /// </summary>
-        /// <param name="sourceImage">Image to create art. After creation will be modified!</param>
-        /// <param name="type">Art type</param>
-        /// <returns></returns>
-        public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight) => 
-            (CreateScheme(ref sourceImage, type, out int[] temp, out maxHeight));
-
-        /// <summary>
-        /// Add progressBar
-        /// </summary>
-        /// <param name="progress">ProgressBar</param>
-        public void SetProgress(ProgressBar progress)
-        {
-            this.progress = progress;
-        }
 
         /// <summary>
         /// Get similarity of 2 colors
@@ -157,11 +170,31 @@ namespace Minecraft_staircase
         /// <param name="g2"></param>
         /// <param name="b2"></param>
         /// <returns></returns>
-        double Similarity(int r1, int g1, int b1, int r2, int g2, int b2) =>
+        double Similarity(double r1, double g1, double b1, double r2, double g2, double b2) =>
             Math.Sqrt(Math.Pow(r2 - r1, 2) + Math.Pow(g2 - g1, 2) + Math.Pow(b2 - b1, 2));
 
-        #region Types
-        
-        #endregion
+
+        /// <summary>
+        /// Get chromatics coordinates of color
+        /// </summary>
+        /// <param name="rgbColor">Color in RGB</param>
+        /// <returns>Color in XYZ scheme</returns>
+        double[] RGBtoXYZ(double[] rgbColor)
+        {
+            return new double[] {
+            0.4124564 * rgbColor[0] + 0.3575761 * rgbColor[1] + 0.1804375 * rgbColor[2],
+            0.2126729 * rgbColor[0] + 0.7151522 * rgbColor[1] + 0.0721750 * rgbColor[2],
+            0.0193339 * rgbColor[0] + 0.1191920 * rgbColor[1] + 0.9503041 * rgbColor[2]};
+        }
+
+
+        /// <summary>
+        /// Add progressBar
+        /// </summary>
+        /// <param name="progress">ProgressBar</param>
+        public void SetProgress(ProgressBar progress)
+        {
+            this.progress = progress;
+        }
     }
 }

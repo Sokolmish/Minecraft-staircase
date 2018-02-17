@@ -12,7 +12,7 @@ using Substrate.ImportExport;
 
 namespace Minecraft_staircase
 {
-    public partial class NewFormMain : Form
+    public partial class FormMain : Form
     {
         const int blockSize = 16;
         const string BlockIDS = @"data\PossibleBlocks.txt";
@@ -28,13 +28,18 @@ namespace Minecraft_staircase
         int[] recourses;
         int maxHeight;
 
-        Thread convertTask;     
+        Thread convertTask;
 
-        public NewFormMain()
+        bool useXYZ;
+        bool noResize;
+
+        public FormMain()
         {
             InitializeComponent();
             LoadColors();
+            useXYZ = false;
         }
+
 
         void LoadColors()
         {
@@ -46,6 +51,12 @@ namespace Minecraft_staircase
             while (!reader.EndOfStream)
             {
                 colorsList.Add((PixelData)serializer.Deserialize(reader.ReadLine(), typeof(PixelData)));
+                //colorsList[index].NormalColor[0] = colorsList[index].LightColor[0] * 220 / 255;
+                //colorsList[index].NormalColor[1] = colorsList[index].LightColor[1] * 220 / 255;
+                //colorsList[index].NormalColor[2] = colorsList[index].LightColor[2] * 220 / 255;
+                //colorsList[index].DarkColor[0] = colorsList[index].LightColor[0] * 180 / 255;
+                //colorsList[index].DarkColor[1] = colorsList[index].LightColor[1] * 180 / 255;
+                //colorsList[index].DarkColor[2] = colorsList[index].LightColor[2] * 180 / 255;
             }
             ms.Close();
 
@@ -196,7 +207,7 @@ namespace Minecraft_staircase
             convertTask?.Abort();
             convertTask = new Thread(() =>
             {
-                ArtGenerator gen = new ArtGenerator(colorsList, extendedColorsList);
+                ArtGenerator gen = new ArtGenerator(colorsList, extendedColorsList, useXYZ);
                 gen.SetProgress(progressBar1);
                 convertedImage = rawImage.Clone() as Image; 
                 ArtType type = ArtType.Flat;
@@ -228,13 +239,17 @@ namespace Minecraft_staircase
 
         private void FinalImageButton_Click(object sender, EventArgs e)
         {
-            //pictureBox1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
-            //pictureBox1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
+            noResize = true;
+            MinimumSize = new Size(0, 0);
+            pictureBox1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
+            pictureBox1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
             panel1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
-            panel1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
-            Width = panel1.Width < 256 ? 256 : panel1.Width + 20;
-            Height = panel1.Height < 256 ? 256 : panel1.Height + 43;
+            panel1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;    
+            Width = panel1.Width + 20;
+            Height = panel1.Height + 43;
             panel1.Location = new Point(0, 0);
+            noResize = false;
+
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -242,6 +257,7 @@ namespace Minecraft_staircase
             if (e.Button == MouseButtons.Right)
             {
                 Size = new Size(763, 575);
+                MinimumSize = new Size(763, 575);
                 panel1.Size = new Size(512, 512);
                 panel1.Location = new Point(223, 12);
             }
@@ -306,9 +322,18 @@ namespace Minecraft_staircase
 
         private void NewFormMain_Resize(object sender, EventArgs e)
         {
-            progressBar1.Location = new Point(progressBar1.Location.X, Height - 74);
-            panel1.Width = Width - 251;
-            panel1.Height = Height - 63;
+            if (!noResize)
+            {
+                progressBar1.Location = new Point(progressBar1.Location.X, Height - 74);
+                panel1.Width = Width - 251;
+                panel1.Height = Height - 63;
+            }
+        }
+
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            useXYZ = checkBox2.Checked;
         }
     }
 }
