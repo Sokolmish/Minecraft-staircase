@@ -170,8 +170,8 @@ namespace Minecraft_staircase
                 label1.Visible = false;
                 textBox1.Visible = false;
                 pictureBox2.Visible = false;
-                FormBorderStyle = FormBorderStyle.Sizable;
                 MaximizeBox = true;
+                MinimumSize = new Size(0, 0);
             }
             else
             {
@@ -189,10 +189,10 @@ namespace Minecraft_staircase
                 label1.Visible = true;
                 textBox1.Visible = true;
                 pictureBox2.Visible = true;
-                FormBorderStyle = FormBorderStyle.Fixed3D;
                 MaximizeBox = false;
                 Width = 728;
                 Height = 584;
+                MinimumSize = new Size(724, 580);
             }
         }
 
@@ -279,6 +279,16 @@ namespace Minecraft_staircase
             panel1.Width = Width - 204;
             panel1.Height = Height - 68;
             panel2.Location = new Point(Width - 186, panel2.Location.Y);
+            panel2.Height = Height - 68;
+
+            Point newLoc = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
+
+            if (pictureBox1.Location.X + pictureBox1.Width <= panel1.Width)
+                newLoc.X = panel1.Width - pictureBox1.Width; //15
+            if (pictureBox1.Location.Y + pictureBox1.Height <= panel1.Height)
+                newLoc.Y = panel1.Height - pictureBox1.Height; //38
+
+            pictureBox1.Location = newLoc;
         }
     }
 }
