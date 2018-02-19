@@ -17,63 +17,60 @@ namespace Minecraft_staircase
         const int blockSize = 16;
         const string BlockIDS = @"data\PossibleBlocks.txt";
 
-        List<PixelData> colorsList;
-        List<PixelData> extendedColorsList;
+        List<ColorNote> colorsNote;
 
         Image originalImage;
         Image rawImage;
         Image convertedImage;
 
         SettedBlock[,] blockMap;
-        int[] recourses;
         int maxHeight;
 
         Thread convertTask;
 
-        bool useXYZ;
         bool noResize;
-
 
         public FormMain()
         {
             InitializeComponent();
-            LoadColors();
-            useXYZ = false;
+            string see = Properties.Settings.Default.PossibleBlocks;
+            LoadData();
         }
 
 
-        void LoadColors()
+        void LoadData()
         {
-            colorsList = new List<PixelData>();
-            MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(Properties.Resources.ColorsIDS));
-            StreamReader reader = new StreamReader(ms);
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            colorsList = new List<PixelData>();
-            while (!reader.EndOfStream)
-            {
-                colorsList.Add((PixelData)serializer.Deserialize(reader.ReadLine(), typeof(PixelData)));
-                //colorsList[index].NormalColor[0] = colorsList[index].LightColor[0] * 220 / 255;
-                //colorsList[index].NormalColor[1] = colorsList[index].LightColor[1] * 220 / 255;
-                //colorsList[index].NormalColor[2] = colorsList[index].LightColor[2] * 220 / 255;
-                //colorsList[index].DarkColor[0] = colorsList[index].LightColor[0] * 180 / 255;
-                //colorsList[index].DarkColor[1] = colorsList[index].LightColor[1] * 180 / 255;
-                //colorsList[index].DarkColor[2] = colorsList[index].LightColor[2] * 180 / 255;
-            }
-            ms.Close();
+            colorsNote = new List<ColorNote>();
+            string[] colors = Properties.Resources.ColorsIDS.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] blocks = Properties.Settings.Default.PossibleBlocks.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            if (colors.Length != blocks.Length)
+                throw new Exception("Length of the list of blocks and length of the list of colors did not match");
 
-            extendedColorsList = new List<PixelData>(colorsList);
-            using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
+            for (int i = 0; i < colors.Length; i++)
             {
-                reader = new StreamReader(fs);
-                string line = reader.ReadLine();
-                int id = 1;
-                while (line != null)
+                string[] curColor = colors[i].Split('-');
+                string curBlocks = blocks[i];
+
+                Color lCol = Color.FromArgb(Convert.ToInt32(curColor[1]), Convert.ToInt32(curColor[2]), Convert.ToInt32(curColor[3]));
+                Color nCol = Color.FromArgb(lCol.R * 220 / 255, lCol.G * 220 / 255, lCol.B * 220 / 255);
+                Color dCol = Color.FromArgb(lCol.R * 180 / 255, lCol.G * 180 / 255, lCol.B * 180 / 255);
+
+                ColorNote note = new ColorNote(Convert.ToInt32(curColor[0]), dCol, nCol, lCol);
+                note.Use = curBlocks.Split('~')[0] == "True";
+
+                string[] block = curBlocks.Split('~')[2].Split('-');
+                note.SelectedBlock = new BlockData(block[0], block[1], Convert.ToInt32(block[2]), Convert.ToInt32(block[3]), block[4] == "True");
+
+                curBlocks = curBlocks.Split('~')[1];
+                List<BlockData> blockDatas = new List<BlockData>();
+                foreach (string str in curBlocks.Split(','))
                 {
-                    if (line.Split('~')[0] == "False")
-                        colorsList.RemoveAll((e) => { return e.ID == id; });
-                    ++id;
-                    line = reader.ReadLine();
+                    block = str.Split('-');
+                    blockDatas.Add(new BlockData(block[0], block[1], Convert.ToInt32(block[2]), Convert.ToInt32(block[3]), block[4] == "True"));
                 }
+                note.PossibleBlocks = blockDatas;
+
+                colorsNote.Add(note);
             }
         }
 
@@ -196,19 +193,18 @@ namespace Minecraft_staircase
 
         private void MaterialsButton_Click(object sender, EventArgs e)
         {
-            new FormSelectMaterials().ShowDialog(extendedColorsList);
+            new FormSelectMaterials().ShowDialog(ref colorsNote);
         }
 
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            LoadColors();
             progressBar1.Maximum = rawImage.Width * rawImage.Height;
             progressBar1.Value = 0;
             convertTask?.Abort();
             convertTask = new Thread(() =>
             {
-                ArtGenerator gen = new ArtGenerator(colorsList, extendedColorsList, useXYZ);
+                ArtGenerator gen = new ArtGenerator(ref colorsNote);
                 gen.SetProgress(progressBar1);
                 convertedImage = rawImage.Clone() as Image; 
                 ArtType type = ArtType.Flat;
@@ -216,7 +212,7 @@ namespace Minecraft_staircase
                     type = ArtType.Lite;
                 else if (radioButton3.Checked)
                     type = ArtType.Full;
-                blockMap = gen.CreateScheme(ref convertedImage, type, out recourses, out maxHeight);
+                blockMap = gen.CreateScheme(ref convertedImage, type, out maxHeight);
                 pictureBox1.Image = convertedImage;
             });
             convertTask.Start();
@@ -271,7 +267,7 @@ namespace Minecraft_staircase
             for (int i = 0; i < blockMap.GetLength(0); i++)
                 for (int j = 1; j < blockMap.GetLength(1); j++)
                     ids[i, j - 1] = blockMap[i, j].ID;
-            new FormTopView().Show(ids);
+            new FormTopView().Show(ids, ref colorsNote);
         }
 
         private void CrossViewButton_Click(object sender, EventArgs e)
@@ -281,7 +277,7 @@ namespace Minecraft_staircase
 
         private void UsedMaterialsButton_Click(object sender, EventArgs e)
         {
-            new FormMaterials().Show(recourses);
+            new FormMaterials().Show(ref colorsNote);
         }
 
         private void SchematicButton_Click(object sender, EventArgs e)

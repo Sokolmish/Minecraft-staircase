@@ -164,20 +164,23 @@
   <data name="&gt;&gt;textBoxData.Name" xml:space="preserve">
     <value>textBoxData</value>
   </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 112</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>244, 282</value>
+  </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 20</value>
   </data>
   <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="textBoxTexture.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Materials</value>
@@ -208,6 +211,9 @@
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxTexture.ZOrder" xml:space="preserve">
+    <value>17</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
@@ -408,9 +414,6 @@
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="textBoxID.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
@@ -522,8 +525,8 @@
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 153</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>244, 282</value>
+  <data name="textBoxID.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="pictureBoxColors.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 44</value>
@@ -552,11 +555,8 @@
   <data name="&gt;&gt;button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxTexture.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="textBoxTexture.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 85</value>
@@ -576,7 +576,7 @@
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
@@ -588,9 +588,6 @@
   <data name="&gt;&gt;button4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru</value>
-  </metadata>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -14,7 +14,7 @@ namespace Minecraft_staircase
 
         int[,] blockMap;
         Dictionary<int, Bitmap> textures;
-        Dictionary<int, string> blockNames;
+        List<ColorNote> colors;
 
         Image originalImage;
 
@@ -30,9 +30,10 @@ namespace Minecraft_staircase
             MouseWheel += new MouseEventHandler(WheelRolled);
         }
 
-        internal void Show(int[,] ids)
+        internal void Show(int[,] ids, ref List<ColorNote> colors)
         {
             Show();
+            this.colors = colors;
             blockMap = ids;
             LoadTextures();
             pictureBox1.Image = new Bitmap(ids.GetLength(0) * blockSize, ids.GetLength(1) * blockSize);
@@ -49,23 +50,8 @@ namespace Minecraft_staircase
         {
             textures = new Dictionary<int, Bitmap>();
             textures.Add(-1, new Bitmap(@"data\Textures\overflow.png"));
-            blockNames = new Dictionary<int, string>();
-            using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
-            {
-                StreamReader reader = new StreamReader(fs);
-                string line = reader.ReadLine();
-                int id = 1;
-                while (line != null)
-                {
-                    line = line.Split('~')[1].Split(',')[0];
-                    if (line[0] != '/' && line[1] != '/')
-                    {
-                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}"));
-                        blockNames.Add(id++, line.Split(new char[] { '-' })[1]);
-                    }
-                    line = reader.ReadLine();
-                }
-            }
+            foreach (ColorNote col in colors)
+                textures.Add(col.ColorID, Image.FromFile(@"data\Textures\" + col.SelectedBlock.TextureName) as Bitmap);
         }
 
         void CreateImage()
@@ -153,7 +139,7 @@ namespace Minecraft_staircase
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             int k = (int)Math.Pow(2, curSize - 1);
-            ShowInfo(blockNames[blockMap[e.Location.X / (blockSize * k), e.Location.Y / (blockSize * k)]].ToString(), Color.Aquamarine);
+            ShowInfo(colors.Find((x) => { return blockMap[e.Location.X / (blockSize * k), e.Location.Y / (blockSize * k)] == x.ColorID; }).SelectedBlock.Name, Color.Aquamarine);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
