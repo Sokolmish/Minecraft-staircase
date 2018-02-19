@@ -62,7 +62,6 @@ namespace Minecraft_staircase
                     int betterID = 0;
                     ColorType betterSet = ColorType.Normal;
                     double betterSimilarity = 1000;
-                    Color selectedColor = new Color();
                     foreach (PixelData col in _colors)
                     {
                         if (Similarity(col.NormalColor[0], col.NormalColor[1], col.NormalColor[2],
@@ -73,7 +72,6 @@ namespace Minecraft_staircase
                             betterSet = ColorType.Normal;
                             betterSimilarity = Similarity(col.NormalColor[0], col.NormalColor[1], col.NormalColor[2],
                                 tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                            //selectedColor = Color.FromArgb((int)col.NormalColor[0], (int)col.NormalColor[1], (int)col.NormalColor[2]);
                         }
                         if (type != ArtType.Flat)
                         {
@@ -85,7 +83,6 @@ namespace Minecraft_staircase
                                 betterSet = ColorType.Light;
                                 betterSimilarity = Similarity(col.LightColor[0], col.LightColor[1], col.LightColor[2],
                                     tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                                //selectedColor = Color.FromArgb((int)col.LightColor[0], (int)col.LightColor[1], (int)col.LightColor[2]);
                             }
                             if (type != ArtType.Lite)
                             {
@@ -97,14 +94,12 @@ namespace Minecraft_staircase
                                     betterSet = ColorType.Dark;
                                     betterSimilarity = Similarity(col.DarkColor[0], col.DarkColor[1], col.DarkColor[2],
                                         tempImage.GetPixel(i, j).R, tempImage.GetPixel(i, j).G, tempImage.GetPixel(i, j).B);
-                                    //selectedColor = Color.FromArgb((int)col.DarkColor[0], (int)col.DarkColor[1], (int)col.DarkColor[2]);
                                 }
                             }
                         }
                     }
                     RawScheme[i, j].ID = betterID;
                     RawScheme[i, j].Set = betterSet;
-                    //tempImage.SetPixel(i, j, selectedColor);
                     double[] arrColor;
                     switch (betterSet)
                     {
@@ -121,7 +116,7 @@ namespace Minecraft_staircase
                             tempImage.SetPixel(i, j, Color.FromArgb((int)arrColor[0], (int)arrColor[1], (int)arrColor[2]));
                             break;
                     }
-                    resources[betterID - 1]++;
+                    ++resources[betterID - 1];
                     progress.BeginInvoke(Inc);
                 }
             }

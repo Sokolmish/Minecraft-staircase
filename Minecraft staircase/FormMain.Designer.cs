@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.OpenButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -46,224 +47,150 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.UsedMaterialsButton = new System.Windows.Forms.Button();
-            this.SettingsButton = new System.Windows.Forms.Button();
+            this.AboutButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FinalImageButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.OptionsButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // OpenButton
             // 
-            this.OpenButton.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.OpenButton, "OpenButton");
             this.OpenButton.Name = "OpenButton";
-            this.OpenButton.Size = new System.Drawing.Size(201, 23);
-            this.OpenButton.TabIndex = 1;
-            this.OpenButton.Text = "Open";
             this.OpenButton.UseVisualStyleBackColor = true;
             this.OpenButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 44);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Width";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(56, 41);
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(69, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(131, 43);
+            resources.ApplyResources(this.checkBox1, "checkBox1");
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(62, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Blocks";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(56, 67);
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(69, 20);
-            this.textBox2.TabIndex = 6;
-            this.textBox2.Text = "1";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 70);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Height";
             // 
             // radioButton1
             // 
-            this.radioButton1.AutoSize = true;
+            resources.ApplyResources(this.radioButton1, "radioButton1");
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(20, 122);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(49, 17);
-            this.radioButton1.TabIndex = 7;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Flat";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(72, 122);
+            resources.ApplyResources(this.radioButton2, "radioButton2");
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(67, 17);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.Text = "3d lite";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(143, 122);
+            resources.ApplyResources(this.radioButton3, "radioButton3");
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(67, 17);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.Text = "3d full";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // MaterialsButton
             // 
-            this.MaterialsButton.Location = new System.Drawing.Point(12, 93);
+            resources.ApplyResources(this.MaterialsButton, "MaterialsButton");
             this.MaterialsButton.Name = "MaterialsButton";
-            this.MaterialsButton.Size = new System.Drawing.Size(201, 23);
-            this.MaterialsButton.TabIndex = 10;
-            this.MaterialsButton.Text = "Materials options";
             this.MaterialsButton.UseVisualStyleBackColor = true;
             this.MaterialsButton.Click += new System.EventHandler(this.MaterialsButton_Click);
             // 
             // CreateButton
             // 
-            this.CreateButton.Enabled = false;
-            this.CreateButton.Location = new System.Drawing.Point(12, 145);
+            resources.ApplyResources(this.CreateButton, "CreateButton");
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(201, 23);
-            this.CreateButton.TabIndex = 11;
-            this.CreateButton.Text = "Create!";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // TopViewButton
             // 
-            this.TopViewButton.Enabled = false;
-            this.TopViewButton.Location = new System.Drawing.Point(12, 210);
+            resources.ApplyResources(this.TopViewButton, "TopViewButton");
             this.TopViewButton.Name = "TopViewButton";
-            this.TopViewButton.Size = new System.Drawing.Size(201, 23);
-            this.TopViewButton.TabIndex = 12;
-            this.TopViewButton.Text = "Top view";
             this.TopViewButton.UseVisualStyleBackColor = true;
             this.TopViewButton.Click += new System.EventHandler(this.TopViewButton_Click);
             // 
             // CrossViewButton
             // 
-            this.CrossViewButton.Enabled = false;
-            this.CrossViewButton.Location = new System.Drawing.Point(12, 239);
+            resources.ApplyResources(this.CrossViewButton, "CrossViewButton");
             this.CrossViewButton.Name = "CrossViewButton";
-            this.CrossViewButton.Size = new System.Drawing.Size(201, 23);
-            this.CrossViewButton.TabIndex = 13;
-            this.CrossViewButton.Text = "Cross view";
             this.CrossViewButton.UseVisualStyleBackColor = true;
             this.CrossViewButton.Click += new System.EventHandler(this.CrossViewButton_Click);
             // 
             // SchematicButton
             // 
-            this.SchematicButton.Enabled = false;
-            this.SchematicButton.Location = new System.Drawing.Point(12, 304);
+            resources.ApplyResources(this.SchematicButton, "SchematicButton");
             this.SchematicButton.Name = "SchematicButton";
-            this.SchematicButton.Size = new System.Drawing.Size(201, 23);
-            this.SchematicButton.TabIndex = 14;
-            this.SchematicButton.Text = "Export schematic";
             this.SchematicButton.UseVisualStyleBackColor = true;
             this.SchematicButton.Click += new System.EventHandler(this.SchematicButton_Click);
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "Images(*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif|All files|*.*";
-            this.openFileDialog1.Title = "Open image";
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "schematic";
-            this.saveFileDialog1.Filter = "Schematic files|*.schematic|All files|*.*";
-            this.saveFileDialog1.Title = "Export schematic";
+            resources.ApplyResources(this.saveFileDialog1, "saveFileDialog1");
             // 
             // UsedMaterialsButton
             // 
-            this.UsedMaterialsButton.Enabled = false;
-            this.UsedMaterialsButton.Location = new System.Drawing.Point(12, 275);
-            this.UsedMaterialsButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            resources.ApplyResources(this.UsedMaterialsButton, "UsedMaterialsButton");
             this.UsedMaterialsButton.Name = "UsedMaterialsButton";
-            this.UsedMaterialsButton.Size = new System.Drawing.Size(201, 23);
-            this.UsedMaterialsButton.TabIndex = 16;
-            this.UsedMaterialsButton.Text = "View materials";
             this.UsedMaterialsButton.UseVisualStyleBackColor = true;
             this.UsedMaterialsButton.Click += new System.EventHandler(this.UsedMaterialsButton_Click);
             // 
-            // SettingsButton
+            // AboutButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(12, 340);
-            this.SettingsButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(201, 23);
-            this.SettingsButton.TabIndex = 17;
-            this.SettingsButton.Text = "About";
-            this.SettingsButton.UseVisualStyleBackColor = true;
-            this.SettingsButton.Click += new System.EventHandler(this.button1_Click_2);
+            resources.ApplyResources(this.AboutButton, "AboutButton");
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.UseVisualStyleBackColor = true;
+            this.AboutButton.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(223, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(512, 512);
-            this.panel1.TabIndex = 18;
             // 
             // pictureBox1
             // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(512, 512);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // FinalImageButton
             // 
-            this.FinalImageButton.Enabled = false;
-            this.FinalImageButton.Location = new System.Drawing.Point(12, 181);
-            this.FinalImageButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            resources.ApplyResources(this.FinalImageButton, "FinalImageButton");
             this.FinalImageButton.Name = "FinalImageButton";
-            this.FinalImageButton.Size = new System.Drawing.Size(201, 23);
-            this.FinalImageButton.TabIndex = 15;
-            this.FinalImageButton.Text = "View image";
             this.FinalImageButton.UseVisualStyleBackColor = true;
             this.FinalImageButton.Click += new System.EventHandler(this.FinalImageButton_Click);
             // 
@@ -273,30 +200,29 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(20, 501);
+            resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(193, 23);
-            this.progressBar1.TabIndex = 20;
             // 
-            // checkBox2
+            // OptionsButton
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 369);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 17);
-            this.checkBox2.TabIndex = 21;
-            this.checkBox2.Text = "Chromatic";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            resources.ApplyResources(this.OptionsButton, "OptionsButton");
+            this.OptionsButton.Name = "OptionsButton";
+            this.OptionsButton.UseVisualStyleBackColor = true;
+            this.OptionsButton.Click += new System.EventHandler(this.OptionsButton_Click);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 536);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.OptionsButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.SettingsButton);
+            this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.UsedMaterialsButton);
             this.Controls.Add(this.FinalImageButton);
             this.Controls.Add(this.SchematicButton);
@@ -314,10 +240,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpenButton);
             this.Controls.Add(this.progressBar1);
-            this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MinimumSize = new System.Drawing.Size(763, 575);
             this.Name = "FormMain";
-            this.Text = "Minecraft staircase";
             this.Resize += new System.EventHandler(this.NewFormMain_Resize);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -344,12 +267,13 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button UsedMaterialsButton;
-        private System.Windows.Forms.Button SettingsButton;
+        private System.Windows.Forms.Button AboutButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button FinalImageButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button OptionsButton;
+        private System.Windows.Forms.Label label3;
     }
 }

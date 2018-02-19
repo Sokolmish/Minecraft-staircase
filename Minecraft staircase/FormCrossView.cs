@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Threading;
 
 namespace Minecraft_staircase
 {
@@ -43,7 +39,7 @@ namespace Minecraft_staircase
             this.maxHeight = maxHeight;
             LoadTextures();
             pictureBox1.Image = CreateLayer(0);
-            label3.Text = $"Maximum height - {maxHeight}";
+            label3.Text += maxHeight;
         }
 
         void LoadTextures()

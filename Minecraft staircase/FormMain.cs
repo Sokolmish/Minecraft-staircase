@@ -6,6 +6,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Threading;
+using System.Resources;
 using Substrate;
 using Substrate.ImportExport;
 
@@ -31,6 +32,7 @@ namespace Minecraft_staircase
 
         bool useXYZ;
         bool noResize;
+
 
         public FormMain()
         {
@@ -313,11 +315,10 @@ namespace Minecraft_staircase
             new AboutBox1().Show();
         }
 
-        private void HelpButton_Click(object sender, EventArgs e)
+        private void OptionsButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://discord.gg/CjErtQY");
+            new FormSettings().ShowDialog();
         }
-
 
         private void NewFormMain_Resize(object sender, EventArgs e)
         {
@@ -328,11 +329,6 @@ namespace Minecraft_staircase
                 panel1.Height = Height - 63;
             }
         }
-
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            useXYZ = checkBox2.Checked;
-        }
     }
 }
+    

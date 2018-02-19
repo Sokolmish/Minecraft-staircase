@@ -96,6 +96,12 @@
     <Compile Include="FormSelectMaterials.Designer.cs">
       <DependentUpon>FormSelectMaterials.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTopView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,11 +123,26 @@
     <EmbeddedResource Include="FormCrossView.resx">
       <DependentUpon>FormCrossView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormCrossView.ru.resx">
+      <DependentUpon>FormCrossView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.ru.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMaterials.resx">
       <DependentUpon>FormMaterials.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelectMaterials.resx">
       <DependentUpon>FormSelectMaterials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectMaterials.ru.resx">
+      <DependentUpon>FormSelectMaterials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettings.ru.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTopView.resx">
       <DependentUpon>FormTopView.cs</DependentUpon>
