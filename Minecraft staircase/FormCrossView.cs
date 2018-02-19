@@ -93,15 +93,21 @@ namespace Minecraft_staircase
         void PrintChunkMesh(Image image)
         {
             Graphics graph = Graphics.FromImage(image);
+            graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize, 0), new Point(blockSize, image.Height));
             for (int i = 0; i < blockMap.GetLength(1) / 16; i++)
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize * 16 * (i + 1) + blockSize, 0), new Point(blockSize * 16 * (i + 1) + blockSize, image.Height));
+            for (int i = 0; i < blockMap.GetLength(1) - 1; i++)
+                graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(0, blockSize * 16 * (i + 1)), new Point(image.Width, blockSize * 16 * (i + 1)));
         }
 
         void PrintMapMesh(Image image)
         {
             Graphics graph = Graphics.FromImage(image);
+            graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize, 0), new Point(blockSize, image.Height));
             for (int i = 0; i < blockMap.GetLength(1) / 128; i++)
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize * 128 * (i + 1) + blockSize, 0), new Point(blockSize * 128 * (i + 1) + blockSize, image.Height));
+            for (int i = 0; i < blockMap.GetLength(1) / 128 - 1; i++)
+                graph.DrawLine(new Pen(mapMeshColor, 2), new Point(0, blockSize * 128 * (i + 1)), new Point(image.Width, blockSize * 128 * (i + 1)));
         }
 
 
