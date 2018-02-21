@@ -17,7 +17,7 @@ namespace Minecraft_staircase
         int maxHeight;
 
         Dictionary<int, Bitmap> textures;
-        Dictionary<int, string> blockNames;
+        List<ColorNote> colors;
 
         int curLayer;
 
@@ -32,9 +32,10 @@ namespace Minecraft_staircase
             pictureBox2.Image = Image.FromFile(compassImage);
         }
 
-        internal void Show(SettedBlock[,] blockMap, int maxHeight)
+        internal void Show(SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
         {
             Show();
+            this.colors = colors;
             this.blockMap = blockMap;
             this.maxHeight = maxHeight;
             LoadTextures();
@@ -46,23 +47,8 @@ namespace Minecraft_staircase
         {
             textures = new Dictionary<int, Bitmap>();
             textures.Add(-1, new Bitmap(@"data\Textures\overflow.png"));
-            blockNames = new Dictionary<int, string>();
-            using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
-            {
-                StreamReader reader = new StreamReader(fs);
-                string line = reader.ReadLine();
-                int id = 1;
-                while (line != null)
-                {
-                    line = line.Split('~')[1].Split(',')[0];
-                    if (line[0] != '/' && line[1] != '/')
-                    {
-                        textures.Add(id, new Bitmap($@"data\Textures\{line.Split(new char[] { '-' })[0]}"));
-                        blockNames.Add(id++, line.Split(new char[] { '-' })[1]);
-                    }
-                    line = reader.ReadLine();
-                }
-            }
+            foreach (ColorNote col in colors)
+                textures.Add(col.ColorID, Image.FromFile(@"data\Textures\" + col.SelectedBlock.TextureName) as Bitmap);
         }
 
         Image CreateLayer(int i)
@@ -263,7 +249,8 @@ namespace Minecraft_staircase
             if (e.Location.X / (blockSize * k) == 0)
                 label2.Text = "Any block";
             else
-                label2.Text = blockNames[blockMap[curLayer, e.Location.X / (blockSize * k)].ID];
+                //label2.Text = blockNames[blockMap[curLayer, e.Location.X / (blockSize * k)].ID];
+                label2.Text = colors.Find((x) => { return blockMap[curLayer, e.Location.X / (blockSize * k)].ID == x.ColorID; }).SelectedBlock.Name;
             label2.Visible = true;
             timer1.Stop();
             timer1.Start();

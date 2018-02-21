@@ -189,9 +189,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="oldColorsIDS.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ColorsIDS.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

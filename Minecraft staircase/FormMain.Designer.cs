@@ -181,8 +181,8 @@
             // 
             // pictureBox1
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
@@ -219,7 +219,6 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.OptionsButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AboutButton);
@@ -240,6 +239,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpenButton);
             this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.label3);
             this.Name = "FormMain";
             this.Resize += new System.EventHandler(this.NewFormMain_Resize);
             this.panel1.ResumeLayout(false);

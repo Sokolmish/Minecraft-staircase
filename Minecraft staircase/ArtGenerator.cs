@@ -88,7 +88,6 @@ namespace Minecraft_staircase
                             tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == betterID; }).LightColor);
                             break;
                     }
-                    //++resources[betterID - 1];
                     _colors.Find((e) => { return e.ColorID == betterID; }).Uses++;
                     progress.BeginInvoke(Inc);
                 }
@@ -116,6 +115,7 @@ namespace Minecraft_staircase
                             BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
                             break;
                     }
+                    if (j != 1 && j - 1 % 128 == 0) BlockMap[i, j].Height = 0;
                     minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
                 }
                 for (int j = 0; j < sourceImage.Height + 1; j++)

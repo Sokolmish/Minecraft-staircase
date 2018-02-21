@@ -272,7 +272,7 @@ namespace Minecraft_staircase
 
         private void CrossViewButton_Click(object sender, EventArgs e)
         {
-            new FormCrossView().Show(blockMap, maxHeight + 1);
+            new FormCrossView().Show(blockMap, maxHeight + 1, ref colorsNote);
         }
 
         private void UsedMaterialsButton_Click(object sender, EventArgs e)
