@@ -251,7 +251,7 @@ namespace Minecraft_staircase
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            //if (e.Button == MouseButtons.Right)
             {
                 Size = new Size(763, 575);
                 MinimumSize = new Size(763, 575);
@@ -285,22 +285,13 @@ namespace Minecraft_staircase
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
-                List<int[]> blockIds = new List<int[]>();
-                using (FileStream fs = new FileStream(BlockIDS, FileMode.Open))
-                {
-                    StreamReader reader = new StreamReader(fs);
-                    string line = reader.ReadLine();
-                    while (line != null)
-                    {
-                        line = line.Split('~')[1].Split(',')[0];
-                        if (line[0] != '/' && line[1] != '/')
-                            blockIds.Add(new int[] { Convert.ToInt32(line.Split('-')[2]), Convert.ToInt32(line.Split('-')[3]) });
-                        line = reader.ReadLine();
-                    }
-                }
                 for (int i = 0; i < blockMap.GetLength(0); i++)
                     for (int j = 1; j < blockMap.GetLength(1); j++)
-                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1, new AlphaBlock(blockIds[blockMap[i, j].ID - 1][0], blockIds[blockMap[i, j].ID - 1][1]));
+                    {
+                        ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
+                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1, 
+                            new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
+                    }                     
                 schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
             }
         }

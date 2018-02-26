@@ -103,5 +103,25 @@ namespace Minecraft_staircase.Properties {
                 return ResourceManager.GetString("ColorsIDS", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HelpSelectingMaterials {
+            get {
+                object obj = ResourceManager.GetObject("HelpSelectingMaterials", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap North {
+            get {
+                object obj = ResourceManager.GetObject("North", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

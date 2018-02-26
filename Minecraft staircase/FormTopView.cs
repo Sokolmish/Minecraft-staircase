@@ -8,7 +8,6 @@ namespace Minecraft_staircase
 {
     public partial class FormTopView : Form
     {
-        const string BlockIDS = @"data\PossibleBlocks.txt";
         const int blockSize = 16;
         const int maxSize = 3;
 
@@ -44,6 +43,8 @@ namespace Minecraft_staircase
             PrintMesh(pictureBox1.Image);
             PrintChunkMesh(pictureBox1.Image);
             PrintMapMesh(pictureBox1.Image);
+            if (!Properties.Settings.Default.HideTips)
+                MessageBox.Show("Try doubleclick on scheme\r\n(This message can be disabled in settings)", "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         void LoadTextures()

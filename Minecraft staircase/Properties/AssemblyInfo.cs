@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Программа Minecraft staircase предназначена для создания плоских и трехмерных артов на картах в игре minecraft.\r\n" +
     "По всем вопросом вы можете посетить канал в Discord.\r\n" +
     "Discord: https://discord.gg/CjErtQY \r\n" +
-    "e-mail: MikhailSokolovskj@yandex.ru")]
+    "e-mail: MikhailSokolovskij@yandex.ru")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sokolmish")]
 [assembly: AssemblyProduct("Minecraft staircase")]
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номер сборки и номер редакции по умолчанию.
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.1.0")]
-[assembly: AssemblyFileVersion("1.2.1.0")]
+[assembly: AssemblyVersion("1.2.2.0")]
+[assembly: AssemblyFileVersion("1.2.2.0")]

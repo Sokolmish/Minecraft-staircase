@@ -48,37 +48,39 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button4 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTexture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxTexture
             // 
-            resources.ApplyResources(this.pictureBoxTexture, "pictureBoxTexture");
             this.pictureBoxTexture.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.pictureBoxTexture, "pictureBoxTexture");
             this.pictureBoxTexture.Name = "pictureBoxTexture";
             this.pictureBoxTexture.TabStop = false;
             this.pictureBoxTexture.DoubleClick += new System.EventHandler(this.pictureBoxTexture_DoubleClick);
             // 
             // pictureBoxColors
             // 
-            resources.ApplyResources(this.pictureBoxColors, "pictureBoxColors");
             this.pictureBoxColors.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.pictureBoxColors, "pictureBoxColors");
             this.pictureBoxColors.Name = "pictureBoxColors";
             this.pictureBoxColors.TabStop = false;
             this.pictureBoxColors.DoubleClick += new System.EventHandler(this.pictureBoxColors_DoubleClick);
             // 
             // comboBox1
             // 
-            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
-            resources.ApplyResources(this.comboBox2, "comboBox2");
             this.comboBox2.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBox2, "comboBox2");
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -157,7 +159,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
             // button4
             // 
@@ -166,10 +167,18 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // FormSelectMaterials
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
@@ -189,10 +198,15 @@
             this.Controls.Add(this.pictureBoxColors);
             this.Controls.Add(this.pictureBoxTexture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.HelpButton = true;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormSelectMaterials";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.FormSelectMaterials_HelpButtonClicked);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.FormSelectMaterials_HelpRequested);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTexture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +233,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

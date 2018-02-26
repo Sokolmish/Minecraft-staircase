@@ -165,5 +165,17 @@ namespace Minecraft_staircase.Properties {
                 this["PossibleBlocks"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideTips {
+            get {
+                return ((bool)(this["HideTips"]));
+            }
+            set {
+                this["HideTips"] = value;
+            }
+        }
     }
 }

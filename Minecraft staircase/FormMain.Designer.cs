@@ -219,7 +219,6 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.OptionsButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.UsedMaterialsButton);
@@ -234,12 +233,13 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpenButton);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.OptionsButton);
             this.Name = "FormMain";
             this.Resize += new System.EventHandler(this.NewFormMain_Resize);
             this.panel1.ResumeLayout(false);

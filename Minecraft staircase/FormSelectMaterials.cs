@@ -23,6 +23,8 @@ namespace Minecraft_staircase
         {
             InitializeComponent();
             Height = 187;
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = Properties.Resources.HelpSelectingMaterials;
         }
 
         #region admin
@@ -147,6 +149,25 @@ namespace Minecraft_staircase
             colorsList[comboBox1.SelectedIndex].Use = !colorsList[comboBox1.SelectedIndex].Use;
             button4.Text = colorsList[comboBox1.SelectedIndex].Use ? "Do not use" : "Use";
             WriteFile();
+        }
+
+
+        private void FormSelectMaterials_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            FormSelectMaterials_HelpRequested(new object(), new HelpEventArgs(new Point(0, 0)));
+        }
+
+        private void FormSelectMaterials_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            pictureBox1.Visible = true;
+            Size = new Size(549, 419);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Size = new Size(264, 187);
+            pictureBox1.Visible = false;
         }
     }
 }

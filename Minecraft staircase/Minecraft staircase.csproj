@@ -132,6 +132,9 @@
     <EmbeddedResource Include="FormMaterials.resx">
       <DependentUpon>FormMaterials.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMaterials.ru.resx">
+      <DependentUpon>FormMaterials.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSelectMaterials.resx">
       <DependentUpon>FormSelectMaterials.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ColorsIDS.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HelpSelectingMaterials.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\North.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

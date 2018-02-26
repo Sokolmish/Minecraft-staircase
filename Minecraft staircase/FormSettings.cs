@@ -12,12 +12,14 @@ namespace Minecraft_staircase
             InitializeComponent();
             propeteries = Properties.Settings.Default;
             checkBox1.Checked = propeteries.LimitedHeight;
+            checkBox2.Checked = propeteries.HideTips;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {            
             propeteries.LimitedHeight = checkBox1.Checked;
-            if (comboBox1.SelectedItem as string != Properties.Settings.Default.Language)
+            propeteries.HideTips = checkBox2.Checked;
+            if ((comboBox1.SelectedItem as string)?.Split(' ')[1] != Properties.Settings.Default.Language)
             {
                 propeteries.Language = "en";
                 propeteries.Language = (comboBox1.SelectedItem as string)?.Split(' ')[1];

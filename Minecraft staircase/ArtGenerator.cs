@@ -115,7 +115,8 @@ namespace Minecraft_staircase
                             BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
                             break;
                     }
-                    if (j != 1 && j - 1 % 128 == 0) BlockMap[i, j].Height = 0;
+                    if (Properties.Settings.Default.LimitedHeight && j != 1 && (j - 1) % 128 == 0)
+                        BlockMap[i, j].Height = 0;
                     minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
                 }
                 for (int j = 0; j < sourceImage.Height + 1; j++)

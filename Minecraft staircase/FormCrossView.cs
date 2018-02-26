@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Minecraft_staircase
 {
     public partial class FormCrossView : Form
     {
-        const string blockIDS = @"data\BlockIDS.txt";
-        const string compassImage = @"data\North.png";
-        const string BlockIDS = @"data\PossibleBlocks.txt";
         const int blockSize = 16;
 
         SettedBlock[,] blockMap;
@@ -29,7 +25,7 @@ namespace Minecraft_staircase
         {
             InitializeComponent();
             MouseWheel += new MouseEventHandler(WheelRolled);
-            pictureBox2.Image = Image.FromFile(compassImage);
+            pictureBox2.Image = Properties.Resources.North;
         }
 
         internal void Show(SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
@@ -178,8 +174,6 @@ namespace Minecraft_staircase
                 textBox1.Visible = true;
                 pictureBox2.Visible = true;
                 MaximizeBox = false;
-                Width = 728;
-                Height = 584;
                 MinimumSize = new Size(724, 580);
             }
         }

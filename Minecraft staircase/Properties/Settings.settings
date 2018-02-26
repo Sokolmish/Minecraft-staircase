@@ -61,5 +61,8 @@ True~hardened_clay_stained_green.png-Green terracota-159-13-False
 True~hardened_clay_stained_red.png-Red terracota-159-14-False
 True~hardened_clay_stained_black.png-Black terracota-159-15-False</Value>
     </Setting>
+    <Setting Name="HideTips" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
