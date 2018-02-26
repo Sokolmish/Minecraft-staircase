@@ -33,6 +33,47 @@ namespace Minecraft_staircase
         /// <returns></returns>
         public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight)
         {
+            //Converting
+            UnsettedBlock[,] RawScheme = Convert(ref sourceImage, type);
+            //Generating
+            SettedBlock[,] BlockMap = new SettedBlock[sourceImage.Width, sourceImage.Height + 1];
+            for (int i = 0; i < sourceImage.Width; i++)
+                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
+            maxHeight = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                int minHeight = 0;
+                for (int j = 1; j < sourceImage.Height + 1; j++)
+                {
+                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
+                    switch (RawScheme[i, j - 1].Set)
+                    {
+                        case ColorType.Normal:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
+                            break;
+                        case ColorType.Dark:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
+                            break;
+                        case ColorType.Light:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
+                            break;
+                    }
+                    if (Properties.Settings.Default.LimitedHeight && j != 1 && (j - 1) % 128 == 0)
+                        BlockMap[i, j].Height = 0;
+                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
+                }
+                for (int j = 0; j < sourceImage.Height + 1; j++)
+                {
+                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
+                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
+                }
+            }
+            return BlockMap;
+        }
+
+
+        UnsettedBlock[,] Convert(ref Image sourceImage, ArtType type)
+        {
             UnsettedBlock[,] RawScheme = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             Bitmap tempImage = sourceImage as Bitmap;
             for (int i = 0; i < sourceImage.Width; i++)
@@ -93,41 +134,8 @@ namespace Minecraft_staircase
                 }
             }
             sourceImage = tempImage;
-            SettedBlock[,] BlockMap = new SettedBlock[sourceImage.Width, sourceImage.Height + 1];
-            for (int i = 0; i < sourceImage.Width; i++)
-                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-            maxHeight = 0;
-            for (int i = 0; i < sourceImage.Width; i++)
-            {
-                int minHeight = 0;
-                for (int j = 1; j < sourceImage.Height + 1; j++)
-                {
-                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
-                    switch (RawScheme[i, j - 1].Set)
-                    {
-                        case ColorType.Normal:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
-                            break;
-                        case ColorType.Dark:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
-                            break;
-                        case ColorType.Light:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
-                            break;
-                    }
-                    if (Properties.Settings.Default.LimitedHeight && j != 1 && (j - 1) % 128 == 0)
-                        BlockMap[i, j].Height = 0;
-                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
-                }
-                for (int j = 0; j < sourceImage.Height + 1; j++)
-                {
-                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
-                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
-                }
-            }
-            return BlockMap;
+            return RawScheme;
         }
-
 
         /// <summary>
         /// Get similarity of 2 colors

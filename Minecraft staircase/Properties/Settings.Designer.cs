@@ -49,114 +49,143 @@ namespace Minecraft_staircase.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True~grass_side.png-Grass block-2-0-False,slime.png-Slimeblock-165-0-True\r\nTrue~s" +
-            "andstone_bottom.png-Sandstone-24-0-False,sand.png-Sand-12-0-False,planks_birch.p" +
-            "ng-Birch planks-5-2-False,end_stone.png-End stone-121-0-False,sandstone_carved.p" +
-            "ng-Chiseled sandstone-24-1-False,sandstone_smooth.png-Smooth sandstone-24-2-Fals" +
-            "e,bone_block_top.png-Bone block-216-0-False,glowstone.png-Glowstone-89-0-False,e" +
-            "nd_bricks.png-Endstone bricks-206-0-False\r\nTrue~web.png-Web-30-0-False\r\nTrue~red" +
-            "stone_block.png-Redstone block-152-0-False,tnt_side.png-TNT-46-0-False\r\nTrue~ice" +
-            "_packed.png-Packed ice-174-0-False,frosted_ice_0.png-Frosted ice-212-0-False,ice" +
-            ".png-Ice-79-0-False\r\nTrue~iron_block.png-Iron block-42-0-False,iron_trapdoor.png" +
-            "-Iron trapdoor-167-0-True,iron_bars.png-Iron bars-101-0-True,brewing_stand.png-B" +
-            "rewing stand-117-0-True\r\nTrue~leaves_oak.png-Oak leaves-18-0-False,wheat_stage_7" +
-            ".png-Wheat-59-7-True\r\nTrue~snow.png-Snow block-80-0-False,wool_colored_white.png" +
-            "-White wool-35-0-False,snow.png-Snow layer-78-0-True,wool_colored_white.png-Whit" +
-            "e carpet-171-0-True,glass_white.png-White stained glass-95-0-True,glass_white.pn" +
-            "g-White stained glass pane-160-0-True,glazed_terracotta_white.png-White glazed t" +
-            "erracota-220-0-True\r\nTrue~clay.png-Clay-82-0-False\r\nTrue~dirt.png-Dirt-3-0-False" +
-            ",planks_jungle.png-Jungle planks-5-3-False,coarse_dirt.png-Coarse dirt-3-1-False" +
-            ",jukebox_top.png-Jukebox-84-0-False,stone_granite.png-Granite-1-1-False,stone_gr" +
-            "anite_smooth.png-Polished granite-1-2-False,grass_path_side.png-Grass path-208-0" +
-            "-False\r\nTrue~stone.png-Stone-1-0-False,cobblestone.png-Cobblestone-4-0-False,sto" +
-            "ne_slab_top.png-Stone slab-44-0-False,stonebrick.png-Stone bricks-98-0-False,sto" +
-            "nebrick_mossy.png-Mossy stone bricks-98-1-False,stonebrick_cracked.png-Cracked s" +
-            "tone bricks-98-2-False,stonebrick_carved.png-Chiseled stone bricks-98-3-False,co" +
-            "bblestone_mossy.png-Mossy cobblestone-48-0-False,gravel.png-Gravel-13-0-False,st" +
-            "one_andesite.png-Andesite-1-5-False,stone_andesite_smooth.png-Polished andesite-" +
-            "1-6-False,bedrock.png-Bedrock-7-0-False,furnace_front_off.png-Furnace-61-0-False" +
-            "\r\nTrue~water_overlay.png-Water-9-0-False\r\nTrue~planks_oak.png-Oak planks-5-0-Fal" +
+        [global::System.Configuration.DefaultSettingValueAttribute("True~grass_side.png-Grass block-2-0-False,slime.png-Slimeblock-165-0-True~grass_s" +
+            "ide.png-Grass block-2-0-False\r\nTrue~sandstone_bottom.png-Sandstone-24-0-False,sa" +
+            "nd.png-Sand-12-0-False,planks_birch.png-Birch planks-5-2-False,end_stone.png-End" +
+            " stone-121-0-False,sandstone_carved.png-Chiseled sandstone-24-1-False,sandstone_" +
+            "smooth.png-Smooth sandstone-24-2-False,bone_block_top.png-Bone block-216-0-False" +
+            ",glowstone.png-Glowstone-89-0-False,end_bricks.png-Endstone bricks-206-0-False~s" +
+            "andstone_bottom.png-Sandstone-24-0-False\r\nTrue~web.png-Web-30-0-False~web.png-We" +
+            "b-30-0-False\r\nTrue~redstone_block.png-Redstone block-152-0-False,tnt_side.png-TN" +
+            "T-46-0-False~redstone_block.png-Redstone block-152-0-False\r\nTrue~ice_packed.png-" +
+            "Packed ice-174-0-False,frosted_ice_0.png-Frosted ice-212-0-False,ice.png-Ice-79-" +
+            "0-False~ice_packed.png-Packed ice-174-0-False\r\nTrue~iron_block.png-Iron block-42" +
+            "-0-False,iron_trapdoor.png-Iron trapdoor-167-0-True,iron_bars.png-Iron bars-101-" +
+            "0-True,brewing_stand.png-Brewing stand-117-0-True~iron_block.png-Iron block-42-0" +
+            "-False\r\nTrue~leaves_oak.png-Oak leaves-18-0-False,wheat_stage_7.png-Wheat-59-7-T" +
+            "rue~leaves_oak.png-Oak leaves-18-0-False\r\nTrue~snow.png-Snow block-80-0-False,wo" +
+            "ol_colored_white.png-White wool-35-0-False,snow.png-Snow layer-78-0-True,wool_co" +
+            "lored_white.png-White carpet-171-0-True,glass_white.png-White stained glass-95-0" +
+            "-True,glass_white.png-White stained glass pane-160-0-True,glazed_terracotta_whit" +
+            "e.png-White glazed terracota-220-0-True~snow.png-Snow block-80-0-False\r\nTrue~cla" +
+            "y.png-Clay-82-0-False~clay.png-Clay-82-0-False\r\nTrue~dirt.png-Dirt-3-0-False,pla" +
+            "nks_jungle.png-Jungle planks-5-3-False,coarse_dirt.png-Coarse dirt-3-1-False,juk" +
+            "ebox_top.png-Jukebox-84-0-False,stone_granite.png-Granite-1-1-False,stone_granit" +
+            "e_smooth.png-Polished granite-1-2-False,grass_path_side.png-Grass path-208-0-Fal" +
+            "se~dirt.png-Dirt-3-0-False\r\nTrue~stone.png-Stone-1-0-False,cobblestone.png-Cobbl" +
+            "estone-4-0-False,stone_slab_top.png-Stone slab-44-0-False,stonebrick.png-Stone b" +
+            "ricks-98-0-False,stonebrick_mossy.png-Mossy stone bricks-98-1-False,stonebrick_c" +
+            "racked.png-Cracked stone bricks-98-2-False,stonebrick_carved.png-Chiseled stone " +
+            "bricks-98-3-False,cobblestone_mossy.png-Mossy cobblestone-48-0-False,gravel.png-" +
+            "Gravel-13-0-False,stone_andesite.png-Andesite-1-5-False,stone_andesite_smooth.pn" +
+            "g-Polished andesite-1-6-False,bedrock.png-Bedrock-7-0-False,furnace_front_off.pn" +
+            "g-Furnace-61-0-False~stone.png-Stone-1-0-False\r\nTrue~water_overlay.png-Water-9-0" +
+            "-False~water_overlay.png-Water-9-0-False\r\nTrue~planks_oak.png-Oak planks-5-0-Fal" +
             "se,crafting_table_front.png-Workbench-58-0-False,bookshelf.png-Bookshelf-47-0-Fa" +
-            "lse,noteblock.png-Noteblock-25-0-False\r\nTrue~stone_diorite.png-Diorite-1-3-False" +
-            ",stone_diorite_smooth.png-Polished diorite-1-4-False,quartz_block_bottom.png-Qua" +
-            "rtz-155-0-False,quartz_block_chiseled.png-Chiseled quartz-155-1-False,quartz_blo" +
-            "ck_lines.png-Quartz pillar-155-2-False,sea_lantern.png-Sea latern-169-0-False\r\nT" +
-            "rue~wool_colored_orange.png-Orange wool-35-1-False,planks_acacia.png-Acacia plan" +
-            "ks-5-4-False,wool_colored_orange.png-Orange carpet-171-1-False,pumpkin_face_off." +
-            "png-Pumpkin-86-0-False,red_sand.png-Red sand-12-1-False,red_sandstone_normal.png" +
-            "-Red sandstone-179-0-False,red_sandstone_carved.png-Chiseled red sandstone-179-1" +
-            "-False,red_sandstone_smooth.png-Smooth red sandstone-179-2-False,hardened_clay.p" +
-            "ng-Stained clay (terracota)-172-0-False,glazed_terracotta_orange.png-Orange glaz" +
-            "ed terracotta-236-0-False,concrete_orange.png-Orange concrete-251-1-False,concre" +
-            "te_powder_orange.png-Orange concrete powder-252-1-False\r\nTrue~purpur_block.png-P" +
-            "urpur block-201-0-False,purpur_pillar.png-Purpur pillar-202-0-False,wool_colored" +
-            "_magenta.png-Magenta wool-35-2-False,glazed_terracotta_magenta.png-Magenta glaze" +
-            "d terracotta-237-0-False,concrete_magenta.png-Magenta concrete-251-2-False,concr" +
-            "ete_powder_magenta.png-Magenta concrete powder-252-2-False\r\nTrue~wool_colored_li" +
-            "ght_blue.png-Light blue wool-35-3-False,glazed_terracotta_light_blue.png-Light b" +
-            "lue glazed terracotta-238-0-False,concrete_light_blue.png-Light blue concrete-25" +
-            "1-3-False,concrete_powder_light_blue.png-Light blue concrete powder-252-3-False\r" +
-            "\nTrue~wool_colored_yellow.png-Yellow wool-35-4-False,glazed_terracotta_yellow.pn" +
-            "g-Yellow glazed terracotta-239-0-False,concrete_yellow.png-Yellow concrete-251-4" +
-            "-False,concrete_powder_yellow.png-Yellow concrete powder-252-4-False,hay_block_s" +
-            "ide.png-Hay bale-170-0-False,sponge.png-Sponge-19-0-False,sponge_wet.png-Wet spo" +
-            "nge-19-1-False\r\nTrue~melon_side.png-Melon-103-0-False,wool_colored_lime.png-Lime" +
-            " wool-35-5-False,glazed_terracotta_lime.png-Lime glazed terracotta-240-0-False,c" +
-            "oncrete_lime.png-Lime concrete-251-5-False,concrete_powder_lime.png-Lime concret" +
-            "e powder-252-5-False\r\nTrue~wool_colored_pink.png-Pink wool-35-6-False,glazed_ter" +
-            "racotta_pink.png-Pink glazed terracotta-241-0-False,concrete_pink.png-Pink concr" +
-            "ete-251-6-False,concrete_powder_pink.png-Pink concrete powder-252-6-False\r\nTrue~" +
-            "wool_colored_gray.png-Gray wool-35-7-False,glazed_terracotta_gray.png-Gray glaze" +
-            "d terracotta-242-0-False,concrete_gray.png-Gray concrete-251-7-False,concrete_po" +
-            "wder_gray.png-Gray concrete powder-252-7-False\r\nTrue~wool_colored_silver.png-Lig" +
-            "ht gray wool-35-8-False,glazed_terracotta_silver.png-Light gray glazed terracott" +
-            "a-243-0-False,concrete_silver.png-Light gray concrete-251-8-False,concrete_powde" +
-            "r_silver.png-Light gray concrete powder-252-8-False\r\nTrue~wool_colored_cyan.png-" +
-            "Cyan wool-35-9-False,glazed_terracotta_cyan.png-Cyan glazed terracotta-244-0-Fal" +
-            "se,concrete_cyan.png-Cyan concrete-251-9-False,concrete_powder_cyan.png-Cyan con" +
-            "crete powder-252-9-False,prismarine_rough.png-Prismarine-168-0-False\r\nTrue~wool_" +
-            "colored_purple.png-Purple wool-35-10-False,glazed_terracotta_purple.png-Purple g" +
-            "lazed terracotta-245-0-False,concrete_purple.png-Purple concrete-251-10-False,co" +
-            "ncrete_powder_purple.png-Purple concrete powder-252-10-False,mycelium_side.png-M" +
-            "ycelium-110-0-False\r\nTrue~wool_colored_blue.png-Blue wool-35-11-False,glazed_ter" +
-            "racotta_blue.png-Blue glazed terracotta-246-0-False,concrete_blue.png-Blue concr" +
-            "ete-251-11-False,concrete_powder_blue.png-Blue concrete powder-252-11-False\r\nTru" +
-            "e~soul_sand.png-Soulsand-88-0-False,planks_big_oak.png-Dark oak planks-5-5-False" +
-            ",wool_colored_brown.png-Brown wool-35-12-False,glazed_terracotta_brown.png-Brown" +
-            " glazed terracotta-247-0-False,concrete_brown.png-Brown concrete-251-12-False,co" +
-            "ncrete_powder_brown.png-Brown concrete powder-252-12-False\r\nTrue~wool_colored_gr" +
-            "een.png-Green wool-35-13-False,glazed_terracotta_green.png-Green glazed terracot" +
-            "ta-248-0-False,concrete_green.png-Green concrete-251-13-False,concrete_powder_gr" +
-            "een.png-Green concrete powder-252-13-False\r\nTrue~wool_colored_red.png-Red wool-3" +
-            "5-14-False,glazed_terracotta_red.png-Red glazed terracotta-249-0-False,concrete_" +
-            "red.png-Red concrete-251-14-False,concrete_powder_red.png-Red concrete powder-25" +
-            "2-14-False,brick.png-Bricks-45-0-False,nether_wart_block.png-Nether wart block-2" +
-            "14-0-False\r\nTrue~wool_colored_black.png-Black wool-35-15-False,glazed_terracotta" +
-            "_black.png-Black glazed terracotta-250-0-False,concrete_black.png-Black concrete" +
-            "-251-15-False,concrete_powder_black.png-Black concrete powder-252-15-False,coal_" +
-            "block.png-Block of coal-173-0-False,obsidian.png-Obsidian-49-0-False\r\nTrue~gold_" +
-            "block.png-Gold block-41-0-False,gold_block.png-Gold pressure plate-147-0-True\r\nT" +
-            "rue~prismarine_bricks.png-Prismarine bricks-168-1-False,prismarine_dark.png-Dark" +
-            " prismarine-168-2-False,diamond_block.png-Diamond block-57-0-False,beacon.png-Be" +
-            "acon-138-0-True\r\nTrue~lapis_block.png-Lapiz lazuli block-22-0-False\r\nTrue~emeral" +
-            "d_block.png-Emerald block-133-0-False\r\nTrue~planks_spruce.png-Spruce planks-5-1-" +
-            "False,dirt_podzol_side.png-Podzol-3-2-False\r\nTrue~netherrack.png-Netherrack-87-0" +
-            "-False,nether_brick.png-Nether bricks-112-0-False,red_nether_brick.png-Red nethe" +
-            "r bricks-215-0-False,magma.png-Magma block-213-0-False\r\nTrue~hardened_clay_stain" +
-            "ed_white.png-White terracota-159-0-False\r\nTrue~hardened_clay_stained_orange.png-" +
-            "Orange terracota-159-1-False\r\nTrue~hardened_clay_stained_magenta.png-Magenta ter" +
-            "racota-159-2-False\r\nTrue~hardened_clay_stained_light_blue.png-Light blue terraco" +
-            "ta-159-3-False\r\nTrue~hardened_clay_stained_yellow.png-Yellow terracota-159-4-Fal" +
-            "se\r\nTrue~hardened_clay_stained_lime.png-Lime terracota-159-5-False\r\nTrue~hardene" +
-            "d_clay_stained_pink.png-Pink terracota-159-6-False\r\nTrue~hardened_clay_stained_g" +
-            "ray.png-Gray terracota-159-7-False\r\nTrue~hardened_clay_stained_silver.png-Light " +
-            "gray terracota-159-8-False\r\nTrue~hardened_clay_stained_cyan.png-Cyan terracota-1" +
-            "59-9-False\r\nTrue~hardened_clay_stained_purple.png-Purple terracota-159-10-False\r" +
-            "\nTrue~hardened_clay_stained_blue.png-Blue terracota-159-11-False\r\nTrue~hardened_" +
-            "clay_stained_brown.png-Brown terracota-159-12-False\r\nTrue~hardened_clay_stained_" +
-            "green.png-Green terracota-159-13-False\r\nTrue~hardened_clay_stained_red.png-Red t" +
-            "erracota-159-14-False\r\nTrue~hardened_clay_stained_black.png-Black terracota-159-" +
-            "15-False")]
+            "lse,noteblock.png-Noteblock-25-0-False~planks_oak.png-Oak planks-5-0-False\r\nTrue" +
+            "~stone_diorite.png-Diorite-1-3-False,stone_diorite_smooth.png-Polished diorite-1" +
+            "-4-False,quartz_block_bottom.png-Quartz-155-0-False,quartz_block_chiseled.png-Ch" +
+            "iseled quartz-155-1-False,quartz_block_lines.png-Quartz pillar-155-2-False,sea_l" +
+            "antern.png-Sea latern-169-0-False~stone_diorite.png-Diorite-1-3-False\r\nTrue~wool" +
+            "_colored_orange.png-Orange wool-35-1-False,planks_acacia.png-Acacia planks-5-4-F" +
+            "alse,wool_colored_orange.png-Orange carpet-171-1-False,pumpkin_face_off.png-Pump" +
+            "kin-86-0-False,red_sand.png-Red sand-12-1-False,red_sandstone_normal.png-Red san" +
+            "dstone-179-0-False,red_sandstone_carved.png-Chiseled red sandstone-179-1-False,r" +
+            "ed_sandstone_smooth.png-Smooth red sandstone-179-2-False,hardened_clay.png-Stain" +
+            "ed clay (terracota)-172-0-False,glazed_terracotta_orange.png-Orange glazed terra" +
+            "cotta-236-0-False,concrete_orange.png-Orange concrete-251-1-False,concrete_powde" +
+            "r_orange.png-Orange concrete powder-252-1-False~wool_colored_orange.png-Orange w" +
+            "ool-35-1-False\r\nTrue~purpur_block.png-Purpur block-201-0-False,purpur_pillar.png" +
+            "-Purpur pillar-202-0-False,wool_colored_magenta.png-Magenta wool-35-2-False,glaz" +
+            "ed_terracotta_magenta.png-Magenta glazed terracotta-237-0-False,concrete_magenta" +
+            ".png-Magenta concrete-251-2-False,concrete_powder_magenta.png-Magenta concrete p" +
+            "owder-252-2-False~purpur_block.png-Purpur block-201-0-False\r\nTrue~wool_colored_l" +
+            "ight_blue.png-Light blue wool-35-3-False,glazed_terracotta_light_blue.png-Light " +
+            "blue glazed terracotta-238-0-False,concrete_light_blue.png-Light blue concrete-2" +
+            "51-3-False,concrete_powder_light_blue.png-Light blue concrete powder-252-3-False" +
+            "~wool_colored_light_blue.png-Light blue wool-35-3-False\r\nTrue~wool_colored_yello" +
+            "w.png-Yellow wool-35-4-False,glazed_terracotta_yellow.png-Yellow glazed terracot" +
+            "ta-239-0-False,concrete_yellow.png-Yellow concrete-251-4-False,concrete_powder_y" +
+            "ellow.png-Yellow concrete powder-252-4-False,hay_block_side.png-Hay bale-170-0-F" +
+            "alse,sponge.png-Sponge-19-0-False,sponge_wet.png-Wet sponge-19-1-False~wool_colo" +
+            "red_yellow.png-Yellow wool-35-4-False\r\nTrue~melon_side.png-Melon-103-0-False,woo" +
+            "l_colored_lime.png-Lime wool-35-5-False,glazed_terracotta_lime.png-Lime glazed t" +
+            "erracotta-240-0-False,concrete_lime.png-Lime concrete-251-5-False,concrete_powde" +
+            "r_lime.png-Lime concrete powder-252-5-False~melon_side.png-Melon-103-0-False\r\nTr" +
+            "ue~wool_colored_pink.png-Pink wool-35-6-False,glazed_terracotta_pink.png-Pink gl" +
+            "azed terracotta-241-0-False,concrete_pink.png-Pink concrete-251-6-False,concrete" +
+            "_powder_pink.png-Pink concrete powder-252-6-False~wool_colored_pink.png-Pink woo" +
+            "l-35-6-False\r\nTrue~wool_colored_gray.png-Gray wool-35-7-False,glazed_terracotta_" +
+            "gray.png-Gray glazed terracotta-242-0-False,concrete_gray.png-Gray concrete-251-" +
+            "7-False,concrete_powder_gray.png-Gray concrete powder-252-7-False~wool_colored_g" +
+            "ray.png-Gray wool-35-7-False\r\nTrue~wool_colored_silver.png-Light gray wool-35-8-" +
+            "False,glazed_terracotta_silver.png-Light gray glazed terracotta-243-0-False,conc" +
+            "rete_silver.png-Light gray concrete-251-8-False,concrete_powder_silver.png-Light" +
+            " gray concrete powder-252-8-False~wool_colored_silver.png-Light gray wool-35-8-F" +
+            "alse\r\nTrue~wool_colored_cyan.png-Cyan wool-35-9-False,glazed_terracotta_cyan.png" +
+            "-Cyan glazed terracotta-244-0-False,concrete_cyan.png-Cyan concrete-251-9-False," +
+            "concrete_powder_cyan.png-Cyan concrete powder-252-9-False,prismarine_rough.png-P" +
+            "rismarine-168-0-False~wool_colored_cyan.png-Cyan wool-35-9-False\r\nTrue~wool_colo" +
+            "red_purple.png-Purple wool-35-10-False,glazed_terracotta_purple.png-Purple glaze" +
+            "d terracotta-245-0-False,concrete_purple.png-Purple concrete-251-10-False,concre" +
+            "te_powder_purple.png-Purple concrete powder-252-10-False,mycelium_side.png-Mycel" +
+            "ium-110-0-False~wool_colored_purple.png-Purple wool-35-10-False\r\nTrue~wool_color" +
+            "ed_blue.png-Blue wool-35-11-False,glazed_terracotta_blue.png-Blue glazed terraco" +
+            "tta-246-0-False,concrete_blue.png-Blue concrete-251-11-False,concrete_powder_blu" +
+            "e.png-Blue concrete powder-252-11-False~wool_colored_blue.png-Blue wool-35-11-Fa" +
+            "lse\r\nTrue~soul_sand.png-Soulsand-88-0-False,planks_big_oak.png-Dark oak planks-5" +
+            "-5-False,wool_colored_brown.png-Brown wool-35-12-False,glazed_terracotta_brown.p" +
+            "ng-Brown glazed terracotta-247-0-False,concrete_brown.png-Brown concrete-251-12-" +
+            "False,concrete_powder_brown.png-Brown concrete powder-252-12-False~soul_sand.png" +
+            "-Soulsand-88-0-False\r\nTrue~wool_colored_green.png-Green wool-35-13-False,glazed_" +
+            "terracotta_green.png-Green glazed terracotta-248-0-False,concrete_green.png-Gree" +
+            "n concrete-251-13-False,concrete_powder_green.png-Green concrete powder-252-13-F" +
+            "alse~wool_colored_green.png-Green wool-35-13-False\r\nTrue~wool_colored_red.png-Re" +
+            "d wool-35-14-False,glazed_terracotta_red.png-Red glazed terracotta-249-0-False,c" +
+            "oncrete_red.png-Red concrete-251-14-False,concrete_powder_red.png-Red concrete p" +
+            "owder-252-14-False,brick.png-Bricks-45-0-False,nether_wart_block.png-Nether wart" +
+            " block-214-0-False~wool_colored_red.png-Red wool-35-14-False\r\nTrue~wool_colored_" +
+            "black.png-Black wool-35-15-False,glazed_terracotta_black.png-Black glazed terrac" +
+            "otta-250-0-False,concrete_black.png-Black concrete-251-15-False,concrete_powder_" +
+            "black.png-Black concrete powder-252-15-False,coal_block.png-Block of coal-173-0-" +
+            "False,obsidian.png-Obsidian-49-0-False~wool_colored_black.png-Black wool-35-15-F" +
+            "alse\r\nTrue~gold_block.png-Gold block-41-0-False,gold_block.png-Gold pressure pla" +
+            "te-147-0-True~gold_block.png-Gold block-41-0-False\r\nTrue~prismarine_bricks.png-P" +
+            "rismarine bricks-168-1-False,prismarine_dark.png-Dark prismarine-168-2-False,dia" +
+            "mond_block.png-Diamond block-57-0-False,beacon.png-Beacon-138-0-True~prismarine_" +
+            "bricks.png-Prismarine bricks-168-1-False\r\nTrue~lapis_block.png-Lapiz lazuli bloc" +
+            "k-22-0-False~lapis_block.png-Lapiz lazuli block-22-0-False\r\nTrue~emerald_block.p" +
+            "ng-Emerald block-133-0-False~emerald_block.png-Emerald block-133-0-False\r\nTrue~p" +
+            "lanks_spruce.png-Spruce planks-5-1-False,dirt_podzol_side.png-Podzol-3-2-False~p" +
+            "lanks_spruce.png-Spruce planks-5-1-False\r\nTrue~netherrack.png-Netherrack-87-0-Fa" +
+            "lse,nether_brick.png-Nether bricks-112-0-False,red_nether_brick.png-Red nether b" +
+            "ricks-215-0-False,magma.png-Magma block-213-0-False~netherrack.png-Netherrack-87" +
+            "-0-False\r\nTrue~hardened_clay_stained_white.png-White terracota-159-0-False~harde" +
+            "ned_clay_stained_white.png-White terracota-159-0-False\r\nTrue~hardened_clay_stain" +
+            "ed_orange.png-Orange terracota-159-1-False~hardened_clay_stained_orange.png-Oran" +
+            "ge terracota-159-1-False\r\nTrue~hardened_clay_stained_magenta.png-Magenta terraco" +
+            "ta-159-2-False~hardened_clay_stained_magenta.png-Magenta terracota-159-2-False\r\n" +
+            "True~hardened_clay_stained_light_blue.png-Light blue terracota-159-3-False~harde" +
+            "ned_clay_stained_light_blue.png-Light blue terracota-159-3-False\r\nTrue~hardened_" +
+            "clay_stained_yellow.png-Yellow terracota-159-4-False~hardened_clay_stained_yello" +
+            "w.png-Yellow terracota-159-4-False\r\nTrue~hardened_clay_stained_lime.png-Lime ter" +
+            "racota-159-5-False~hardened_clay_stained_lime.png-Lime terracota-159-5-False\r\nTr" +
+            "ue~hardened_clay_stained_pink.png-Pink terracota-159-6-False~hardened_clay_stain" +
+            "ed_pink.png-Pink terracota-159-6-False\r\nTrue~hardened_clay_stained_gray.png-Gray" +
+            " terracota-159-7-False~hardened_clay_stained_gray.png-Gray terracota-159-7-False" +
+            "\r\nTrue~hardened_clay_stained_silver.png-Light gray terracota-159-8-False~hardene" +
+            "d_clay_stained_silver.png-Light gray terracota-159-8-False\r\nTrue~hardened_clay_s" +
+            "tained_cyan.png-Cyan terracota-159-9-False~hardened_clay_stained_cyan.png-Cyan t" +
+            "erracota-159-9-False\r\nTrue~hardened_clay_stained_purple.png-Purple terracota-159" +
+            "-10-False~hardened_clay_stained_purple.png-Purple terracota-159-10-False\r\nTrue~h" +
+            "ardened_clay_stained_blue.png-Blue terracota-159-11-False~hardened_clay_stained_" +
+            "blue.png-Blue terracota-159-11-False\r\nTrue~hardened_clay_stained_brown.png-Brown" +
+            " terracota-159-12-False~hardened_clay_stained_brown.png-Brown terracota-159-12-F" +
+            "alse\r\nTrue~hardened_clay_stained_green.png-Green terracota-159-13-False~hardened" +
+            "_clay_stained_green.png-Green terracota-159-13-False\r\nTrue~hardened_clay_stained" +
+            "_red.png-Red terracota-159-14-False~hardened_clay_stained_red.png-Red terracota-" +
+            "159-14-False\r\nTrue~hardened_clay_stained_black.png-Black terracota-159-15-False~" +
+            "hardened_clay_stained_black.png-Black terracota-159-15-False")]
         public string PossibleBlocks {
             get {
                 return ((string)(this["PossibleBlocks"]));

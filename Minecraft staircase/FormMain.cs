@@ -69,7 +69,6 @@ namespace Minecraft_staircase
                     blockDatas.Add(new BlockData(block[0], block[1], Convert.ToInt32(block[2]), Convert.ToInt32(block[3]), block[4] == "True"));
                 }
                 note.PossibleBlocks = blockDatas;
-
                 colorsNote.Add(note);
             }
         }
