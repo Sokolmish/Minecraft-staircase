@@ -12,24 +12,12 @@ namespace Minecraft_staircase
         ProgressBar progress;
         public event Action Inc;
 
-        /// <summary>
-        /// Initialize new ArtGenerator
-        /// </summary>
-        /// <param name="colors">List of colors</param>
         public ArtGenerator(ref List<ColorNote> colors)
         {
             _colors = colors;
             Inc += () => { progress?.Increment(1); };
         }
 
-
-        /// <summary>
-        /// Create array of blocks
-        /// </summary>
-        /// <param name="sourceImage">Image to create art. After creation will be modified!</param>
-        /// <param name="type">Art type</param>
-        /// <param name="resources">Array of resources required</param>
-        /// <returns></returns>
         public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight)
         {
             UnsettedBlock[,] RawScheme = Convert(ref sourceImage, type);
@@ -176,16 +164,6 @@ namespace Minecraft_staircase
             return BlockMap;
         }
 
-        /// <summary>
-        /// Get similarity of 2 colors
-        /// </summary>
-        /// <param name="r1"></param>
-        /// <param name="g1"></param>
-        /// <param name="b1"></param>
-        /// <param name="r2"></param>
-        /// <param name="g2"></param>
-        /// <param name="b2"></param>
-        /// <returns></returns>
         double Similarity(Color col1, Color col2)
         {
             if (Properties.Settings.Default.ConvertingMethod == 0)
@@ -198,11 +176,6 @@ namespace Minecraft_staircase
             }
         }
 
-        /// <summary>
-        /// Get chromatics coordinates of color
-        /// </summary>
-        /// <param name="rgbColor">Color in RGB</param>
-        /// <returns>Color in XYZ scheme</returns>
         double[] RGBtoXYZ(double[] rgbColor)
         {
             return new double[] {
@@ -211,11 +184,6 @@ namespace Minecraft_staircase
             0.0193339 * rgbColor[0] + 0.1191920 * rgbColor[1] + 0.9503041 * rgbColor[2]};
         }
 
-
-        /// <summary>
-        /// Add progressBar
-        /// </summary>
-        /// <param name="progress">ProgressBar</param>
         public void SetProgress(ProgressBar progress)
         {
             this.progress = progress;

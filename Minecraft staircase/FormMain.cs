@@ -348,7 +348,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.OpenButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -362,7 +362,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.HeightTextBox;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -376,7 +376,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.WidthTextBox;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -390,7 +390,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.SizeCheckBox;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -404,7 +404,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.MatOptionsButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -418,7 +418,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.FlatRadio;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -432,7 +432,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.LiteRadio;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -446,7 +446,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.FullRadio;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -460,7 +460,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.GenerateButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -474,7 +474,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.ViewImgButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -488,7 +488,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.TopViewButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -502,7 +502,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossViewButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -516,7 +516,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.MatButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -530,7 +530,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.SchemButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();

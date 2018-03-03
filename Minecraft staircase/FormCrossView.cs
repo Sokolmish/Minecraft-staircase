@@ -306,7 +306,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossPrevButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -320,7 +320,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossCurTextBox;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -334,7 +334,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.TopMost;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -348,7 +348,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossMaxHeight;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
@@ -362,7 +362,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossNextButton;
                     break;
                 default:
-                    //curHint = ResourceHintsRu.OpenButton;
+                    textBox3.Text = ResourceHintsEn.OpenButton;
                     break;
             }
             ShowHint();
