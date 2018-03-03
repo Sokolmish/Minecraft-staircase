@@ -44,7 +44,15 @@ namespace Minecraft_staircase
             PrintChunkMesh(pictureBox1.Image);
             PrintMapMesh(pictureBox1.Image);
             if (!Properties.Settings.Default.HideTips)
-                MessageBox.Show("Try doubleclick on scheme\r\n(This message can be disabled in settings)", "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                switch (Properties.Settings.Default.Language)
+                {
+                    case "ru-RU":
+                        MessageBox.Show(ResourceHintsRu.TopTopMostHint, "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default:
+                        MessageBox.Show(ResourceHintsEn.TopTopMostHint, "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                }
         }
 
         void LoadTextures()

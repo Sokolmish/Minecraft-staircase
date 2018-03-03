@@ -10,8 +10,7 @@ namespace Minecraft_staircase
         List<ColorNote> _colors;
 
         ProgressBar progress;
-        public delegate void Del();
-        public event Del Inc;
+        public event Action Inc;
 
         /// <summary>
         /// Initialize new ArtGenerator
@@ -33,42 +32,8 @@ namespace Minecraft_staircase
         /// <returns></returns>
         public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight)
         {
-            //Converting
             UnsettedBlock[,] RawScheme = Convert(ref sourceImage, type);
-            //Generating
-            SettedBlock[,] BlockMap = new SettedBlock[sourceImage.Width, sourceImage.Height + 1];
-            for (int i = 0; i < sourceImage.Width; i++)
-                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-            maxHeight = 0;
-            for (int i = 0; i < sourceImage.Width; i++)
-            {
-                int minHeight = 0;
-                for (int j = 1; j < sourceImage.Height + 1; j++)
-                {
-                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
-                    switch (RawScheme[i, j - 1].Set)
-                    {
-                        case ColorType.Normal:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
-                            break;
-                        case ColorType.Dark:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
-                            break;
-                        case ColorType.Light:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
-                            break;
-                    }
-                    if (Properties.Settings.Default.LimitedHeight && j != 1 && (j - 1) % 128 == 0)
-                        BlockMap[i, j].Height = 0;
-                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
-                }
-                for (int j = 0; j < sourceImage.Height + 1; j++)
-                {
-                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
-                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
-                }
-            }
-            return BlockMap;
+            return GenerateFlow(ref RawScheme, out maxHeight);
         }
 
 
@@ -137,6 +102,80 @@ namespace Minecraft_staircase
             return RawScheme;
         }
 
+        SettedBlock[,] GenerateFlow(ref UnsettedBlock[,] RawScheme, out int maxHeight)
+        {
+            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1)];
+            for (int i = 0; i < RawScheme.GetLength(0); i++)
+                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
+            maxHeight = 0;
+            for (int i = 0; i < RawScheme.GetLength(0); i++)
+            {
+                int minHeight = 0;
+                for (int j = 1; j < RawScheme.GetLength(1) + 1; j++)
+                {
+                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
+                    switch (RawScheme[i, j - 1].Set)
+                    {
+                        case ColorType.Normal:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
+                            break;
+                        case ColorType.Dark:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
+                            break;
+                        case ColorType.Light:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
+                            break;
+                    }
+                    if (j != 1 && (j - 1) % 128 == 0)
+                        BlockMap[i, j].Height = 0;
+                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
+                }
+                for (int j = 0; j < RawScheme.GetLength(1) + 1; j++)
+                {
+                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
+                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
+                }
+            }
+            return BlockMap;
+        }
+
+        SettedBlock[,] GenerateDefault(ref UnsettedBlock[,] RawScheme, out int maxHeight)
+        {
+            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
+            for (int i = 0; i < RawScheme.GetLength(0); i++)
+                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
+            maxHeight = 0;
+            for (int i = 0; i < RawScheme.GetLength(0); i++)
+            {
+                int minHeight = 0;
+                for (int j = 1; j < RawScheme.GetLength(1) + 1; j++)
+                {
+                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
+                    switch (RawScheme[i, j - 1].Set)
+                    {
+                        case ColorType.Normal:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
+                            break;
+                        case ColorType.Dark:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
+                            break;
+                        case ColorType.Light:
+                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
+                            break;
+                    }
+                    if (Properties.Settings.Default.GeneratingMethod == 0 && j != 1 && (j - 1) % 128 == 0)
+                        BlockMap[i, j].Height = 0;
+                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
+                }
+                for (int j = 0; j < RawScheme.GetLength(1) + 1; j++)
+                {
+                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
+                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
+                }
+            }
+            return BlockMap;
+        }
+
         /// <summary>
         /// Get similarity of 2 colors
         /// </summary>
@@ -147,9 +186,17 @@ namespace Minecraft_staircase
         /// <param name="g2"></param>
         /// <param name="b2"></param>
         /// <returns></returns>
-        double Similarity(Color col1, Color col2) =>
-            Math.Sqrt(Math.Pow(col2.R - col1.R, 2) + Math.Pow(col2.G - col1.G, 2) + Math.Pow(col2.B - col1.B, 2));
-
+        double Similarity(Color col1, Color col2)
+        {
+            if (Properties.Settings.Default.ConvertingMethod == 0)
+                return Math.Sqrt(Math.Pow(col2.R - col1.R, 2) + Math.Pow(col2.G - col1.G, 2) + Math.Pow(col2.B - col1.B, 2));
+            else //if (Properties.Settings.Default.ConvertingMethod == 1)
+            {
+                double[] color1 = RGBtoXYZ(new double[] { col1.R, col1.G, col1.B });
+                double[] color2 = RGBtoXYZ(new double[] { col2.R, col2.G, col2.B });
+                return Math.Sqrt(Math.Pow(color2[0] - color1[0], 2) + Math.Pow(color2[1] - color1[1], 2) + Math.Pow(color2[2] - color1[2], 2));
+            }
+        }
 
         /// <summary>
         /// Get chromatics coordinates of color

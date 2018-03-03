@@ -205,7 +205,7 @@ namespace Minecraft_staircase
             {
                 ArtGenerator gen = new ArtGenerator(ref colorsNote);
                 gen.SetProgress(progressBar1);
-                convertedImage = rawImage.Clone() as Image; 
+                convertedImage = rawImage.Clone() as Image;
                 ArtType type = ArtType.Flat;
                 if (radioButton2.Checked)
                     type = ArtType.Lite;
@@ -240,7 +240,7 @@ namespace Minecraft_staircase
             pictureBox1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
             pictureBox1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
             panel1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
-            panel1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;    
+            panel1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
             Width = panel1.Width + 20;
             Height = panel1.Height + 43;
             panel1.Location = new Point(0, 0);
@@ -283,14 +283,14 @@ namespace Minecraft_staircase
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
+                Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight, blockMap.GetLength(1));
                 for (int i = 0; i < blockMap.GetLength(0); i++)
                     for (int j = 1; j < blockMap.GetLength(1); j++)
                     {
                         ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
-                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1, 
+                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1,
                             new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
-                    }                     
+                    }
                 schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
             }
         }
@@ -315,6 +315,227 @@ namespace Minecraft_staircase
                 panel1.Height = Height - 63;
             }
         }
+
+
+        #region Hints
+        private void Hint_MouseLeave(object sender, EventArgs e)
+        {
+            System.Threading.Timer timer = new System.Threading.Timer((x) =>
+            {
+                textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
+            }, null, 500, Timeout.Infinite);
+        }
+
+        private void ShowHint()
+        {
+            if (!Properties.Settings.Default.HideTips)
+                new System.Threading.Timer((x) =>
+                {
+                    textBox3.BeginInvoke(new Action(() =>
+                    {
+                        textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
+                        textBox3.Visible = true;
+                    }));
+                }, null, 1000, Timeout.Infinite);
+        }
+    
+
+        private void OpenButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.OpenButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void textBox2_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.HeightTextBox;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void textBox1_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.WidthTextBox;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void checkBox1_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.SizeCheckBox;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void MaterialsButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.MatOptionsButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void radioButton1_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.FlatRadio;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void radioButton2_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.LiteRadio;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void radioButton3_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.FullRadio;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void CreateButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.GenerateButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void FinalImageButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.ViewImgButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void TopViewButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.TopViewButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void CrossViewButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.CrossViewButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void UsedMaterialsButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.MatButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void SchematicButton_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.SchemButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+        #endregion
     }
 }
     

@@ -117,44 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Применить</value>
+  <data name="CrossCurTextBox" xml:space="preserve">
+    <value>Select layer</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+  <data name="CrossMaxHeight" xml:space="preserve">
+    <value>The height of the highest block</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Язык</value>
+  <data name="CrossNextButton" xml:space="preserve">
+    <value>Next layer</value>
   </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 17</value>
+  <data name="CrossPrevButton" xml:space="preserve">
+    <value>Previous layer</value>
   </data>
-  <data name="checkBox1.Text" xml:space="preserve">
-    <value>Ограничение по высоте (128)</value>
+  <data name="CrossViewButton" xml:space="preserve">
+    <value>Look at the art on the side (For 3d)</value>
   </data>
-  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 17</value>
+  <data name="FlatRadio" xml:space="preserve">
+    <value>Create flat art</value>
   </data>
-  <data name="checkBox2.Text" xml:space="preserve">
-    <value>Скрыть подсказки</value>
+  <data name="FullRadio" xml:space="preserve">
+    <value>Create 3d art</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+  <data name="GenerateButton" xml:space="preserve">
+    <value>Start generating</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Конвертация</value>
+  <data name="HeightTextBox" xml:space="preserve">
+    <value>Select height of image</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+  <data name="LiteRadio" xml:space="preserve">
+    <value>Create simple 3d art</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Генерация</value>
+  <data name="MatButton" xml:space="preserve">
+    <value>Look at the list of materials</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Закрыть</value>
+  <data name="MatOptionsButton" xml:space="preserve">
+    <value>Configure the list of used materials</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Настройки</value>
+  <data name="OpenButton" xml:space="preserve">
+    <value>Open new image</value>
+  </data>
+  <data name="SchemButton" xml:space="preserve">
+    <value>Export schematic file</value>
+  </data>
+  <data name="SizeCheckBox" xml:space="preserve">
+    <value>Checked - size will be in blocks\r\nElse - size will be in maps</value>
+  </data>
+  <data name="TopMost" xml:space="preserve">
+    <value>Show above another windows</value>
+  </data>
+  <data name="TopTopMostHint" xml:space="preserve">
+    <value>Doubleclick on image to show above another windows (You may disable this message in settings)</value>
+  </data>
+  <data name="TopViewButton" xml:space="preserve">
+    <value>Look at the art from the top (For flat)</value>
+  </data>
+  <data name="ViewImgButton" xml:space="preserve">
+    <value>Look at the art in real size (Like image in game)</value>
+  </data>
+  <data name="WidthTextBox" xml:space="preserve">
+    <value>Select width of image</value>
   </data>
 </root>

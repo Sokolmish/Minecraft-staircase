@@ -49,6 +49,7 @@
             this.UsedMaterialsButton = new System.Windows.Forms.Button();
             this.AboutButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FinalImageButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -65,6 +66,8 @@
             this.OpenButton.Name = "OpenButton";
             this.OpenButton.UseVisualStyleBackColor = true;
             this.OpenButton.Click += new System.EventHandler(this.button1_Click);
+            this.OpenButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.OpenButton.MouseHover += new System.EventHandler(this.OpenButton_MouseEnter);
             // 
             // label1
             // 
@@ -76,6 +79,8 @@
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.textBox1.MouseHover += new System.EventHandler(this.textBox1_MouseEnter);
             // 
             // checkBox1
             // 
@@ -83,12 +88,16 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.checkBox1.MouseHover += new System.EventHandler(this.checkBox1_MouseEnter);
             // 
             // textBox2
             // 
             resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.textBox2.MouseHover += new System.EventHandler(this.textBox2_MouseEnter);
             // 
             // label2
             // 
@@ -102,18 +111,24 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.TabStop = true;
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.radioButton1.MouseHover += new System.EventHandler(this.radioButton1_MouseEnter);
             // 
             // radioButton2
             // 
             resources.ApplyResources(this.radioButton2, "radioButton2");
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.radioButton2.MouseHover += new System.EventHandler(this.radioButton2_MouseEnter);
             // 
             // radioButton3
             // 
             resources.ApplyResources(this.radioButton3, "radioButton3");
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.radioButton3.MouseHover += new System.EventHandler(this.radioButton3_MouseEnter);
             // 
             // MaterialsButton
             // 
@@ -121,6 +136,8 @@
             this.MaterialsButton.Name = "MaterialsButton";
             this.MaterialsButton.UseVisualStyleBackColor = true;
             this.MaterialsButton.Click += new System.EventHandler(this.MaterialsButton_Click);
+            this.MaterialsButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.MaterialsButton.MouseHover += new System.EventHandler(this.MaterialsButton_MouseEnter);
             // 
             // CreateButton
             // 
@@ -128,6 +145,8 @@
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
+            this.CreateButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.CreateButton.MouseHover += new System.EventHandler(this.CreateButton_MouseEnter);
             // 
             // TopViewButton
             // 
@@ -135,6 +154,8 @@
             this.TopViewButton.Name = "TopViewButton";
             this.TopViewButton.UseVisualStyleBackColor = true;
             this.TopViewButton.Click += new System.EventHandler(this.TopViewButton_Click);
+            this.TopViewButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.TopViewButton.MouseHover += new System.EventHandler(this.TopViewButton_MouseEnter);
             // 
             // CrossViewButton
             // 
@@ -142,6 +163,8 @@
             this.CrossViewButton.Name = "CrossViewButton";
             this.CrossViewButton.UseVisualStyleBackColor = true;
             this.CrossViewButton.Click += new System.EventHandler(this.CrossViewButton_Click);
+            this.CrossViewButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.CrossViewButton.MouseHover += new System.EventHandler(this.CrossViewButton_MouseEnter);
             // 
             // SchematicButton
             // 
@@ -149,6 +172,8 @@
             this.SchematicButton.Name = "SchematicButton";
             this.SchematicButton.UseVisualStyleBackColor = true;
             this.SchematicButton.Click += new System.EventHandler(this.SchematicButton_Click);
+            this.SchematicButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.SchematicButton.MouseHover += new System.EventHandler(this.SchematicButton_MouseEnter);
             // 
             // openFileDialog1
             // 
@@ -165,6 +190,8 @@
             this.UsedMaterialsButton.Name = "UsedMaterialsButton";
             this.UsedMaterialsButton.UseVisualStyleBackColor = true;
             this.UsedMaterialsButton.Click += new System.EventHandler(this.UsedMaterialsButton_Click);
+            this.UsedMaterialsButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.UsedMaterialsButton.MouseHover += new System.EventHandler(this.UsedMaterialsButton_MouseEnter);
             // 
             // AboutButton
             // 
@@ -178,6 +205,13 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Name = "panel1";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox3, "textBox3");
+            this.textBox3.Name = "textBox3";
             // 
             // pictureBox1
             // 
@@ -193,6 +227,8 @@
             this.FinalImageButton.Name = "FinalImageButton";
             this.FinalImageButton.UseVisualStyleBackColor = true;
             this.FinalImageButton.Click += new System.EventHandler(this.FinalImageButton_Click);
+            this.FinalImageButton.MouseEnter += new System.EventHandler(this.FinalImageButton_MouseEnter);
+            this.FinalImageButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
             // 
             // timer1
             // 
@@ -214,11 +250,14 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.label3.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
+            this.label3.MouseHover += new System.EventHandler(this.checkBox1_MouseEnter);
             // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.UsedMaterialsButton);
@@ -275,5 +314,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button OptionsButton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }

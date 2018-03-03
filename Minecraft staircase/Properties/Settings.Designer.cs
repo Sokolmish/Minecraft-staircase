@@ -37,18 +37,6 @@ namespace Minecraft_staircase.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LimitedHeight {
-            get {
-                return ((bool)(this["LimitedHeight"]));
-            }
-            set {
-                this["LimitedHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True~grass_side.png-Grass block-2-0-False,slime.png-Slimeblock-165-0-True~grass_s" +
             "ide.png-Grass block-2-0-False\r\nTrue~sandstone_bottom.png-Sandstone-24-0-False,sa" +
             "nd.png-Sand-12-0-False,planks_birch.png-Birch planks-5-2-False,end_stone.png-End" +
@@ -204,6 +192,30 @@ namespace Minecraft_staircase.Properties {
             }
             set {
                 this["HideTips"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte ConvertingMethod {
+            get {
+                return ((byte)(this["ConvertingMethod"]));
+            }
+            set {
+                this["ConvertingMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte GeneratingMethod {
+            get {
+                return ((byte)(this["GeneratingMethod"]));
+            }
+            set {
+                this["GeneratingMethod"] = value;
             }
         }
     }

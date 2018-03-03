@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Minecraft_staircase
 {
@@ -273,5 +274,99 @@ namespace Minecraft_staircase
 
             pictureBox1.Location = newLoc;
         }
+
+
+        #region Hints
+        private void Hint_MouseLeave(object sender, EventArgs e)
+        {
+            System.Threading.Timer timer = new System.Threading.Timer((x) =>
+            {
+                textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
+            }, null, 500, Timeout.Infinite);
+        }
+
+        private void ShowHint()
+        {
+            if (!Properties.Settings.Default.HideTips)
+                new System.Threading.Timer((x) =>
+                {
+                    textBox3.BeginInvoke(new Action(() =>
+                    {
+                        textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
+                        textBox3.Visible = true;
+                    }));
+                }, null, 1000, Timeout.Infinite);
+        }
+
+        private void buttonPrevious_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.CrossPrevButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void textBox1_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.CrossCurTextBox;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void checkBox1_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.TopMost;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void label3_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.CrossMaxHeight;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+
+        private void buttonNext_MouseEnter(object sender, EventArgs e)
+        {
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    textBox3.Text = ResourceHintsRu.CrossNextButton;
+                    break;
+                default:
+                    //curHint = ResourceHintsRu.OpenButton;
+                    break;
+            }
+            ShowHint();
+        }
+        #endregion
     }
 }
