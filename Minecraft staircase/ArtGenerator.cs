@@ -92,7 +92,7 @@ namespace Minecraft_staircase
 
         SettedBlock[,] GenerateFlow(ref UnsettedBlock[,] RawScheme, out int maxHeight)
         {
-            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1)];
+            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
             for (int i = 0; i < RawScheme.GetLength(0); i++)
                 BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
             maxHeight = 0;

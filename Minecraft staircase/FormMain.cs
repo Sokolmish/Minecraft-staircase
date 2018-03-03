@@ -241,11 +241,11 @@ namespace Minecraft_staircase
             pictureBox1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
             panel1.Width = convertedImage.Width < 256 ? 256 : convertedImage.Width;
             panel1.Height = convertedImage.Height < 256 ? 256 : convertedImage.Height;
-            Width = panel1.Width + 20;
-            Height = panel1.Height + 43;
+            Width = panel1.Width + 15;
+            Height = panel1.Height + 38;
             panel1.Location = new Point(0, 0);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             noResize = false;
-
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -256,6 +256,7 @@ namespace Minecraft_staircase
                 MinimumSize = new Size(763, 575);
                 panel1.Size = new Size(512, 512);
                 panel1.Location = new Point(223, 12);
+                FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
 
@@ -320,23 +321,31 @@ namespace Minecraft_staircase
         #region Hints
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
-            System.Threading.Timer timer = new System.Threading.Timer((x) =>
+            try
             {
-                textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-            }, null, 500, Timeout.Infinite);
+                System.Threading.Timer timer = new System.Threading.Timer((x) =>
+                {
+                    textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
+                }, null, 500, Timeout.Infinite);
+            }
+            catch { }
         }
 
         private void ShowHint()
         {
-            if (!Properties.Settings.Default.HideTips)
-                new System.Threading.Timer((x) =>
-                {
-                    textBox3.BeginInvoke(new Action(() =>
+            try
+            {
+                if (!Properties.Settings.Default.HideTips)
+                    new System.Threading.Timer((x) =>
                     {
-                        textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
-                        textBox3.Visible = true;
-                    }));
-                }, null, 1000, Timeout.Infinite);
+                        textBox3.BeginInvoke(new Action(() =>
+                        {
+                            textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
+                            textBox3.Visible = true;
+                        }));
+                    }, null, 1000, Timeout.Infinite);
+            }
+            catch { }
         }
     
 
@@ -362,7 +371,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.HeightTextBox;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.HeightTextBox;
                     break;
             }
             ShowHint();
@@ -376,7 +385,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.WidthTextBox;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.WidthTextBox;
                     break;
             }
             ShowHint();
@@ -390,7 +399,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.SizeCheckBox;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.SizeCheckBox;
                     break;
             }
             ShowHint();
@@ -404,7 +413,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.MatOptionsButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.MatOptionsButton;
                     break;
             }
             ShowHint();
@@ -418,7 +427,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.FlatRadio;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.FlatRadio;
                     break;
             }
             ShowHint();
@@ -432,7 +441,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.LiteRadio;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.LiteRadio;
                     break;
             }
             ShowHint();
@@ -446,7 +455,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.FullRadio;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.FullRadio;
                     break;
             }
             ShowHint();
@@ -460,7 +469,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.GenerateButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.GenerateButton;
                     break;
             }
             ShowHint();
@@ -474,7 +483,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.ViewImgButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.ViewImgButton;
                     break;
             }
             ShowHint();
@@ -488,7 +497,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.TopViewButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.TopViewButton;
                     break;
             }
             ShowHint();
@@ -502,7 +511,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossViewButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.CrossViewButton;
                     break;
             }
             ShowHint();
@@ -516,7 +525,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.MatButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.MatButton;
                     break;
             }
             ShowHint();
@@ -530,7 +539,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.SchemButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.SchemButton;
                     break;
             }
             ShowHint();

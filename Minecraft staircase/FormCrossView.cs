@@ -277,25 +277,35 @@ namespace Minecraft_staircase
 
 
         #region Hints
+        System.Threading.Timer timer;
+
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
-            System.Threading.Timer timer = new System.Threading.Timer((x) =>
+            try
             {
-                textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-            }, null, 500, Timeout.Infinite);
+                System.Threading.Timer timer = new System.Threading.Timer((x) =>
+                {
+                    textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
+                }, null, 500, Timeout.Infinite);
+            }
+            catch { }
         }
 
         private void ShowHint()
         {
             if (!Properties.Settings.Default.HideTips)
-                new System.Threading.Timer((x) =>
+                try
                 {
-                    textBox3.BeginInvoke(new Action(() =>
+                    timer = new System.Threading.Timer((x) =>
                     {
-                        textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
-                        textBox3.Visible = true;
-                    }));
-                }, null, 1000, Timeout.Infinite);
+                        textBox3.BeginInvoke(new Action(() =>
+                        {
+                            textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
+                            textBox3.Visible = true;
+                        }));
+                    }, null, 1000, Timeout.Infinite);
+                }
+                catch { }
         }
 
         private void buttonPrevious_MouseEnter(object sender, EventArgs e)
@@ -306,7 +316,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossPrevButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.CrossPrevButton;
                     break;
             }
             ShowHint();
@@ -320,7 +330,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossCurTextBox;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.CrossCurTextBox;
                     break;
             }
             ShowHint();
@@ -334,7 +344,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.TopMost;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.TopMost;
                     break;
             }
             ShowHint();
@@ -348,7 +358,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossMaxHeight;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.CrossMaxHeight;
                     break;
             }
             ShowHint();
@@ -362,7 +372,7 @@ namespace Minecraft_staircase
                     textBox3.Text = ResourceHintsRu.CrossNextButton;
                     break;
                 default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
+                    textBox3.Text = ResourceHintsEn.CrossNextButton;
                     break;
             }
             ShowHint();
