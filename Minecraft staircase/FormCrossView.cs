@@ -201,7 +201,7 @@ namespace Minecraft_staircase
                 if (newLoc.X + pictureBox1.Width <= panel1.Width)
                     newLoc.X = panel1.Width - pictureBox1.Width; //15
                 if (newLoc.Y + pictureBox1.Height <= panel1.Height)
-                    newLoc.Y = panel1.Height - pictureBox1.Height ; //38
+                    newLoc.Y = panel1.Height - pictureBox1.Height; //38
 
                 pictureBox1.Location = newLoc;
             }
@@ -277,39 +277,43 @@ namespace Minecraft_staircase
 
 
         #region Hints
-        System.Threading.Timer timer;
+        bool isOnControl = false;
 
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
-            try
+            isOnControl = false;
+            System.Threading.Timer timer = new System.Threading.Timer((x) =>
             {
-                System.Threading.Timer timer = new System.Threading.Timer((x) =>
+                try
                 {
                     textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-                }, null, 500, Timeout.Infinite);
-            }
-            catch { }
+                }
+                catch { }
+            }, null, 500, Timeout.Infinite);
         }
 
         private void ShowHint()
         {
+            isOnControl = true;
             if (!Properties.Settings.Default.HideTips)
-                try
+                new System.Threading.Timer((x) =>
                 {
-                    timer = new System.Threading.Timer((x) =>
-                    {
-                        textBox3.BeginInvoke(new Action(() =>
+                    if (isOnControl)
+                        try
                         {
-                            textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
-                            textBox3.Visible = true;
-                        }));
-                    }, null, 1000, Timeout.Infinite);
-                }
-                catch { }
+                            textBox3.BeginInvoke(new Action(() =>
+                                {
+                                    textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
+                                    textBox3.Visible = true;
+                                }));
+                        }
+                        catch { }
+                }, null, 1000, Timeout.Infinite);
         }
 
         private void buttonPrevious_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -324,6 +328,7 @@ namespace Minecraft_staircase
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -338,6 +343,7 @@ namespace Minecraft_staircase
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -352,6 +358,7 @@ namespace Minecraft_staircase
 
         private void label3_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -366,6 +373,7 @@ namespace Minecraft_staircase
 
         private void buttonNext_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":

@@ -319,38 +319,43 @@ namespace Minecraft_staircase
 
 
         #region Hints
+        bool isOnControl = false;
+
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
-            try
+            isOnControl = false;
+            System.Threading.Timer timer = new System.Threading.Timer((x) =>
             {
-                System.Threading.Timer timer = new System.Threading.Timer((x) =>
+                try
                 {
                     textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-                }, null, 500, Timeout.Infinite);
-            }
-            catch { }
+                }
+                catch { }
+            }, null, 500, Timeout.Infinite);
         }
 
         private void ShowHint()
         {
-            try
-            {
-                if (!Properties.Settings.Default.HideTips)
-                    new System.Threading.Timer((x) =>
-                    {
-                        textBox3.BeginInvoke(new Action(() =>
+            if (!Properties.Settings.Default.HideTips)
+                new System.Threading.Timer((x) =>
+                {
+                    if (isOnControl)
+                        try
                         {
-                            textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
-                            textBox3.Visible = true;
-                        }));
-                    }, null, 1000, Timeout.Infinite);
-            }
-            catch { }
+                            textBox3.BeginInvoke(new Action(() =>
+                            {
+                                textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
+                                textBox3.Visible = true;
+                            }));
+                        }
+                        catch { }
+                }, null, 1000, Timeout.Infinite);
         }
-    
+
 
         private void OpenButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -365,6 +370,7 @@ namespace Minecraft_staircase
 
         private void textBox2_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -379,6 +385,7 @@ namespace Minecraft_staircase
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -393,6 +400,7 @@ namespace Minecraft_staircase
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -407,6 +415,7 @@ namespace Minecraft_staircase
 
         private void MaterialsButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -421,6 +430,7 @@ namespace Minecraft_staircase
 
         private void radioButton1_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -435,6 +445,7 @@ namespace Minecraft_staircase
 
         private void radioButton2_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -449,6 +460,7 @@ namespace Minecraft_staircase
 
         private void radioButton3_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -463,6 +475,7 @@ namespace Minecraft_staircase
 
         private void CreateButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -477,6 +490,7 @@ namespace Minecraft_staircase
 
         private void FinalImageButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -491,6 +505,7 @@ namespace Minecraft_staircase
 
         private void TopViewButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -505,6 +520,7 @@ namespace Minecraft_staircase
 
         private void CrossViewButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -519,6 +535,7 @@ namespace Minecraft_staircase
 
         private void UsedMaterialsButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
@@ -533,6 +550,7 @@ namespace Minecraft_staircase
 
         private void SchematicButton_MouseEnter(object sender, EventArgs e)
         {
+            isOnControl = true;
             switch (Properties.Settings.Default.Language)
             {
                 case "ru-RU":
