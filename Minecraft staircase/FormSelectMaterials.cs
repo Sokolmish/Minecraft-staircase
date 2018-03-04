@@ -24,7 +24,16 @@ namespace Minecraft_staircase
             InitializeComponent();
             Height = 187;
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.HelpSelectingMaterials;
+            switch (Properties.Settings.Default.Language)
+            {
+                case "ru-RU":
+                    pictureBox1.Image = Properties.Resources.HelpSelectingMaterialsRu;
+                    break;
+                default:
+                    pictureBox1.Image = Properties.Resources.HelpSelectingMaterialsEn;
+                    break;
+            }
+            
         }
 
         #region admin

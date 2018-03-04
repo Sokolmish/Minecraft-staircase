@@ -213,10 +213,13 @@
     <None Include="ColorsIDS.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\HelpSelectingMaterials.png" />
+    <None Include="Images\North.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\North.png" />
+    <None Include="Images\HelpSelectingMaterialsEn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HelpSelectingMaterialsRu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
