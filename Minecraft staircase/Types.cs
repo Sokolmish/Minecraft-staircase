@@ -4,9 +4,6 @@ using System.Drawing;
 
 namespace Minecraft_staircase
 {
-    /// <summary>
-    /// Blocks with 3 colors
-    /// </summary>
     public class PixelData
     {
         public int ID { get; set; }
@@ -28,18 +25,12 @@ namespace Minecraft_staircase
         }
     }
 
-    /// <summary>
-    /// Block defined by a set
-    /// </summary>
     public struct UnsettedBlock
     {
         public int ID { get; set; }
         public ColorType Set { get; set; }
     }
 
-    /// <summary>
-    /// Block defined by a height
-    /// </summary>
     public struct SettedBlock
     {
         public int ID { get; set; }
@@ -89,9 +80,6 @@ namespace Minecraft_staircase
         }
     }
 
-    /// <summary>
-    /// All possible colors for ID
-    /// </summary>
     public class ColorNote
     {
         public int ColorID { get; set; }
