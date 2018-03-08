@@ -221,8 +221,5 @@
   <ItemGroup>
     <None Include="Images\HelpSelectingMaterialsRu.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Copyright.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

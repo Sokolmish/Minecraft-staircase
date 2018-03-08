@@ -284,7 +284,7 @@ namespace Minecraft_staircase
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight, blockMap.GetLength(1));
+                Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
                 for (int i = 0; i < blockMap.GetLength(0); i++)
                     for (int j = 1; j < blockMap.GetLength(1); j++)
                     {
