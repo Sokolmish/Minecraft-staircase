@@ -169,6 +169,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Please, select image. Show additional information about this exception?.
+        /// </summary>
+        internal static string NoImage {
+            get {
+                return ResourceManager.GetString("NoImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Open new image.
         /// </summary>
         internal static string OpenButton {

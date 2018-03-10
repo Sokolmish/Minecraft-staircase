@@ -153,6 +153,9 @@
   <data name="MatOptionsButton" xml:space="preserve">
     <value>Configure the list of used materials</value>
   </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>Please, select image. Show additional information about this exception?</value>
+  </data>
   <data name="OpenButton" xml:space="preserve">
     <value>Open new image</value>
   </data>

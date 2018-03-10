@@ -4,27 +4,6 @@ using System.Drawing;
 
 namespace Minecraft_staircase
 {
-    public class PixelData
-    {
-        public int ID { get; set; }
-        public double[] NormalColor { get; set; }
-        public double[] DarkColor { get; set; }
-        public double[] LightColor { get; set; }
-
-        public PixelData()
-        {
-
-        }
-
-        public PixelData(PixelData copy)
-        {
-            ID = copy.ID;
-            NormalColor = copy.NormalColor.Clone() as double[];
-            DarkColor = copy.DarkColor.Clone() as double[];
-            LightColor = copy.LightColor.Clone() as double[];
-        }
-    }
-
     public struct UnsettedBlock
     {
         public int ID { get; set; }

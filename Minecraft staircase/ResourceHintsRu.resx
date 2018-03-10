@@ -153,6 +153,9 @@
   <data name="MatOptionsButton" xml:space="preserve">
     <value>Настроить список используемых материалов</value>
   </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>Следует выбрать изображение. Показать дополнительную информацию об ошибке?</value>
+  </data>
   <data name="OpenButton" xml:space="preserve">
     <value>Открыть новое изображение</value>
   </data>

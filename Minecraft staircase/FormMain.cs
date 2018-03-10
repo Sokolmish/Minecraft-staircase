@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
-using System.Resources;
 using Substrate;
 using Substrate.ImportExport;
 
@@ -75,7 +74,25 @@ namespace Minecraft_staircase
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                originalImage = Image.FromFile(openFileDialog1.FileName);
+                try
+                {
+                    originalImage = Image.FromFile(openFileDialog1.FileName);
+                }
+                catch (Exception ex)
+                {
+                    switch (Properties.Settings.Default.Language)
+                    {
+                        case "ru-RU":
+                            if (MessageBox.Show(ResourceHintsRu.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
+                            break;
+                        default:
+                            if (MessageBox.Show(ResourceHintsEn.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
+                            break;
+                    }
+                    return;
+                }
                 if (!checkBox1.Checked)
                 {
                     rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
@@ -560,6 +577,55 @@ namespace Minecraft_staircase
             ShowHint();
         }
         #endregion
+
+
+        private void FormMain_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) &&
+                ((e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move))
+                e.Effect = DragDropEffects.Move;
+        }
+
+        private void FormMain_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && e.Effect == DragDropEffects.Move)
+            {
+                try
+                {
+                    originalImage = Image.FromFile(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
+                }
+                catch (Exception ex)
+                {
+                    switch (Properties.Settings.Default.Language)
+                    {
+                        case "ru-RU":
+                            if (MessageBox.Show(ResourceHintsRu.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
+                            break;
+                        default:
+                            if (MessageBox.Show(ResourceHintsEn.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
+                            break;
+                    }
+                    return;
+                }
+                if (!checkBox1.Checked)
+                {
+                    rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
+                    textBox1.Text = (rawImage.Width / 128).ToString();
+                    textBox2.Text = (rawImage.Height / 128).ToString();
+                }
+                else
+                {
+                    rawImage = originalImage;
+                    textBox1.Text = rawImage.Width.ToString();
+                    textBox2.Text = rawImage.Height.ToString();
+                }
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.Image = rawImage;
+                CreateButton.Enabled = true;
+            }
+        }
     }
 }
     

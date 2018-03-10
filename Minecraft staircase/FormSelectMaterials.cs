@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Minecraft_staircase
 {
@@ -56,7 +51,7 @@ namespace Minecraft_staircase
             //    BlockData[] temp = possibleBlocks[comboBox1.SelectedIndex];
             //    possibleBlocks[comboBox1.SelectedIndex] = new BlockData[temp.Length + 1];
             //    temp.CopyTo(possibleBlocks[comboBox1.SelectedIndex], 0);
-            //    possibleBlocks[comboBox1.SelectedIndex][possibleBlocks[comboBox1.SelectedIndex].Length - 1] = 
+            //    possibleBlocks[comboBox1.SelectedIndex][possibleBlocks[comboBox1.SelectedIndex].Length - 1] =
             //        new BlockData(comboBox1.SelectedIndex, textBoxTexture.Text, textBoxName.Text, id, data, checkBox1.Checked);
             //    comboBox2.Items.Clear();
             //    foreach (BlockData block in possibleBlocks[comboBox1.SelectedIndex])
