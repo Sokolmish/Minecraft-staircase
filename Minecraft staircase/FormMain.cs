@@ -212,6 +212,8 @@ namespace Minecraft_staircase
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
+            foreach (ColorNote col in colorsNote)
+                col.Uses = 0;
             progressBar1.Maximum = rawImage.Width * rawImage.Height;
             progressBar1.Value = 0;
             convertTask?.Abort();

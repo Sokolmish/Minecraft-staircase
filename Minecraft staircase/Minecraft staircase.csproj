@@ -53,7 +53,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Substrate">
-      <HintPath>..\..\..\Schematicator\Schematicator\bin\Debug\Substrate.dll</HintPath>
+      <HintPath>..\..\Schematicator\Schematicator\bin\Debug\Substrate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />

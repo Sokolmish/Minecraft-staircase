@@ -396,6 +396,9 @@
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>[?]</value>
   </data>
+  <data name="linkLabel1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
   </data>
@@ -425,6 +428,9 @@
   </data>
   <data name="linkLabel2.Text" xml:space="preserve">
     <value>[?]</value>
+  </data>
+  <data name="linkLabel2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;linkLabel2.Name" xml:space="preserve">
     <value>linkLabel2</value>
