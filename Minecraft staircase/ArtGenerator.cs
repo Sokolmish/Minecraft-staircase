@@ -90,7 +90,7 @@ namespace Minecraft_staircase
             return RawScheme;
         }
 
-        SettedBlock[,] GenerateFlow(ref UnsettedBlock[,] RawScheme, out int maxHeight)
+        SettedBlock[,] GenerateFlow(ref UnsettedBlock[,] RawScheme, out int maxHeight) //EveryMap shift
         {
             SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
             for (int i = 0; i < RawScheme.GetLength(0); i++)
@@ -127,7 +127,7 @@ namespace Minecraft_staircase
             return BlockMap;
         }
 
-        SettedBlock[,] GenerateDefault(ref UnsettedBlock[,] RawScheme, out int maxHeight)
+        SettedBlock[,] GenerateMinimal(ref UnsettedBlock[,] RawScheme, out int maxHeight)
         {
             SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
             for (int i = 0; i < RawScheme.GetLength(0); i++)

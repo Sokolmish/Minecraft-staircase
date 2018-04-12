@@ -314,75 +314,35 @@ namespace Minecraft_staircase
         private void buttonPrevious_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.CrossPrevButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.CrossPrevButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("CrossPrevButton");
             ShowHint();
         }
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.CrossCurTextBox;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.CrossCurTextBox;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("CrossCurTextBox");
             ShowHint();
         }
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.TopMost;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.TopMost;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("TopMost");
             ShowHint();
         }
 
         private void label3_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.CrossMaxHeight;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.CrossMaxHeight;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("CrossMaxHeight");
             ShowHint();
         }
 
         private void buttonNext_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.CrossNextButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.CrossNextButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("CrossNextButton");
             ShowHint();
         }
         #endregion

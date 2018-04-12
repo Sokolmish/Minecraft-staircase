@@ -80,17 +80,8 @@ namespace Minecraft_staircase
                 }
                 catch (Exception ex)
                 {
-                    switch (Properties.Settings.Default.Language)
-                    {
-                        case "ru-RU":
-                            if (MessageBox.Show(ResourceHintsRu.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
-                            break;
-                        default:
-                            if (MessageBox.Show(ResourceHintsEn.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
-                            break;
-                    }
+                    if (MessageBox.Show(Lang.GetHint("NoImage"), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
                     return;
                 }
                 if (!checkBox1.Checked)
@@ -372,210 +363,98 @@ namespace Minecraft_staircase
         private void OpenButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.OpenButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.OpenButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("OpenButton");
             ShowHint();
         }
 
         private void textBox2_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.HeightTextBox;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.HeightTextBox;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("HeightTextBox");
             ShowHint();
         }
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.WidthTextBox;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.WidthTextBox;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("WidthTextBox");
             ShowHint();
         }
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.SizeCheckBox;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.SizeCheckBox;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("SizeCheckBox");
             ShowHint();
         }
 
         private void MaterialsButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.MatOptionsButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.MatOptionsButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("MatOptionsButton");
             ShowHint();
         }
 
         private void radioButton1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.FlatRadio;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.FlatRadio;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("FlatRadio");
             ShowHint();
         }
 
         private void radioButton2_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.LiteRadio;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.LiteRadio;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("LiteRadio");
             ShowHint();
         }
 
         private void radioButton3_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.FullRadio;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.FullRadio;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("FullRadio");
             ShowHint();
         }
 
         private void CreateButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.GenerateButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.GenerateButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("GenerateButton");
             ShowHint();
         }
 
         private void FinalImageButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.ViewImgButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.ViewImgButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("ViewImgButton");
             ShowHint();
         }
 
         private void TopViewButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.TopViewButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.TopViewButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("TopViewButton");
             ShowHint();
         }
 
         private void CrossViewButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.CrossViewButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.CrossViewButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("CrossViewButton");
             ShowHint();
         }
 
         private void UsedMaterialsButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.MatButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.MatButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("MatButton");
             ShowHint();
         }
 
         private void SchematicButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "ru-RU":
-                    textBox3.Text = ResourceHintsRu.SchemButton;
-                    break;
-                default:
-                    textBox3.Text = ResourceHintsEn.SchemButton;
-                    break;
-            }
+            textBox3.Text = Lang.GetHint("SchemButton");
             ShowHint();
         }
         #endregion
@@ -598,36 +477,28 @@ namespace Minecraft_staircase
                 }
                 catch (Exception ex)
                 {
-                    switch (Properties.Settings.Default.Language)
-                    {
-                        case "ru-RU":
-                            if (MessageBox.Show(ResourceHintsRu.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
-                            break;
-                        default:
-                            if (MessageBox.Show(ResourceHintsEn.NoImage, "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
-                            break;
-                    }
-                    return;
+                    if (MessageBox.Show(Lang.GetHint("NoImage"), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                        MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
                 }
-                if (!checkBox1.Checked)
-                {
-                    rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
-                    textBox1.Text = (rawImage.Width / 128).ToString();
-                    textBox2.Text = (rawImage.Height / 128).ToString();
-                }
-                else
-                {
-                    rawImage = originalImage;
-                    textBox1.Text = rawImage.Width.ToString();
-                    textBox2.Text = rawImage.Height.ToString();
-                }
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.Image = rawImage;
-                CreateButton.Enabled = true;
+                return;
             }
+            if (!checkBox1.Checked)
+            {
+                rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
+                textBox1.Text = (rawImage.Width / 128).ToString();
+                textBox2.Text = (rawImage.Height / 128).ToString();
+            }
+            else
+            {
+                rawImage = originalImage;
+                textBox1.Text = rawImage.Width.ToString();
+                textBox2.Text = rawImage.Height.ToString();
+            }
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = rawImage;
+            CreateButton.Enabled = true;
         }
     }
 }
+
     

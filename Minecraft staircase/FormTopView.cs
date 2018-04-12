@@ -44,15 +44,7 @@ namespace Minecraft_staircase
             PrintChunkMesh(pictureBox1.Image);
             PrintMapMesh(pictureBox1.Image);
             if (!Properties.Settings.Default.HideTips)
-                switch (Properties.Settings.Default.Language)
-                {
-                    case "ru-RU":
-                        MessageBox.Show(ResourceHintsRu.TopTopMostHint, "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    default:
-                        MessageBox.Show(ResourceHintsEn.TopTopMostHint, "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                }
+                MessageBox.Show(Lang.GetHint("TopTopMostHint"), "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         void LoadTextures()

@@ -22,4 +22,26 @@ namespace Minecraft_staircase
             Application.Run(new FormMain());
         }
     }
+
+    static public class Lang
+    {
+        public static System.Resources.ResourceManager HintsResource
+        {
+            get
+            {
+                switch (Properties.Settings.Default.Language)
+                {
+                    case "ru-RU":
+                        return ResourceHintsRu.ResourceManager;
+                    default:
+                        return ResourceHintsEn.ResourceManager;
+                }
+            }
+        }
+
+        public static string GetHint(string name)
+        {
+            return HintsResource.GetString(name);
+        }
+    }
 }
