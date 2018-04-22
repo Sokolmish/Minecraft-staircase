@@ -18,9 +18,9 @@ namespace Minecraft_staircase
 
         int curLayer;
 
-        Color defMeshColor = Color.Black;
-        Color chunkMeshColor = Color.Red;
-        Color mapMeshColor = Color.Purple;
+        Color defMeshColor = Properties.Settings.Default.defMeshColor;
+        Color chunkMeshColor = Properties.Settings.Default.chunkMeshColor;
+        Color mapMeshColor = Properties.Settings.Default.mapMeshColor;
 
         public FormCrossView()
         {

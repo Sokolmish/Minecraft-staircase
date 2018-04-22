@@ -122,37 +122,67 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>42, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 17</value>
-  </data>
-  <data name="checkBox1.Text" xml:space="preserve">
-    <value>Ограничение по высоте (128)</value>
-  </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 17</value>
+    <value>150, 21</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value>Скрыть подсказки</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>95, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Конвертация</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>80, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Генерация</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
     <value>Закрыть</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Цвет сетки</value>
+  </data>
+  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 142</value>
+  </data>
+  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 28</value>
+  </data>
+  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 176</value>
+  </data>
+  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 28</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Цвет сетки чанков</value>
+  </data>
+  <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>158, 210</value>
+  </data>
+  <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 28</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 17</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Цвет сетки карт</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>

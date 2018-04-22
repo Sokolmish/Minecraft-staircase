@@ -67,5 +67,14 @@ True~hardened_clay_stained_black.png-Black terracota-159-15-False~hardened_clay_
     <Setting Name="GeneratingMethod" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="defMeshColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="chunkMeshColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="mapMeshColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Purple</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
