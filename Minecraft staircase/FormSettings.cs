@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace Minecraft_staircase
 {
@@ -12,6 +13,12 @@ namespace Minecraft_staircase
         Color chunkMeshColor;
         Color mapMeshColor;
 
+        Dictionary<string, string> langsList = new Dictionary<string, string>()
+        {
+            {"en", "English" },
+            {"ru-RU", "Русский" }
+        };
+
         public FormSettings()
         {
             InitializeComponent();
@@ -20,15 +27,9 @@ namespace Minecraft_staircase
             comboBox2.Text = comboBox2.Items[properties.ConvertingMethod] as string;
             comboBox3.Text = comboBox3.Items[properties.ConvertingMethod] as string;
 
-            switch (properties.Language)
-            {
-                case "en":
-                    comboBox1.SelectedItem = "English en";
-                    break;
-                case "ru-RU":
-                    comboBox1.SelectedItem = "Русский ru-RU";
-                    break;
-            }
+            foreach (var str in langsList)
+                comboBox1.Items.Add(str.Value);
+            comboBox1.SelectedItem = langsList[properties.Language];
 
             defMeshColor = properties.defMeshColor;
             chunkMeshColor = properties.chunkMeshColor;
@@ -48,7 +49,7 @@ namespace Minecraft_staircase
             comboBox3.Visible = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ApplyButtonClick(object sender, EventArgs e)
         {            
             properties.HideTips = checkBox2.Checked;
             properties.ConvertingMethod = comboBox2.SelectedIndex >= 0 ? (byte)comboBox2.SelectedIndex : properties.ConvertingMethod;
@@ -58,10 +59,9 @@ namespace Minecraft_staircase
             properties.chunkMeshColor = chunkMeshColor;
             properties.mapMeshColor = mapMeshColor;
 
-            if ((comboBox1.SelectedItem as string)?.Split(' ')[1] != Properties.Settings.Default.Language)
+            if (LangByName(comboBox1.SelectedItem as string) != properties.Language)
             {
-                properties.Language = "en";
-                properties.Language = (comboBox1.SelectedItem as string)?.Split(' ')[1];
+                properties.Language = LangByName(comboBox1.SelectedItem as string);
                 properties.Save();
                 System.Diagnostics.Process.Start("Minecraft staircase");
                 Environment.Exit(0);
@@ -70,9 +70,18 @@ namespace Minecraft_staircase
             Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CancelButtonClick(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+        private string LangByName(string name)
+        {
+            foreach (var str in langsList)
+                if (str.Value == name)
+                    return str.Key;
+            return null;
         }
 
 

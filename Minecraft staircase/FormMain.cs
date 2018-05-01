@@ -29,8 +29,8 @@ namespace Minecraft_staircase
         public FormMain()
         {
             InitializeComponent();
-            string see = Properties.Settings.Default.PossibleBlocks;
             LoadData();
+            NewFormMain_Resize(null, null);  //?
         }
 
 
