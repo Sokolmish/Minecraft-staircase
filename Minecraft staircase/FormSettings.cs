@@ -25,7 +25,7 @@ namespace Minecraft_staircase
             properties = Properties.Settings.Default;
             checkBox2.Checked = properties.HideTips;
             comboBox2.Text = comboBox2.Items[properties.ConvertingMethod] as string;
-            comboBox3.Text = comboBox3.Items[properties.ConvertingMethod] as string;
+            comboBox3.Text = comboBox3.Items[properties.GeneratingMethod] as string;
 
             foreach (var str in langsList)
                 comboBox1.Items.Add(str.Value);

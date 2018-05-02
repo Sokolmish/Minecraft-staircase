@@ -240,9 +240,6 @@
   <data name="comboBox2.Items" xml:space="preserve">
     <value>Default (Recommended)</value>
   </data>
-  <data name="comboBox2.Items1" xml:space="preserve">
-    <value>Chromatic</value>
-  </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 73</value>
   </data>
