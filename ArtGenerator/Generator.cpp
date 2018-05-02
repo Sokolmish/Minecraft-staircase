@@ -16,13 +16,13 @@ double Similarity(int *col1, int *col2, int set) {
 			pow(col2[1] - col1[1], 2) +
 			pow(col2[2] - col1[2], 2));
 	case NORM:
-		return sqrt(pow(col2[0] * 220 / 255 - col1[0] * 220 / 255, 2) +
-			pow(col2[1] * 220 / 255 - col1[1] * 220 / 255, 2) +
-			pow(col2[2] * 220 / 255 - col1[2] * 220 / 255, 2));
+		return sqrt(pow(col2[0] - col1[0] * 220 / 255, 2) +
+			pow(col2[1] - col1[1] * 220 / 255, 2) +
+			pow(col2[2] - col1[2] * 220 / 255, 2));
 	case DARK:
-		return sqrt(pow(col2[0] * 180 / 255 - col1[0] * 180 / 255, 2) +
-			pow(col2[1] * 180 / 255 - col1[1] * 180 / 255, 2) +
-			pow(col2[2] * 180 / 255 - col1[2] * 180 / 255, 2));
+		return sqrt(pow(col2[0] - col1[0] * 180 / 255, 2) +
+			pow(col2[1] - col1[1] * 180 / 255, 2) +
+			pow(col2[2] - col1[2] * 180 / 255, 2));
 	default:
 		return 0;
 	}
@@ -37,13 +37,15 @@ double* RGBtoXYZ(int x1, int y1, int z1) {
 }
 
 __declspec(dllexport)
-int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *notes/*=id-rgb=*/, int colCount, void(*Progress)(), void(*SaveUses)(int cou))
+int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *notes/*=id-rgb=*/, int colCount, void(*Progress)(), void(*SaveUses)(int *cou))
 {
 	//>>r1,g1,b1,r2,g2,b2, ri,gi,bi
 	//<<id1,set1,id2,set2, idi,seti
 
-	int* result = /*(int*)malloc(length / 3 * 2);*/new int[length / 3 * 2];
-	int* uses = /*(int*)malloc(colCount / 4);*/new int[colCount / 4];
+	int* result = new int[length / 3 * 2];
+	int* uses = new int[colCount / 4];
+	for (int i = 0; i < colCount / 4; i++)
+		uses[i] = 0;
 	for (int i = 0; i < length / 3; i++) {
 		int betterSimilarity = 99999;
 		int betterId = 0;
@@ -74,9 +76,9 @@ int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *not
 		}
 		result[i * 2] = betterId;
 		result[i * 2 + 1] = betterSet;
-		//++uses[betterIdNum];
+		++uses[betterIdNum];
 		Progress();
 	}
-	//SaveUses(uses);
+	SaveUses(uses);
 	return result;
 }

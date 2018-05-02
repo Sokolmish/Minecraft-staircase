@@ -22,6 +22,22 @@ namespace Minecraft_staircase
         public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight)
         {
             UnsettedBlock[,] RawScheme = ConvertCPP(ref sourceImage, type);
+            Bitmap tempImage = new Bitmap(RawScheme.GetLength(0), RawScheme.GetLength(1));
+            for (int i = 0; i < RawScheme.GetLength(0); i++)
+                for (int j = 0; j < RawScheme.GetLength(1); j++)
+                    switch (RawScheme[i, j].Set)
+                    {
+                        case ColorType.Dark:
+                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).DarkColor);
+                            break;
+                        case ColorType.Normal:
+                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).NormalColor);
+                            break;
+                        case ColorType.Light:
+                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).LightColor);
+                            break;
+                    }
+            sourceImage = tempImage;
             //UnsettedBlock[,] RawScheme = OldConvert(ref sourceImage, type);
             return GenerateFlow(ref RawScheme, out maxHeight);
         }
@@ -195,7 +211,7 @@ namespace Minecraft_staircase
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void Progress();
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void SaveUses(int cou);
+        public delegate void SaveUses(int* cou);
         [DllImport("ArtGenerator.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern int* Convert(int* image, int imageLen, int type, bool chromatic, int* notes, int notesCount, [MarshalAs(UnmanagedType.FunctionPtr)] Progress callback, [MarshalAs(UnmanagedType.FunctionPtr)] SaveUses callback1);
 
@@ -222,10 +238,14 @@ namespace Minecraft_staircase
                 }
                 fixed (int* notes = notes1.ToArray())
                 {
-                    int* fet = 
-                    Convert(image, image1.Count, 0, false, notes, notes1.Count,
-                        () => { progress.BeginInvoke(Inc); }, /*MessageBox.Show("Soul eather");*/
-                        (e) => { MessageBox.Show(e.ToString()); });
+                    int* fet =
+                    Convert(image, image1.Count, (int)type, false, notes, notes1.Count,
+                        () => { progress.BeginInvoke(Inc); },
+                        (e) =>
+                        {
+                            for (int j = 0; j < _colors.Count; j++)
+                                _colors[j].Uses = e[j];
+                        });
                     int i = 0;
                     for (int x = 0; x < sourceImage.Height; x++)
                         for (int y = 0; y < sourceImage.Width; y++)

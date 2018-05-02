@@ -9,6 +9,9 @@ namespace Minecraft_staircase
         public FormMaterials()
         {
             InitializeComponent();
+            //What?
+            listBox1.Height = 667;
+            Height = 751;
         }
 
         public void Show(ref List<ColorNote> colorsNote)

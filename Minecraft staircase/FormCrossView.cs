@@ -38,6 +38,7 @@ namespace Minecraft_staircase
             LoadTextures();
             pictureBox1.Image = CreateLayer(0);
             label3.Text += maxHeight;
+            FormCrossView_Resize(null, null);
         }
 
         void LoadTextures()

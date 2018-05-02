@@ -130,7 +130,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="listBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 871</value>
+    <value>285, 667</value>
   </data>
   <data name="listBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -154,7 +154,7 @@
     <value>8, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>320, 901</value>
+    <value>320, 700</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
