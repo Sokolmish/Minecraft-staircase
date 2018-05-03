@@ -509,7 +509,7 @@ namespace Minecraft_staircase
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            convertTask.Abort();
+            convertTask?.Abort();
         }
     }
 }
