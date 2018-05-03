@@ -19,6 +19,7 @@ namespace Minecraft_staircase
 
         ProgressBar progress;
         public event Action Inc;
+        public event Action Done;
 
         public ArtGenerator(ref List<ColorNote> colors)
         {
@@ -46,6 +47,7 @@ namespace Minecraft_staircase
                     }
             sourceImage = tempImage;
             //UnsettedBlock[,] RawScheme = OldConvert(ref sourceImage, type);
+            Done();
             return GenerateFlow(ref RawScheme, out maxHeight);
         }
 

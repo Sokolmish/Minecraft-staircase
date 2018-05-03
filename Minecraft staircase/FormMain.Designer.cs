@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.OpenButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,7 +51,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.FinalImageButton = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -231,10 +229,6 @@
             this.FinalImageButton.MouseEnter += new System.EventHandler(this.FinalImageButton_MouseEnter);
             this.FinalImageButton.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // progressBar1
             // 
             resources.ApplyResources(this.progressBar1, "progressBar1");
@@ -315,7 +309,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button FinalImageButton;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button OptionsButton;
         private System.Windows.Forms.Label label3;

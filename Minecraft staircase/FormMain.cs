@@ -29,8 +29,8 @@ namespace Minecraft_staircase
         public FormMain()
         {
             InitializeComponent();
-            LoadData();
             NewFormMain_Resize(null, null);  //?
+            LoadData();
         }
 
 
@@ -209,8 +209,8 @@ namespace Minecraft_staircase
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            foreach (ColorNote col in colorsNote)
-                col.Uses = 0;
+            //foreach (ColorNote col in colorsNote)
+            //    col.Uses = 0;
             progressBar1.Maximum = rawImage.Width * rawImage.Height;
             progressBar1.Value = 0;
             convertTask?.Abort();
@@ -218,6 +218,15 @@ namespace Minecraft_staircase
             {
                 ArtGenerator gen = new ArtGenerator(ref colorsNote);
                 gen.SetProgress(progressBar1);
+                gen.Done += () =>
+                {
+                    FinalImageButton.BeginInvoke(new Action(() => { FinalImageButton.Enabled = true; }));
+                    TopViewButton.BeginInvoke(new Action(() => { TopViewButton.Enabled = true; }));
+                    CrossViewButton.BeginInvoke(new Action(() => { CrossViewButton.Enabled = true; }));
+                    UsedMaterialsButton.BeginInvoke(new Action(() => { UsedMaterialsButton.Enabled = true; }));
+                    SchematicButton.BeginInvoke(new Action(() => { SchematicButton.Enabled = true; }));
+                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                };
                 convertedImage = rawImage.Clone() as Image;
                 ArtType type = ArtType.Flat;
                 if (radioButton2.Checked)
@@ -228,21 +237,6 @@ namespace Minecraft_staircase
                 pictureBox1.Image = convertedImage;
             });
             convertTask.Start();
-            timer1.Start();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (convertTask.ThreadState == ThreadState.Stopped)
-            {
-                timer1.Stop();
-                FinalImageButton.Enabled = true;
-                TopViewButton.Enabled = true;
-                CrossViewButton.Enabled = true;
-                UsedMaterialsButton.Enabled = true;
-                SchematicButton.Enabled = true;
-                MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
         }
 
 
