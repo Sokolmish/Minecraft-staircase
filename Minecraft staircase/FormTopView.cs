@@ -196,5 +196,15 @@ namespace Minecraft_staircase
                 loc.Y = 0;
             pictureBox1.Location = loc;
         }
+
+
+        private void FormTopView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pictureBox1.Image = null;
+            originalImage = null;
+            textures = null;
+            blockMap = null;
+            GC.Collect();
+        }
     }
 }
