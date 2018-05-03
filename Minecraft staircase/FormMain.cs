@@ -86,7 +86,10 @@ namespace Minecraft_staircase
                 }
                 if (!checkBox1.Checked)
                 {
-                    rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
+                    if (originalImage.Width < 128 || originalImage.Height < 128)
+                        rawImage = new Bitmap(originalImage, 128, 128);
+                    else
+                        rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
                     textBox1.Text = (rawImage.Width / 128).ToString();
                     textBox2.Text = (rawImage.Height / 128).ToString();
                 }
@@ -108,7 +111,10 @@ namespace Minecraft_staircase
                 return;
             if (!checkBox1.Checked)
             {
-                rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
+                if (originalImage.Width < 128 || originalImage.Height < 128)
+                    rawImage = new Bitmap(originalImage, 128, 128);
+                else
+                    rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
                 textBox1.Text = (rawImage.Width / 128).ToString();
                 textBox2.Text = (rawImage.Height / 128).ToString();
             }
@@ -314,6 +320,7 @@ namespace Minecraft_staircase
             new FormSettings().ShowDialog();
         }
 
+
         private void NewFormMain_Resize(object sender, EventArgs e)
         {
             if (!noResize)
@@ -497,6 +504,12 @@ namespace Minecraft_staircase
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = rawImage;
             CreateButton.Enabled = true;
+        }
+
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            convertTask.Abort();
         }
     }
 }

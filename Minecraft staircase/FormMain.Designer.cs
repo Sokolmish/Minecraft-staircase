@@ -282,6 +282,7 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.OptionsButton);
             this.Name = "FormMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FormMain_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FormMain_DragEnter);
             this.Resize += new System.EventHandler(this.NewFormMain_Resize);
