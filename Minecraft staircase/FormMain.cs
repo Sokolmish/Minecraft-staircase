@@ -26,11 +26,24 @@ namespace Minecraft_staircase
 
         bool noResize;
 
+        TextBox textBoxHint = new TextBox
+        {
+            BackColor = Color.WhiteSmoke,
+            Name = "textBox3",
+            ReadOnly = true,
+            Multiline = true,
+            WordWrap = true,
+            MaximumSize = new Size(267, 114),
+            Visible = false
+        };
+
         public FormMain()
         {
             InitializeComponent();
             NewFormMain_Resize(null, null);  //?
             LoadData();
+            Controls.Add(textBoxHint);
+            Controls.SetChildIndex(textBoxHint, 0);
         }
 
 
@@ -333,14 +346,8 @@ namespace Minecraft_staircase
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
             isOnControl = false;
-            System.Threading.Timer timer = new System.Threading.Timer((x) =>
-            {
-                try
-                {
-                    textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-                }
-                catch { }
-            }, null, 500, Timeout.Infinite);
+            try { textBoxHint.BeginInvoke(new Action(() => { textBoxHint.Visible = false; })); }
+            catch { }
         }
 
         private void ShowHint()
@@ -351,10 +358,11 @@ namespace Minecraft_staircase
                     if (isOnControl)
                         try
                         {
-                            textBox3.BeginInvoke(new Action(() =>
+                            textBoxHint.BeginInvoke(new Action(() =>
                             {
-                                textBox3.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
-                                textBox3.Visible = true;
+                                textBoxHint.Location = new Point(MousePosition.X - Location.X, MousePosition.Y - Location.Y);
+                                textBoxHint.Size = textBoxHint.GetPreferredSize(new Size());
+                                textBoxHint.Visible = true;
                             }));
                         }
                         catch { }
@@ -365,98 +373,98 @@ namespace Minecraft_staircase
         private void OpenButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("OpenButton");
+            textBoxHint.Text = Lang.GetHint("OpenButton");
             ShowHint();
         }
 
         private void textBox2_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("HeightTextBox");
+            textBoxHint.Text = Lang.GetHint("HeightTextBox");
             ShowHint();
         }
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("WidthTextBox");
+            textBoxHint.Text = Lang.GetHint("WidthTextBox");
             ShowHint();
         }
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("SizeCheckBox");
+            textBoxHint.Text = Lang.GetHint("SizeCheckBox");
             ShowHint();
         }
 
         private void MaterialsButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("MatOptionsButton");
+            textBoxHint.Text = Lang.GetHint("MatOptionsButton");
             ShowHint();
         }
 
         private void radioButton1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("FlatRadio");
+            textBoxHint.Text = Lang.GetHint("FlatRadio");
             ShowHint();
         }
 
         private void radioButton2_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("LiteRadio");
+            textBoxHint.Text = Lang.GetHint("LiteRadio");
             ShowHint();
         }
 
         private void radioButton3_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("FullRadio");
+            textBoxHint.Text = Lang.GetHint("FullRadio");
             ShowHint();
         }
 
         private void CreateButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("GenerateButton");
+            textBoxHint.Text = Lang.GetHint("GenerateButton");
             ShowHint();
         }
 
         private void FinalImageButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("ViewImgButton");
+            textBoxHint.Text = Lang.GetHint("ViewImgButton");
             ShowHint();
         }
 
         private void TopViewButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("TopViewButton");
+            textBoxHint.Text = Lang.GetHint("TopViewButton");
             ShowHint();
         }
 
         private void CrossViewButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("CrossViewButton");
+            textBoxHint.Text = Lang.GetHint("CrossViewButton");
             ShowHint();
         }
 
         private void UsedMaterialsButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("MatButton");
+            textBoxHint.Text = Lang.GetHint("MatButton");
             ShowHint();
         }
 
         private void SchematicButton_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("SchemButton");
+            textBoxHint.Text = Lang.GetHint("SchemButton");
             ShowHint();
         }
         #endregion

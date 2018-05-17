@@ -163,7 +163,7 @@
     <value>Выгрузить схематик-файл арта</value>
   </data>
   <data name="SizeCheckBox" xml:space="preserve">
-    <value>Отмечено - размер указывается в блоках\r\nНе отмечено - размер указывается в картах</value>
+    <value>Отмечено - размер указывается в блоках, Не отмечено - размер указывается в картах</value>
   </data>
   <data name="TopMost" xml:space="preserve">
     <value>Отображать поверх других окон</value>

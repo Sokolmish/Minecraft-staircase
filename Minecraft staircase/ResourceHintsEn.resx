@@ -163,7 +163,7 @@
     <value>Export schematic file</value>
   </data>
   <data name="SizeCheckBox" xml:space="preserve">
-    <value>Checked - size will be in blocks\r\nElse - size will be in maps</value>
+    <value>Checked - size will be in blocks, Else - size will be in maps</value>
   </data>
   <data name="TopMost" xml:space="preserve">
     <value>Show above another windows</value>

@@ -196,7 +196,7 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Checked - size will be in blocks\r\nElse - size will be in maps.
+        ///   Ищет локализованную строку, похожую на Checked - size will be in blocks, Else - size will be in maps.
         /// </summary>
         internal static string SizeCheckBox {
             get {

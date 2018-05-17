@@ -22,12 +22,25 @@ namespace Minecraft_staircase
         Color chunkMeshColor = Properties.Settings.Default.chunkMeshColor;
         Color mapMeshColor = Properties.Settings.Default.mapMeshColor;
 
+        TextBox textBoxHint = new TextBox
+        {
+            BackColor = Color.WhiteSmoke,
+            Name = "textBoxHint",
+            ReadOnly = true,
+            Multiline = true,
+            WordWrap = true,
+            MaximumSize = new Size(267, 114),
+            Visible = false
+        };
+
         public FormCrossView()
         {
             InitializeComponent();
             MouseWheel += new MouseEventHandler(WheelRolled);
             pictureBox2.Image = Properties.Resources.North;
-            this.FormClosing += (args, e) => { GC.Collect(0); };
+            FormClosing += (args, e) => { GC.Collect(0); };
+            Controls.Add(textBoxHint);
+            Controls.SetChildIndex(textBoxHint, 0);
         }
 
         internal void Show(SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
@@ -285,14 +298,8 @@ namespace Minecraft_staircase
         private void Hint_MouseLeave(object sender, EventArgs e)
         {
             isOnControl = false;
-            System.Threading.Timer timer = new System.Threading.Timer((x) =>
-            {
-                try
-                {
-                    textBox3.BeginInvoke(new Action(() => { textBox3.Visible = false; }));
-                }
-                catch { }
-            }, null, 500, Timeout.Infinite);
+            try { textBoxHint.BeginInvoke(new Action(() => { textBoxHint.Visible = false; })); }
+            catch { }
         }
 
         private void ShowHint()
@@ -304,10 +311,11 @@ namespace Minecraft_staircase
                     if (isOnControl)
                         try
                         {
-                            textBox3.BeginInvoke(new Action(() =>
+                            textBoxHint.BeginInvoke(new Action(() =>
                                 {
-                                    textBox3.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
-                                    textBox3.Visible = true;
+                                    textBoxHint.Location = new Point(MousePosition.X - Location.X - 100, MousePosition.Y - Location.Y);
+                                    textBoxHint.Size = textBoxHint.GetPreferredSize(new Size());
+                                    textBoxHint.Visible = true;
                                 }));
                         }
                         catch { }
@@ -317,35 +325,35 @@ namespace Minecraft_staircase
         private void buttonPrevious_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("CrossPrevButton");
+            textBoxHint.Text = Lang.GetHint("CrossPrevButton");
             ShowHint();
         }
 
         private void textBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("CrossCurTextBox");
+            textBoxHint.Text = Lang.GetHint("CrossCurTextBox");
             ShowHint();
         }
 
         private void checkBox1_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("TopMost");
+            textBoxHint.Text = Lang.GetHint("TopMost");
             ShowHint();
         }
 
         private void label3_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("CrossMaxHeight");
+            textBoxHint.Text = Lang.GetHint("CrossMaxHeight");
             ShowHint();
         }
 
         private void buttonNext_MouseEnter(object sender, EventArgs e)
         {
             isOnControl = true;
-            textBox3.Text = Lang.GetHint("CrossNextButton");
+            textBoxHint.Text = Lang.GetHint("CrossNextButton");
             ShowHint();
         }
         #endregion
