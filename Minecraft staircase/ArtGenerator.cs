@@ -59,20 +59,21 @@ namespace Minecraft_staircase
             for (int i = 0; i < sourceImage.Height; i++)
                 for (int j = 0; j < sourceImage.Width; j++)
                 {
-                    image1.Add((sourceImage as Bitmap).GetPixel(j, i).R);
-                    image1.Add((sourceImage as Bitmap).GetPixel(j, i).G);
-                    image1.Add((sourceImage as Bitmap).GetPixel(j, i).B);
+                    Color pixel = (sourceImage as Bitmap).GetPixel(j, i);
+                    image1.Add(pixel.R);
+                    image1.Add(pixel.G);
+                    image1.Add(pixel.B);
                 }
+            List<int> notes1 = new List<int>(_colors.Count * 4);
+            foreach (ColorNote col in _colors)
+            {
+                notes1.Add(col.ColorID);
+                notes1.Add(col.LightColor.R);
+                notes1.Add(col.LightColor.G);
+                notes1.Add(col.LightColor.B);
+            }
             fixed (int* image = image1.ToArray())
             {
-                List<int> notes1 = new List<int>(_colors.Count * 4);
-                foreach (ColorNote col in _colors)
-                {
-                    notes1.Add(col.ColorID);
-                    notes1.Add(col.LightColor.R);
-                    notes1.Add(col.LightColor.G);
-                    notes1.Add(col.LightColor.B);
-                }
                 fixed (int* notes = notes1.ToArray())
                 {
                     int* fet = Convert(image, image1.Count, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,

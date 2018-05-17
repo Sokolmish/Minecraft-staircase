@@ -207,12 +207,12 @@ namespace Minecraft_staircase
         }
 
 
+        DateTime startTime;
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            //foreach (ColorNote col in colorsNote)
-            //    col.Uses = 0;
             progressBar1.Maximum = rawImage.Width * rawImage.Height;
             progressBar1.Value = 0;
+            startTime = DateTime.Now;
             convertTask?.Abort();
             convertTask = new Thread(() =>
             {
@@ -220,12 +220,13 @@ namespace Minecraft_staircase
                 gen.SetProgress(progressBar1);
                 gen.Done += () =>
                 {
+                    label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
                     FinalImageButton.BeginInvoke(new Action(() => { FinalImageButton.Enabled = true; }));
                     TopViewButton.BeginInvoke(new Action(() => { TopViewButton.Enabled = true; }));
                     CrossViewButton.BeginInvoke(new Action(() => { CrossViewButton.Enabled = true; }));
                     UsedMaterialsButton.BeginInvoke(new Action(() => { UsedMaterialsButton.Enabled = true; }));
                     SchematicButton.BeginInvoke(new Action(() => { SchematicButton.Enabled = true; }));
-                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //-V3038
                 };
                 convertedImage = rawImage.Clone() as Image;
                 ArtType type = ArtType.Flat;

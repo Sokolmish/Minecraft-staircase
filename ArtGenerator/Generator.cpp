@@ -8,20 +8,22 @@
 #define LITE 1
 #define FULL 2
 
+int pow2(int num) { return num * num; }
+
 double Similarity(int* col1, int* col2, int set) {
 	switch (set) {
 	case LIGH:
-		return sqrt(pow(col2[0] - col1[0], 2) +
-			pow(col2[1] - col1[1], 2) +
-			pow(col2[2] - col1[2], 2));
+		return sqrt(pow2(col2[0] - col1[0]) +
+			pow2(col2[1] - col1[1]) +
+			pow2(col2[2] - col1[2]));
 	case NORM:
-		return sqrt(pow(col2[0] - col1[0] * 220 / 255, 2) +
-			pow(col2[1] - col1[1] * 220 / 255, 2) +
-			pow(col2[2] - col1[2] * 220 / 255, 2));
+		return sqrt(pow2(col2[0] - col1[0] * 220 / 255) +
+			pow2(col2[1] - col1[1] * 220 / 255) +
+			pow2(col2[2] - col1[2] * 220 / 255));
 	case DARK:
-		return sqrt(pow(col2[0] - col1[0] * 180 / 255, 2) +
-			pow(col2[1] - col1[1] * 180 / 255, 2) +
-			pow(col2[2] - col1[2] * 180 / 255, 2));
+		return sqrt(pow2(col2[0] - col1[0] * 180 / 255) +
+			pow2(col2[1] - col1[1] * 180 / 255) +
+			pow2(col2[2] - col1[2] * 180 / 255));
 	default:
 		return 0;
 	}

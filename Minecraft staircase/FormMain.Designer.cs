@@ -54,6 +54,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -248,11 +249,17 @@
             this.label3.MouseLeave += new System.EventHandler(this.Hint_MouseLeave);
             this.label3.MouseHover += new System.EventHandler(this.checkBox1_MouseEnter);
             // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
             // FormMain
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AboutButton);
@@ -313,5 +320,6 @@
         private System.Windows.Forms.Button OptionsButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label4;
     }
 }

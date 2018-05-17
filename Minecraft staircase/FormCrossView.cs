@@ -27,6 +27,7 @@ namespace Minecraft_staircase
             InitializeComponent();
             MouseWheel += new MouseEventHandler(WheelRolled);
             pictureBox2.Image = Properties.Resources.North;
+            this.FormClosing += (args, e) => { GC.Collect(0); };
         }
 
         internal void Show(SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
@@ -58,7 +59,6 @@ namespace Minecraft_staircase
                 graph.DrawImage(textures[blockMap[i, j].ID], j * blockSize, blockMap[i, j].Height * blockSize);
             }
             //tempImg.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            graph = Graphics.FromImage(tempImg);
             PrintMesh(tempImg);
             PrintChunkMesh(tempImg);
             PrintMapMesh(tempImg);
@@ -132,10 +132,12 @@ namespace Minecraft_staircase
             }
         }
 
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = checkBox1.Checked;
         }
+
 
         bool isNotFull = true;
         Size naturalSize;
