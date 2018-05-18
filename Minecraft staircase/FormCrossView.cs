@@ -189,7 +189,7 @@ namespace Minecraft_staircase
                 checkBox1.Visible = true;
                 label1.Visible = true;
                 textBox1.Visible = true;
-                pictureBox2.Visible = true;
+                //pictureBox2.Visible = true;
                 MaximizeBox = false;
                 MinimumSize = new Size(724, 580);
             }
