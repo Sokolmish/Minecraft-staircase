@@ -46,7 +46,6 @@ namespace Minecraft_staircase
                             break;
                     }
             sourceImage = tempImage;
-            //UnsettedBlock[,] RawScheme = OldConvert(ref sourceImage, type);
             Done();
             return GenerateFlow(ref RawScheme, out maxHeight);
         }

@@ -8,8 +8,6 @@ namespace Minecraft_staircase
 {
     public partial class FormSelectMaterials : Form
     {
-        const string BlockIDS = @"data\PossibleBlocks.txt";
-
         bool admin;
 
         List<ColorNote> colorsList;
@@ -85,7 +83,7 @@ namespace Minecraft_staircase
             graph.FillRectangle(new SolidBrush(colorsList[0].DarkColor), new Rectangle(0, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(colorsList[0].NormalColor), new Rectangle(50, 0, 50, 32));
             graph.FillRectangle(new SolidBrush(colorsList[0].LightColor), new Rectangle(100, 0, 50, 32));
-            Show();
+            ShowDialog();
         }
 
 

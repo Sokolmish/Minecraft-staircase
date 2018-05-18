@@ -11,7 +11,6 @@ namespace Minecraft_staircase
     public partial class FormMain : Form
     {
         const int blockSize = 16;
-        const string BlockIDS = @"data\PossibleBlocks.txt";
 
         List<ColorNote> colorsNote;
 
@@ -87,10 +86,7 @@ namespace Minecraft_staircase
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    originalImage = Image.FromFile(openFileDialog1.FileName);
-                }
+                try { originalImage = Image.FromFile(openFileDialog1.FileName); }
                 catch (Exception ex)
                 {
                     if (MessageBox.Show(Lang.GetHint("NoImage"), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
@@ -115,6 +111,7 @@ namespace Minecraft_staircase
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBox1.Image = rawImage;
                 CreateButton.Enabled = true;
+                GC.Collect();
             }
         }
 
@@ -141,6 +138,7 @@ namespace Minecraft_staircase
 
         }
 
+        int maxSize = 15;
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (rawImage != null && int.TryParse(textBox1.Text, out int cur))
@@ -152,10 +150,10 @@ namespace Minecraft_staircase
                         cur = 1;
                         textBox1.Text = "1";
                     }
-                    if (cur > 30)
+                    if (cur > maxSize)
                     {
-                        cur = 30;
-                        textBox1.Text = "30";
+                        cur = maxSize;
+                        textBox1.Text = maxSize.ToString();
                     }
                     rawImage = new Bitmap(originalImage, cur * 128, rawImage.Height);
                 }
@@ -166,10 +164,10 @@ namespace Minecraft_staircase
                         cur = 1;
                         textBox1.Text = "1";
                     }
-                    if (cur > 3840)
+                    if (cur > maxSize * 128)
                     {
-                        cur = 3840;
-                        textBox1.Text = "3840";
+                        cur = maxSize * 128;
+                        textBox1.Text = (maxSize * 128).ToString();
                     }
                     rawImage = new Bitmap(originalImage, cur, rawImage.Height);
                 }
@@ -188,10 +186,10 @@ namespace Minecraft_staircase
                         cur = 1;
                         textBox2.Text = "1";
                     }
-                    if (cur > 30)
+                    if (cur > maxSize)
                     {
-                        cur = 30;
-                        textBox2.Text = "30";
+                        cur = maxSize;
+                        textBox2.Text = maxSize.ToString();
                     }
                     rawImage = new Bitmap(originalImage, rawImage.Width, cur * 128);
                 }
@@ -202,10 +200,10 @@ namespace Minecraft_staircase
                         cur = 1;
                         textBox1.Text = "1";
                     }
-                    if (cur > 3840)
+                    if (cur > maxSize * 128)
                     {
-                        cur = 3840;
-                        textBox1.Text = "3840";
+                        cur = maxSize * 128;
+                        textBox1.Text = (maxSize * 128).ToString();
                     }
                     rawImage = new Bitmap(originalImage, rawImage.Width, cur);
                 }
@@ -249,6 +247,7 @@ namespace Minecraft_staircase
                     type = ArtType.Full;
                 blockMap = gen.CreateScheme(ref convertedImage, type, out maxHeight);
                 pictureBox1.Image = convertedImage;
+                GC.Collect();
             });
             convertTask.Start();
         }
@@ -338,7 +337,6 @@ namespace Minecraft_staircase
                 panel1.Height = Height - 63;
             }
         }
-
 
         #region Hints
         bool isOnControl = false;
@@ -469,7 +467,6 @@ namespace Minecraft_staircase
         }
         #endregion
 
-
         private void FormMain_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop) &&
@@ -481,20 +478,20 @@ namespace Minecraft_staircase
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop) && e.Effect == DragDropEffects.Move)
             {
-                try
-                {
-                    originalImage = Image.FromFile(((string[])e.Data.GetData(DataFormats.FileDrop))[0]);
-                }
+                try { originalImage = Image.FromFile(((string[])e.Data.GetData(DataFormats.FileDrop))[0]); }
                 catch (Exception ex)
                 {
                     if (MessageBox.Show(Lang.GetHint("NoImage"), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                         MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK);
+                    return;
                 }
-                return;
             }
             if (!checkBox1.Checked)
             {
-                rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
+                if (originalImage.Width < 128 || originalImage.Height < 128)
+                    rawImage = new Bitmap(originalImage, 128, 128);
+                else
+                    rawImage = new Bitmap(originalImage, originalImage.Width - (originalImage.Width % 128), originalImage.Height - (originalImage.Height % 128));
                 textBox1.Text = (rawImage.Width / 128).ToString();
                 textBox2.Text = (rawImage.Height / 128).ToString();
             }
