@@ -77,7 +77,8 @@ int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *not
 		result[i * 2] = betterId;
 		result[i * 2 + 1] = betterSet;
 		++uses[betterIdNum];
-		Progress();
+		if (i % 128 == 0)
+			Progress();
 	}
 	SaveUses(uses);
 	return result;

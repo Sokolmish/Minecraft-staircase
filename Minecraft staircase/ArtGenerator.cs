@@ -18,18 +18,18 @@ namespace Minecraft_staircase
         List<ColorNote> _colors;
 
         ProgressBar progress;
-        public event Action Inc;
+        Label stateLabel;
         public event Action Done;
 
         public ArtGenerator(ref List<ColorNote> colors)
         {
             _colors = colors;
-            Inc += () => { progress?.Increment(1); };
         }
 
         public SettedBlock[,] CreateScheme(ref Image sourceImage, ArtType type, out int maxHeight)
         {
             UnsettedBlock[,] RawScheme = ConvertCPP(ref sourceImage, type);
+            stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Making image"; }));
             Bitmap tempImage = new Bitmap(RawScheme.GetLength(0), RawScheme.GetLength(1));
             for (int i = 0; i < RawScheme.GetLength(0); i++)
                 for (int j = 0; j < RawScheme.GetLength(1); j++)
@@ -46,13 +46,17 @@ namespace Minecraft_staircase
                             break;
                     }
             sourceImage = tempImage;
+            stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Generating"; }));
+            SettedBlock[,] result = GenerateFlow(ref RawScheme, out maxHeight);
+            stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Done"; }));
             Done();
-            return GenerateFlow(ref RawScheme, out maxHeight);
+            return result;
         }
 
 
         UnsettedBlock[,] ConvertCPP(ref Image sourceImage, ArtType type)
         {
+            stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Serialization"; }));
             UnsettedBlock[,] result = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             List<int> image1 = new List<int>(sourceImage.Width * sourceImage.Height * 3);
             for (int i = 0; i < sourceImage.Height; i++)
@@ -71,12 +75,13 @@ namespace Minecraft_staircase
                 notes1.Add(col.LightColor.G);
                 notes1.Add(col.LightColor.B);
             }
+            stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Converting"; }));
             fixed (int* image = image1.ToArray())
             {
                 fixed (int* notes = notes1.ToArray())
                 {
                     int* fet = Convert(image, image1.Count, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
-                        () => { progress.BeginInvoke(Inc); },
+                        () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
                         (e) =>
                         {
                             for (int j = 0; j < _colors.Count; j++)
@@ -143,9 +148,8 @@ namespace Minecraft_staircase
         }
 
 
-        public void SetProgress(ProgressBar progress)
-        {
-            this.progress = progress;
-        }
+        public void SetProgress(ProgressBar progress) => this.progress = progress;
+
+        public void SetStateLabel(Label label) => this.stateLabel = label;
     }
 }

@@ -221,7 +221,7 @@ namespace Minecraft_staircase
         DateTime startTime;
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            progressBar1.Maximum = rawImage.Width * rawImage.Height;
+            progressBar1.Maximum = (rawImage.Width * rawImage.Height) / 128;
             progressBar1.Value = 0;
             startTime = DateTime.Now;
             convertTask?.Abort();
@@ -229,6 +229,7 @@ namespace Minecraft_staircase
             {
                 ArtGenerator gen = new ArtGenerator(ref colorsNote);
                 gen.SetProgress(progressBar1);
+                gen.SetStateLabel(label4);
                 gen.Done += () =>
                 {
                     label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
@@ -265,6 +266,7 @@ namespace Minecraft_staircase
             Height = panel1.Height + 38;
             panel1.Location = new Point(0, 0);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            label4.Visible = false;
             noResize = false;
         }
 
