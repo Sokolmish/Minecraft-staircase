@@ -187,6 +187,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Processing time.
+        /// </summary>
+        internal static string ProgressTimer {
+            get {
+                return ResourceManager.GetString("ProgressTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Export schematic file.
         /// </summary>
         internal static string SchemButton {

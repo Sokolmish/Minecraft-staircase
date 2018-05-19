@@ -159,6 +159,9 @@
   <data name="OpenButton" xml:space="preserve">
     <value>Open new image</value>
   </data>
+  <data name="ProgressTimer" xml:space="preserve">
+    <value>Processing time</value>
+  </data>
   <data name="SchemButton" xml:space="preserve">
     <value>Export schematic file</value>
   </data>

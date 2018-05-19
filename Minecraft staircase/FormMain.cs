@@ -238,7 +238,6 @@ namespace Minecraft_staircase
                     CrossViewButton.BeginInvoke(new Action(() => { CrossViewButton.Enabled = true; }));
                     UsedMaterialsButton.BeginInvoke(new Action(() => { UsedMaterialsButton.Enabled = true; }));
                     SchematicButton.BeginInvoke(new Action(() => { SchematicButton.Enabled = true; }));
-                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //-V3038
                 };
                 convertedImage = rawImage.Clone() as Image;
                 ArtType type = ArtType.Flat;
@@ -335,6 +334,7 @@ namespace Minecraft_staircase
             if (!noResize)
             {
                 progressBar1.Location = new Point(progressBar1.Location.X, Height - 74);
+                label4.Location = new Point(label4.Location.X, Height - 0b1011010);
                 panel1.Width = Width - 251;
                 panel1.Height = Height - 63;
             }
@@ -465,6 +465,13 @@ namespace Minecraft_staircase
         {
             isOnControl = true;
             textBoxHint.Text = Lang.GetHint("SchemButton");
+            ShowHint();
+        }
+
+        private void label4_MouseEnter(object sender, EventArgs e)
+        {
+            isOnControl = true;
+            textBoxHint.Text = Lang.GetHint("ProgressTimer");
             ShowHint();
         }
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using FastBitmapLib;
 
 namespace Minecraft_staircase
 {
@@ -31,19 +32,22 @@ namespace Minecraft_staircase
             UnsettedBlock[,] RawScheme = ConvertCPP(ref sourceImage, type);
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Making image"; }));
             Bitmap tempImage = new Bitmap(RawScheme.GetLength(0), RawScheme.GetLength(1));
-            for (int i = 0; i < RawScheme.GetLength(0); i++)
-                for (int j = 0; j < RawScheme.GetLength(1); j++)
-                    switch (RawScheme[i, j].Set)
+            using (FastBitmap fbmp = tempImage.FastLock())
+                for (int i = 0; i < RawScheme.GetLength(0); i++)
+                    for (int j = 0; j < RawScheme.GetLength(1); j++)
                     {
-                        case ColorType.Dark:
-                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).DarkColor);
-                            break;
-                        case ColorType.Normal:
-                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).NormalColor);
-                            break;
-                        case ColorType.Light:
-                            tempImage.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).LightColor);
-                            break;
+                        switch (RawScheme[i, j].Set)
+                        {
+                            case ColorType.Dark:
+                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).DarkColor);
+                                break;
+                            case ColorType.Normal:
+                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).NormalColor);
+                                break;
+                            case ColorType.Light:
+                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).LightColor);
+                                break;
+                        }
                     }
             sourceImage = tempImage;
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Generating"; }));
@@ -59,14 +63,15 @@ namespace Minecraft_staircase
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Serialization"; }));
             UnsettedBlock[,] result = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             List<int> image1 = new List<int>(sourceImage.Width * sourceImage.Height * 3);
-            for (int i = 0; i < sourceImage.Height; i++)
-                for (int j = 0; j < sourceImage.Width; j++)
-                {
-                    Color pixel = (sourceImage as Bitmap).GetPixel(j, i);
-                    image1.Add(pixel.R);
-                    image1.Add(pixel.G);
-                    image1.Add(pixel.B);
-                }
+            using (FastBitmap fbmp = (sourceImage as Bitmap).FastLock())
+                for (int i = 0; i < sourceImage.Height; i++)
+                    for (int j = 0; j < sourceImage.Width; j++)
+                    {
+                        Color pixel = fbmp.GetPixel(j, i);
+                        image1.Add(pixel.R);
+                        image1.Add(pixel.G);
+                        image1.Add(pixel.B);
+                    }
             List<int> notes1 = new List<int>(_colors.Count * 4);
             foreach (ColorNote col in _colors)
             {
