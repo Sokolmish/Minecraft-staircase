@@ -44,14 +44,14 @@ int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *not
 
 	int* result = new int[length / 3 * 2];
 	int* uses = new int[colCount / 4];
-	for (int i = 0; i < colCount / 4; i++)
+	for (int i = 0; i < colCount / 4; ++i)
 		uses[i] = 0;
-	for (int i = 0; i < length / 3; i++) {
+	for (int i = 0; i < length / 3; ++i) {
 		int betterSimilarity = 99999;
 		int betterId = 0;
 		int betterSet = NORM;
 		int betterIdNum = 0;
-		for (int col = 0; col < colCount / 4; col++) {
+		for (int col = 0; col < colCount / 4; ++col) {
 			if (Similarity(&notes[col * 4 + 1], &image[i * 3], NORM) < betterSimilarity) {
 				betterSimilarity = Similarity(&notes[col * 4 + 1], &image[i * 3], NORM);
 				betterId = notes[col * 4];

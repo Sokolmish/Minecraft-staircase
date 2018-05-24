@@ -67,7 +67,7 @@ namespace Minecraft_staircase
         {
             Image tempImg = new Bitmap(blockMap.GetLength(1) * blockSize, maxHeight > 3 ? maxHeight * blockSize : 3 * blockSize);
             Graphics graph = Graphics.FromImage(tempImg);
-            for (int j = 0; j < (blockMap.GetLength(1)); j++)
+            for (int j = 0; j < (blockMap.GetLength(1)); ++j)
             {
                 graph.DrawImage(textures[blockMap[i, j].ID], j * blockSize, blockMap[i, j].Height * blockSize);
             }
@@ -83,7 +83,7 @@ namespace Minecraft_staircase
         void PrintMesh(Image image)
         {
             Graphics graph = Graphics.FromImage(image);
-            for (int i = 0; i < blockMap.GetLength(1); i++)
+            for (int i = 0; i < blockMap.GetLength(1); ++i)
                 graph.DrawLine(new Pen(defMeshColor, 1), new Point(blockSize * (i + 1), 0), new Point(blockSize * (i + 1), image.Height));
         }
 
@@ -91,9 +91,9 @@ namespace Minecraft_staircase
         {
             Graphics graph = Graphics.FromImage(image);
             graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize, 0), new Point(blockSize, image.Height));
-            for (int i = 0; i < blockMap.GetLength(1) / 16; i++)
+            for (int i = 0; i < blockMap.GetLength(1) / 16; ++i)
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize * 16 * (i + 1) + blockSize, 0), new Point(blockSize * 16 * (i + 1) + blockSize, image.Height));
-            for (int i = 0; i < blockMap.GetLength(1) - 1; i++)
+            for (int i = 0; i < blockMap.GetLength(1) - 1; ++i)
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(0, blockSize * 16 * (i + 1)), new Point(image.Width, blockSize * 16 * (i + 1)));
         }
 
@@ -101,9 +101,9 @@ namespace Minecraft_staircase
         {
             Graphics graph = Graphics.FromImage(image);
             graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize, 0), new Point(blockSize, image.Height));
-            for (int i = 0; i < blockMap.GetLength(1) / 128; i++)
+            for (int i = 0; i < blockMap.GetLength(1) / 128; ++i)
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize * 128 * (i + 1) + blockSize, 0), new Point(blockSize * 128 * (i + 1) + blockSize, image.Height));
-            for (int i = 0; i < blockMap.GetLength(1) / 128 - 1; i++)
+            for (int i = 0; i < blockMap.GetLength(1) / 128 - 1; ++i)
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(0, blockSize * 128 * (i + 1)), new Point(image.Width, blockSize * 128 * (i + 1)));
         }
 

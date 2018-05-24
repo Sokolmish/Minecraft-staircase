@@ -138,7 +138,7 @@ namespace Minecraft_staircase
 
         }
 
-        int maxSize = 15;
+        int maxSize = 16;
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (rawImage != null && int.TryParse(textBox1.Text, out int cur))
@@ -306,8 +306,8 @@ namespace Minecraft_staircase
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
-                for (int i = 0; i < blockMap.GetLength(0); i++)
-                    for (int j = 1; j < blockMap.GetLength(1); j++)
+                for (int i = 0; i < blockMap.GetLength(0); ++i)
+                    for (int j = 1; j < blockMap.GetLength(1); ++j)
                     {
                         ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
                         schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1,
