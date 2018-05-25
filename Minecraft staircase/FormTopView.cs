@@ -10,6 +10,7 @@ namespace Minecraft_staircase
     {
         const int blockSize = 16;
         const int maxSize = 3;
+        const int maxImage = 5;
 
         int[,] blockMap;
         Dictionary<int, Bitmap> textures;
@@ -29,9 +30,14 @@ namespace Minecraft_staircase
             MouseWheel += new MouseEventHandler(WheelRolled);
         }
 
-        internal void Show(int[,] ids, ref List<ColorNote> colors)
+        internal void Show(ref int[,] ids, ref List<ColorNote> colors)
         {
-            Show();
+            if (ids.GetLength(0) > 128 * maxImage || ids.GetLength(1) > 128 * maxImage)
+            {
+                MessageBox.Show(Lang.GetHint("BigImageError"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                return;
+            }
             this.colors = colors;
             blockMap = ids;
             LoadTextures();
@@ -43,6 +49,7 @@ namespace Minecraft_staircase
             PrintMesh(pictureBox1.Image);
             PrintChunkMesh(pictureBox1.Image);
             PrintMapMesh(pictureBox1.Image);
+            Show();
             if (!Properties.Settings.Default.HideTips)
                 MessageBox.Show(Lang.GetHint("TopTopMostHint"), "Hint", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -61,6 +68,7 @@ namespace Minecraft_staircase
             for (int i = 0; i < blockMap.GetLength(0); ++i)
                 for (int j = 0; j < blockMap.GetLength(1); ++j)
                     graph.DrawImage(textures[blockMap[i, j]], i * blockSize, j * blockSize);
+            graph.Dispose();
         }
 
 
@@ -80,6 +88,7 @@ namespace Minecraft_staircase
                 graph.DrawLine(new Pen(defMeshColor, 1), new Point(blockSize * (i + 1), 0), new Point(blockSize * (i + 1), image.Height));
             for (int i = 0; i < blockMap.GetLength(1) - 1; ++i)
                 graph.DrawLine(new Pen(defMeshColor, 1), new Point(0, blockSize * (i + 1)), new Point(image.Width, blockSize * (i + 1)));
+            graph.Dispose();
         }
 
         void PrintChunkMesh(Image image)
@@ -89,6 +98,7 @@ namespace Minecraft_staircase
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize * 16 * (i + 1), 0), new Point(blockSize * 16 * (i + 1), image.Height));
             for (int i = 0; i < blockMap.GetLength(1) - 1; ++i)
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(0, blockSize * 16 * (i + 1)), new Point(image.Width, blockSize * 16 * (i + 1)));
+            graph.Dispose();
         }
 
         void PrintMapMesh(Image image)
@@ -98,6 +108,7 @@ namespace Minecraft_staircase
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize * 128 * (i + 1), 0), new Point(blockSize * 128 * (i + 1), image.Height));
             for (int i = 0; i < blockMap.GetLength(1) / 128 - 1; ++i)
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(0, blockSize * 128 * (i + 1)), new Point(image.Width, blockSize * 128 * (i + 1)));
+            graph.Dispose();
         }
 
         Point cur, curnew;
@@ -203,7 +214,6 @@ namespace Minecraft_staircase
             pictureBox1.Image = null;
             originalImage = null;
             textures = null;
-            blockMap = null;
             GC.Collect();
         }
     }

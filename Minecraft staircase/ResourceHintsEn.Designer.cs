@@ -61,6 +61,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Too large image can not displayed in this view. You can use schematic files..
+        /// </summary>
+        internal static string BigImageError {
+            get {
+                return ResourceManager.GetString("BigImageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Select layer.
         /// </summary>
         internal static string CrossCurTextBox {

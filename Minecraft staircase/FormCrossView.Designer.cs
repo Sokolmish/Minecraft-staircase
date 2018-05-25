@@ -169,6 +169,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "FormCrossView";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormCrossView_FormClosed);
             this.Resize += new System.EventHandler(this.FormCrossView_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

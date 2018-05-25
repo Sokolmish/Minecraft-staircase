@@ -9,6 +9,7 @@ namespace Minecraft_staircase
     public partial class FormCrossView : Form
     {
         const int blockSize = 16;
+        const int maxImage = 5;
 
         SettedBlock[,] blockMap;
         int maxHeight;
@@ -43,15 +44,21 @@ namespace Minecraft_staircase
             Controls.SetChildIndex(textBoxHint, 0);
         }
 
-        internal void Show(SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
+        internal void Show(ref SettedBlock[,] blockMap, int maxHeight, ref List<ColorNote> colors)
         {
-            Show();
+            if (blockMap.GetLength(0) > 129 * maxImage || blockMap.GetLength(1) > 129 * maxImage)
+            {
+                MessageBox.Show(Lang.GetHint("BigImageError"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                return;
+            }
             this.colors = colors;
             this.blockMap = blockMap;
             this.maxHeight = maxHeight;
             LoadTextures();
             pictureBox1.Image = CreateLayer(0);
             label3.Text += maxHeight;
+            Show();
             FormCrossView_Resize(null, null);
         }
 
@@ -68,14 +75,12 @@ namespace Minecraft_staircase
             Image tempImg = new Bitmap(blockMap.GetLength(1) * blockSize, maxHeight > 3 ? maxHeight * blockSize : 3 * blockSize);
             Graphics graph = Graphics.FromImage(tempImg);
             for (int j = 0; j < (blockMap.GetLength(1)); ++j)
-            {
                 graph.DrawImage(textures[blockMap[i, j].ID], j * blockSize, blockMap[i, j].Height * blockSize);
-            }
-            //tempImg.RotateFlip(RotateFlipType.Rotate270FlipNone);
             PrintMesh(tempImg);
             PrintChunkMesh(tempImg);
             PrintMapMesh(tempImg);
             tempImg.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            graph.Dispose();
             return tempImg;
         }
 
@@ -85,6 +90,7 @@ namespace Minecraft_staircase
             Graphics graph = Graphics.FromImage(image);
             for (int i = 0; i < blockMap.GetLength(1); ++i)
                 graph.DrawLine(new Pen(defMeshColor, 1), new Point(blockSize * (i + 1), 0), new Point(blockSize * (i + 1), image.Height));
+            graph.Dispose();
         }
 
         void PrintChunkMesh(Image image)
@@ -95,6 +101,7 @@ namespace Minecraft_staircase
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(blockSize * 16 * (i + 1) + blockSize, 0), new Point(blockSize * 16 * (i + 1) + blockSize, image.Height));
             for (int i = 0; i < blockMap.GetLength(1) - 1; ++i)
                 graph.DrawLine(new Pen(chunkMeshColor, 2), new Point(0, blockSize * 16 * (i + 1)), new Point(image.Width, blockSize * 16 * (i + 1)));
+            graph.Dispose();
         }
 
         void PrintMapMesh(Image image)
@@ -105,6 +112,7 @@ namespace Minecraft_staircase
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(blockSize * 128 * (i + 1) + blockSize, 0), new Point(blockSize * 128 * (i + 1) + blockSize, image.Height));
             for (int i = 0; i < blockMap.GetLength(1) / 128 - 1; ++i)
                 graph.DrawLine(new Pen(mapMeshColor, 2), new Point(0, blockSize * 128 * (i + 1)), new Point(image.Width, blockSize * 128 * (i + 1)));
+            graph.Dispose();
         }
 
 
@@ -357,5 +365,12 @@ namespace Minecraft_staircase
             ShowHint();
         }
         #endregion
+
+        private void FormCrossView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pictureBox1.Image = null;
+            textures = null;
+            GC.Collect();
+        }
     }
 }

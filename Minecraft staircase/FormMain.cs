@@ -230,7 +230,7 @@ namespace Minecraft_staircase
                 ArtGenerator gen = new ArtGenerator(ref colorsNote);
                 gen.SetProgress(progressBar1);
                 gen.SetStateLabel(label4);
-                gen.Done += () =>
+                gen.Done += () => 
                 {
                     label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
                     FinalImageButton.BeginInvoke(new Action(() => { FinalImageButton.Enabled = true; }));
@@ -288,18 +288,12 @@ namespace Minecraft_staircase
             for (int i = 0; i < blockMap.GetLength(0); i++)
                 for (int j = 1; j < blockMap.GetLength(1); j++)
                     ids[i, j - 1] = blockMap[i, j].ID;
-            new FormTopView().Show(ids, ref colorsNote);
+            new FormTopView().Show(ref ids, ref colorsNote);
         }
 
-        private void CrossViewButton_Click(object sender, EventArgs e)
-        {
-            new FormCrossView().Show(blockMap, maxHeight + 1, ref colorsNote);
-        }
+        private void CrossViewButton_Click(object sender, EventArgs e) => new FormCrossView().Show(ref blockMap, maxHeight + 1, ref colorsNote);
 
-        private void UsedMaterialsButton_Click(object sender, EventArgs e)
-        {
-            new FormMaterials().Show(ref colorsNote);
-        }
+        private void UsedMaterialsButton_Click(object sender, EventArgs e) => new FormMaterials().Show(ref colorsNote);
 
         private void SchematicButton_Click(object sender, EventArgs e)
         {
@@ -318,15 +312,9 @@ namespace Minecraft_staircase
         }
 
 
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            new AboutBox1().Show();
-        }
+        private void button1_Click_2(object sender, EventArgs e) => new AboutBox1().Show();
 
-        private void OptionsButton_Click(object sender, EventArgs e)
-        {
-            new FormSettings().ShowDialog();
-        }
+        private void OptionsButton_Click(object sender, EventArgs e) => new FormSettings().ShowDialog();
 
 
         private void NewFormMain_Resize(object sender, EventArgs e)

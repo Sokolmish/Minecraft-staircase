@@ -32,9 +32,10 @@ namespace Minecraft_staircase
             UnsettedBlock[,] RawScheme = ConvertCPP(ref sourceImage, type);
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Making image"; }));
             Bitmap tempImage = new Bitmap(RawScheme.GetLength(0), RawScheme.GetLength(1));
+            int gl0 = RawScheme.GetLength(0); int gl1 = RawScheme.GetLength(1);
             using (FastBitmap fbmp = tempImage.FastLock())
-                for (int i = 0; i < RawScheme.GetLength(0); ++i)
-                    for (int j = 0; j < RawScheme.GetLength(1); ++j)
+                for (int i = 0; i < gl0; ++i)
+                    for (int j = 0; j < gl1; ++j)
                     {
                         switch (RawScheme[i, j].Set)
                         {
@@ -62,15 +63,16 @@ namespace Minecraft_staircase
         {
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Serialization"; }));
             UnsettedBlock[,] result = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
-            List<int> image1 = new List<int>(sourceImage.Width * sourceImage.Height * 3);
+            int[] image1 = new int[sourceImage.Width * sourceImage.Height * 3];
+            int h = sourceImage.Height; int w = sourceImage.Width; //Out of roof
             using (FastBitmap fbmp = (sourceImage as Bitmap).FastLock())
-                for (int i = 0; i < sourceImage.Height; ++i)
-                    for (int j = 0; j < sourceImage.Width; ++j)
+                for (int i = 0; i < h; ++i)
+                    for (int j = 0; j < w; ++j)
                     {
                         Color pixel = fbmp.GetPixel(j, i);
-                        image1.Add(pixel.R);
-                        image1.Add(pixel.G);
-                        image1.Add(pixel.B);
+                        image1[i * w * 3 + j * 3 + 0] = pixel.R;
+                        image1[i * w * 3 + j * 3 + 1] = pixel.G;
+                        image1[i * w * 3 + j * 3 + 2] = pixel.B;
                     }
             List<int> notes1 = new List<int>(_colors.Count * 4);
             foreach (ColorNote col in _colors)
@@ -81,11 +83,11 @@ namespace Minecraft_staircase
                 notes1.Add(col.LightColor.B);
             }
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Converting"; }));
-            fixed (int* image = image1.ToArray())
+            fixed (int* image = image1)
             {
                 fixed (int* notes = notes1.ToArray())
                 {
-                    int* fet = Convert(image, image1.Count, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
+                    int* fet = Convert(image, image1.Length, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
                         () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
                         (e) =>
                         {
@@ -93,8 +95,8 @@ namespace Minecraft_staircase
                                 _colors[j].Uses = e[j];
                         });
                     int i = 0;
-                    for (int x = 0; x < sourceImage.Height; ++x)
-                        for (int y = 0; y < sourceImage.Width; ++y)
+                    for (int x = 0; x < h; ++x)
+                        for (int y = 0; y < w; ++y)
                         {
                             result[y, x].ID = fet[i++];
                             result[y, x].Set = (ColorType)fet[i++];

@@ -61,6 +61,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Слишком большое изображение недоступно для отображения подобным образом. Вы можете использовать схематик файлы..
+        /// </summary>
+        internal static string BigImageError {
+            get {
+                return ResourceManager.GetString("BigImageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выбрать слой.
         /// </summary>
         internal static string CrossCurTextBox {
