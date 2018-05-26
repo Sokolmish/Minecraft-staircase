@@ -11,6 +11,7 @@ namespace Minecraft_staircase
     public partial class FormMain : Form
     {
         const int blockSize = 16;
+        const int maxSize = 10;
 
         List<ColorNote> colorsNote;
 
@@ -138,7 +139,6 @@ namespace Minecraft_staircase
 
         }
 
-        int maxSize = 16;
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (rawImage != null && int.TryParse(textBox1.Text, out int cur))
@@ -297,17 +297,26 @@ namespace Minecraft_staircase
 
         private void SchematicButton_Click(object sender, EventArgs e)
         {
+            startTime = DateTime.Now;
+            convertTask?.Abort();
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Schematic schem = new Schematic(blockMap.GetLength(0), maxHeight + 1, blockMap.GetLength(1));
-                for (int i = 0; i < blockMap.GetLength(0); ++i)
-                    for (int j = 1; j < blockMap.GetLength(1); ++j)
-                    {
-                        ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
-                        schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1,
-                            new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
-                    }
-                schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
+                label4.Text = "Exporting";
+                convertTask = new Thread(() =>
+                {
+                    for (int i = 0; i < blockMap.GetLength(0); ++i)
+                        for (int j = 1; j < blockMap.GetLength(1); ++j)
+                        {
+                            ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
+                            schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1,
+                                new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
+                        }
+                    schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
+                    label4.BeginInvoke(new Action(() => { label4.Text = label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
+                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                });
+                convertTask.Start();
             }
         }
 

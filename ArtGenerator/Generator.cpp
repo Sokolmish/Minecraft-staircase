@@ -29,14 +29,6 @@ double Similarity(int* col1, int* col2, int set) {
 	}
 }
 
-//double* RGBtoXYZ(int x1, int y1, int z1) {
-//	return new double[3]{
-//		0.4124564 * x1 + 0.3575761 * y1 + 0.1804375 * z1,
-//		0.2126729 * x1 + 0.7151522 * y1 + 0.0721750 * z1,
-//		0.0193339 * x1 + 0.1191920 * y1 + 0.9503041 * z1
-//	};
-//}
-
 __declspec(dllexport)
 int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *notes/*=id-rgb=*/, int colCount, void(*Progress)(), void(*SaveUses)(int *cou)) {
 	//>>r1,g1,b1,r2,g2,b2, ri,gi,bi
