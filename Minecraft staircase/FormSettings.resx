@@ -268,10 +268,13 @@
     <value>18</value>
   </data>
   <data name="comboBox3.Items" xml:space="preserve">
-    <value>Flow (Recommended)</value>
+    <value>Flow</value>
   </data>
   <data name="comboBox3.Items1" xml:space="preserve">
-    <value>Minimal height</value>
+    <value>Segmented</value>
+  </data>
+  <data name="comboBox3.Items2" xml:space="preserve">
+    <value>Mixed</value>
   </data>
   <data name="comboBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 106</value>

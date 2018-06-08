@@ -52,7 +52,22 @@ namespace Minecraft_staircase
                     }
             sourceImage = tempImage;
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Generating"; }));
-            SettedBlock[,] result = GenerateFlow(ref RawScheme, out maxHeight);
+            SchemeGenerator gen = new SchemeGenerator(ref RawScheme);
+            SettedBlock[,] result;
+            switch (Properties.Settings.Default.GeneratingMethod)
+            {
+                case 0:
+                    result = gen.GenerateFlow(out maxHeight);
+                    break;
+                case 1:
+                    result = gen.GenerateSegmented(out maxHeight);
+                    break;
+                case 2:
+                    result = gen.GenerateMixed(out maxHeight);
+                    break;
+                default:
+                    throw new Exception("Unknown generating method");
+            }
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Done"; }));
             Done();
             return result;

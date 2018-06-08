@@ -91,7 +91,8 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             resources.GetString("comboBox3.Items"),
-            resources.GetString("comboBox3.Items1")});
+            resources.GetString("comboBox3.Items1"),
+            resources.GetString("comboBox3.Items2")});
             resources.ApplyResources(this.comboBox3, "comboBox3");
             this.comboBox3.Name = "comboBox3";
             // 

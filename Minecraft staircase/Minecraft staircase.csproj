@@ -130,6 +130,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceHintsRu.resx</DependentUpon>
     </Compile>
+    <Compile Include="SchemeGenerator.cs" />
     <Compile Include="Types.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>

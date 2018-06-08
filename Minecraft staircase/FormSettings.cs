@@ -45,8 +45,8 @@ namespace Minecraft_staircase
             textBox3.Text = mapMeshColor.IsNamedColor ? mapMeshColor.Name :
                 $"{mapMeshColor.R}; {mapMeshColor.G}; {mapMeshColor.B}";
 
-            label3.Visible = false;
-            comboBox3.Visible = false;
+            //label3.Visible = false;
+            //comboBox3.Visible = false;
         }
 
         private void ApplyButtonClick(object sender, EventArgs e)

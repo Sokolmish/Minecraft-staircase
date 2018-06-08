@@ -313,8 +313,8 @@ namespace Minecraft_staircase
                                 new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
                         }
                     schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
-                    label4.BeginInvoke(new Action(() => { label4.Text = label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
-                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
+                    MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information); //-V3038
                 });
                 convertTask.Start();
             }
