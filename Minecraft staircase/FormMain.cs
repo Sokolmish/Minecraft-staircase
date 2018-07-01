@@ -519,5 +519,3 @@ namespace Minecraft_staircase
         }
     }
 }
-
-    

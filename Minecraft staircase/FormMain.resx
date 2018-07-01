@@ -789,6 +789,9 @@
   <data name="label4.Text" xml:space="preserve">
     <value>_</value>
   </data>
+  <data name="label4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>

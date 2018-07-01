@@ -18,38 +18,6 @@ namespace Minecraft_staircase
         {
             SettedBlock[,] BlockMap = new SettedBlock[rawScheme.GetLength(0), rawScheme.GetLength(1) + 1];
             MaxHeight = 0;
-            #region
-            //for (int i = 0; i < rawScheme.GetLength(0); ++i)
-            //    BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-            //for (int i = 0; i < rawScheme.GetLength(0); ++i)
-            //{
-            //    int minHeight = 0;
-            //    for (int j = 1; j < rawScheme.GetLength(1) + 1; ++j)
-            //    {
-            //        BlockMap[i, j].ID = rawScheme[i, j - 1].ID;
-            //        switch (rawScheme[i, j - 1].Set)
-            //        {
-            //            case ColorType.Normal:
-            //                BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
-            //                break;
-            //            case ColorType.Dark:
-            //                BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
-            //                break;
-            //            case ColorType.Light:
-            //                BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
-            //                break;
-            //        }
-            //        if (j != 1 && (j - 1) % 128 == 0)
-            //            BlockMap[i, j].Height = 0;
-            //        minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
-            //    }
-            //    for (int j = 0; j < rawScheme.GetLength(1) + 1; ++j)
-            //    {
-            //        BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
-            //        MaxHeight = BlockMap[i, j].Height > MaxHeight ? BlockMap[i, j].Height : MaxHeight;
-            //    }
-            //}
-            #endregion
             for (int i = 0; i < rawScheme.GetLength(0); ++i)
             {
                 SettedBlock[] layer = GenerateFlowLayer(i, out int curMaxHeight);
@@ -66,70 +34,6 @@ namespace Minecraft_staircase
         {
             SettedBlock[,] BlockMap = new SettedBlock[rawScheme.GetLength(0), rawScheme.GetLength(1) + 1];
             MaxHeight = 0;
-            #region
-            //for (int i = 0; i < rawScheme.GetLength(0); ++i)
-            //{
-            //    List<MBlock> mBlocks = new List<MBlock>();
-            //    UnsettedBlock last = new UnsettedBlock { ID = -1, Set = ColorType.Normal };
-            //    MBlock curMBlock = new MBlock();
-            //    curMBlock.Add(new UnsettedBlock { ID = -1, Set = ColorType.Normal });
-            //    bool isUp = rawScheme[i, 0].Set == ColorType.Light;
-            //    for (int j = 0; j < rawScheme.GetLength(1); ++j)
-            //    {
-            //        if (!isUp)
-            //        {
-            //            if (rawScheme[i, j].Set == ColorType.Dark || rawScheme[i, j].Set == ColorType.Normal)
-            //                curMBlock.Add(rawScheme[i, j]);
-            //            else
-            //            {
-            //                isUp = true;
-            //                curMBlock.Add(rawScheme[i, j]);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (rawScheme[i, j].Set == ColorType.Light || rawScheme[i, j].Set == ColorType.Normal)
-            //                curMBlock.Add(rawScheme[i, j]);
-            //            else
-            //            {
-            //                isUp = false;
-            //                mBlocks.Add(curMBlock.Clone() as MBlock);
-            //                curMBlock = new MBlock();
-            //                curMBlock.Add(rawScheme[i, j]);
-            //            }
-            //        }
-            //    }
-            //    mBlocks.Add(curMBlock.Clone() as MBlock);
-
-            //    foreach (MBlock mb in mBlocks)
-            //        mb.Calculate();
-            //    int minH = 0;
-            //    for (int j = 1; j < mBlocks.Count; ++j)
-            //    {
-            //        if (mBlocks[j].StartH >= mBlocks[j - 1].EndH)
-            //        {
-            //            mBlocks[j].Shift = mBlocks[j].StartH - mBlocks[j - 1].EndH + 1;
-            //            if (minH > mBlocks[j].Shift)
-            //                minH = mBlocks[j].Shift;
-            //            for (int k = j - 1; k >= 0; --k)
-            //                if (mBlocks[k].EndH <= mBlocks[k + 1].StartH)
-            //                    mBlocks[k].Shift += mBlocks[k + 1].StartH - mBlocks[k].EndH + 1;
-            //        }
-            //    }
-
-            //    int curPos = -1;
-            //    for (int j = 0; j < mBlocks.Count; ++j)
-            //    {
-            //        if (MaxHeight < mBlocks[j].StartH)
-            //            MaxHeight = mBlocks[j].StartH;
-            //        if (MaxHeight < mBlocks[j].EndH)
-            //            MaxHeight = mBlocks[j].EndH;
-            //        SettedBlock[] cur = mBlocks[j].Get();
-            //        for (int k = 0; k < cur.Length; ++k)
-            //            BlockMap[i, ++curPos] = cur[k];
-            //    }
-            //}
-            #endregion
             for (int i = 0; i < rawScheme.GetLength(0); ++i)
             {
                 SettedBlock[] layer = GenerateSegmentedLayer(i, out int curMaxHeight);

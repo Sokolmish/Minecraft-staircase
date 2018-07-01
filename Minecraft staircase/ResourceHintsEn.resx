@@ -120,6 +120,9 @@
   <data name="BigImageError" xml:space="preserve">
     <value>Too large image can not displayed in this view. You can use schematic files.</value>
   </data>
+  <data name="ConvertionDesc" xml:space="preserve">
+    <value>Select method of image conversion (Default - Find most simmilar colors)</value>
+  </data>
   <data name="CrossCurTextBox" xml:space="preserve">
     <value>Select layer</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="GenerateButton" xml:space="preserve">
     <value>Start generating</value>
+  </data>
+  <data name="GeneratingDesc" xml:space="preserve">
+    <value>Select method of creating minecraft scheme (Affects the maximum height of the art)</value>
   </data>
   <data name="HeightTextBox" xml:space="preserve">
     <value>Select height of image</value>

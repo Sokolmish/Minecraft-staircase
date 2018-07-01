@@ -120,6 +120,9 @@
   <data name="BigImageError" xml:space="preserve">
     <value>Слишком большое изображение недоступно для отображения подобным образом. Вы можете использовать схематик файлы.</value>
   </data>
+  <data name="ConvertionDesc" xml:space="preserve">
+    <value>Выбрать метод преобразования изображения (Default - Найти наиболее похожие цвета)</value>
+  </data>
   <data name="CrossCurTextBox" xml:space="preserve">
     <value>Выбрать слой</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="GenerateButton" xml:space="preserve">
     <value>Начать процесс создания арта</value>
+  </data>
+  <data name="GeneratingDesc" xml:space="preserve">
+    <value>Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов)</value>
   </data>
   <data name="HeightTextBox" xml:space="preserve">
     <value>Задать высоту изображения</value>

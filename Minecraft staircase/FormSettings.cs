@@ -44,9 +44,6 @@ namespace Minecraft_staircase
             panel3.BackColor = mapMeshColor;
             textBox3.Text = mapMeshColor.IsNamedColor ? mapMeshColor.Name :
                 $"{mapMeshColor.R}; {mapMeshColor.G}; {mapMeshColor.B}";
-
-            //label3.Visible = false;
-            //comboBox3.Visible = false;
         }
 
         private void ApplyButtonClick(object sender, EventArgs e)
@@ -87,12 +84,12 @@ namespace Minecraft_staircase
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            MessageBox.Show(Lang.GetHint("ConvertionDesc"), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            MessageBox.Show(Lang.GetHint("GeneratingDesc"), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button3_Click(object sender, EventArgs e)

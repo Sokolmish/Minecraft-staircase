@@ -70,6 +70,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрать метод преобразования изображения (Default - Найти наиболее похожие цвета).
+        /// </summary>
+        internal static string ConvertionDesc {
+            get {
+                return ResourceManager.GetString("ConvertionDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выбрать слой.
         /// </summary>
         internal static string CrossCurTextBox {
@@ -138,6 +147,15 @@ namespace Minecraft_staircase {
         internal static string GenerateButton {
             get {
                 return ResourceManager.GetString("GenerateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов).
+        /// </summary>
+        internal static string GeneratingDesc {
+            get {
+                return ResourceManager.GetString("GeneratingDesc", resourceCulture);
             }
         }
         
