@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using FastBitmapLib;
 
 namespace Minecraft_staircase
 {
@@ -32,8 +31,9 @@ namespace Minecraft_staircase
             UnsettedBlock[,] RawScheme = ConvertCPP(ref sourceImage, type);
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Making image"; }));
             Bitmap tempImage = new Bitmap(RawScheme.GetLength(0), RawScheme.GetLength(1));
-            int gl0 = RawScheme.GetLength(0); int gl1 = RawScheme.GetLength(1);
-            using (FastBitmap fbmp = tempImage.FastLock())
+            int gl0 = RawScheme.GetLength(0);
+            int gl1 = RawScheme.GetLength(1);
+            using (FBitmap fbmp = new FBitmap(tempImage, false))
                 for (int i = 0; i < gl0; ++i)
                     for (int j = 0; j < gl1; ++j)
                     {
@@ -79,8 +79,9 @@ namespace Minecraft_staircase
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Serialization"; }));
             UnsettedBlock[,] result = new UnsettedBlock[sourceImage.Width, sourceImage.Height];
             int[] image1 = new int[sourceImage.Width * sourceImage.Height * 3];
-            int h = sourceImage.Height; int w = sourceImage.Width; //Out of roof
-            using (FastBitmap fbmp = (sourceImage as Bitmap).FastLock())
+            int h = sourceImage.Height;
+            int w = sourceImage.Width;
+            using (FBitmap fbmp = new FBitmap((Bitmap)sourceImage, true))
                 for (int i = 0; i < h; ++i)
                     for (int j = 0; j < w; ++j)
                     {
@@ -122,5 +123,39 @@ namespace Minecraft_staircase
         public void SetProgress(ProgressBar progress) => this.progress = progress;
 
         public void SetStateLabel(Label label) => this.stateLabel = label;
+
+
+        unsafe class FBitmap : IDisposable
+        {
+            Bitmap _bitmap;
+            System.Drawing.Imaging.BitmapData _data;
+
+            int* _scan0;
+            int _stride;
+
+            public FBitmap(Bitmap bitmap, bool Read)
+            {
+                _bitmap = bitmap;
+                _data = _bitmap.LockBits(new Rectangle(0, 0, _bitmap.Width, bitmap.Height), 
+                    Read ? System.Drawing.Imaging.ImageLockMode.ReadOnly : System.Drawing.Imaging.ImageLockMode.WriteOnly, _bitmap.PixelFormat);
+                _scan0 = (int*)_data.Scan0;
+                _stride = _data.Stride / 4;
+            }
+
+            public void SetPixel(int x, int y, Color color)
+            {
+                *(uint*)(_scan0 + x + y * _stride) = unchecked((uint)(color.ToArgb()));
+            }
+
+            public Color GetPixel(int x, int y)
+            {
+                return Color.FromArgb(*(_scan0 + x + y * _stride));
+            }
+
+            public void Dispose()
+            {
+                _bitmap.UnlockBits(_data);
+            }
+        }
     }
 }
