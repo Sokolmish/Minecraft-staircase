@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
-using Substrate;
-using Substrate.ImportExport;
 
 namespace Minecraft_staircase
 {
@@ -44,6 +42,9 @@ namespace Minecraft_staircase
             LoadData();
             Controls.Add(textBoxHint);
             Controls.SetChildIndex(textBoxHint, 0);
+#if DEBUG
+            label4.Visible = true;
+#endif
         }
 
 
@@ -68,14 +69,14 @@ namespace Minecraft_staircase
                 note.Use = curBlocks.Split('~')[0] == "True";
 
                 string[] block = curBlocks.Split('~')[2].Split('-');
-                note.SelectedBlock = new BlockData(block[0], block[1], Convert.ToInt32(block[2]), Convert.ToInt32(block[3]), block[4] == "True");
+                note.SelectedBlock = new BlockData(block[0], block[1], Convert.ToByte(block[2]), Convert.ToByte(block[3]), block[4] == "True");
 
                 curBlocks = curBlocks.Split('~')[1];
                 List<BlockData> blockDatas = new List<BlockData>();
                 foreach (string str in curBlocks.Split(','))
                 {
                     block = str.Split('-');
-                    blockDatas.Add(new BlockData(block[0], block[1], Convert.ToInt32(block[2]), Convert.ToInt32(block[3]), block[4] == "True"));
+                    blockDatas.Add(new BlockData(block[0], block[1], Convert.ToByte(block[2]), Convert.ToByte(block[3]), block[4] == "True"));
                 }
                 note.PossibleBlocks = blockDatas;
                 colorsNote.Add(note);
@@ -309,11 +310,12 @@ namespace Minecraft_staircase
                         for (int j = 1; j < blockMap.GetLength(1); ++j)
                         {
                             ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
-                            schem.Blocks.SetBlock(i, blockMap[i, j].Height, j - 1,
-                                new AlphaBlock(col.SelectedBlock.ID, col.SelectedBlock.Data));
+                            schem.SetBlock(i, blockMap[i, j].Height, j - 1, col.SelectedBlock.ID, col.SelectedBlock.Data);
                         }
-                    schem.Export(saveFileDialog1.FileName.Contains(".schematic") ? saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic");
-                    label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
+                    using (System.IO.FileStream fs = new System.IO.FileStream(saveFileDialog1.FileName.Contains(".schematic") ? 
+                        saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic", System.IO.FileMode.Create))
+                        schem.WriteToStream(fs);
+                        label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
                     MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information); //-V3038
                 });
                 convertTask.Start();
@@ -337,7 +339,7 @@ namespace Minecraft_staircase
             }
         }
 
-        #region Hints
+#region Hints
         bool isOnControl = false;
 
         private void Hint_MouseLeave(object sender, EventArgs e)
@@ -471,7 +473,7 @@ namespace Minecraft_staircase
             textBoxHint.Text = Lang.GetHint("ProgressTimer");
             ShowHint();
         }
-        #endregion
+#endregion
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
         {

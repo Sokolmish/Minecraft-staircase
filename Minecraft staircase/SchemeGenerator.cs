@@ -135,12 +135,10 @@ namespace Minecraft_staircase
                 }
             }
             mBlocks.Add(curMBlock.Clone() as MBlock);
-
             foreach (MBlock mb in mBlocks)
                 mb.Calculate();
             int minH = 0;
             for (int j = 1; j < mBlocks.Count; ++j)
-            {
                 if (mBlocks[j].StartH >= mBlocks[j - 1].EndH)
                 {
                     mBlocks[j].Shift = mBlocks[j].StartH - mBlocks[j - 1].EndH + 1;
@@ -150,8 +148,6 @@ namespace Minecraft_staircase
                         if (mBlocks[k].EndH <= mBlocks[k + 1].StartH)
                             mBlocks[k].Shift += mBlocks[k + 1].StartH - mBlocks[k].EndH + 1;
                 }
-            }
-
             int curPos = -1;
             for (int j = 0; j < mBlocks.Count; ++j)
             {
@@ -163,7 +159,6 @@ namespace Minecraft_staircase
                 for (int k = 0; k < cur.Length; ++k)
                     layer[++curPos] = cur[k];
             }
-
             return layer;
         }
 

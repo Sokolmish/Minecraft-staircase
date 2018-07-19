@@ -44,11 +44,11 @@ namespace Minecraft_staircase
         //public int ColorID { get; }
         public string TextureName { get; }
         public string Name { get; }
-        public int ID { get; }
-        public int Data { get; }
+        public byte ID { get; }
+        public byte Data { get; }
         public bool IsTransparent { get; }
 
-        public BlockData(string textureName, string name, int iD, int data, bool isTransparent)
+        public BlockData(string textureName, string name, byte iD, byte data, bool isTransparent)
         {
             //ColorID = colorID;
             TextureName = textureName;

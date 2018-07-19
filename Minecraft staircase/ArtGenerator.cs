@@ -99,76 +99,25 @@ namespace Minecraft_staircase
             }
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Converting"; }));
             fixed (int* image = image1)
+            fixed (int* notes = notes1.ToArray())
             {
-                fixed (int* notes = notes1.ToArray())
-                {
-                    int* fet = Convert(image, image1.Length, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
-                        () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
-                        (e) =>
-                        {
-                            for (int j = 0; j < _colors.Count; ++j)
-                                _colors[j].Uses = e[j];
-                        });
-                    int i = 0;
-                    for (int x = 0; x < h; ++x)
-                        for (int y = 0; y < w; ++y)
-                        {
-                            result[y, x].ID = fet[i++];
-                            result[y, x].Set = (ColorType)fet[i++];
-                        }
-                }
+                int* res = Convert(image, image1.Length, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
+                    () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
+                    (e) =>
+                    {
+                        for (int j = 0; j < _colors.Count; ++j)
+                            _colors[j].Uses = e[j];
+                    });
+                int i = 0;
+                for (int x = 0; x < h; ++x)
+                    for (int y = 0; y < w; ++y)
+                    {
+                        result[y, x].ID = res[i++];
+                        result[y, x].Set = (ColorType)res[i++];
+                    }
             }
             return result;
         }
-
-
-        SettedBlock[,] GenerateFlow(ref UnsettedBlock[,] RawScheme, out int maxHeight) //EveryMap shift
-        {
-            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
-            for (int i = 0; i < RawScheme.GetLength(0); ++i)
-                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-            maxHeight = 0;
-            for (int i = 0; i < RawScheme.GetLength(0); ++i)
-            {
-                int minHeight = 0;
-                for (int j = 1; j < RawScheme.GetLength(1) + 1; ++j)
-                {
-                    BlockMap[i, j].ID = RawScheme[i, j - 1].ID;
-                    switch (RawScheme[i, j - 1].Set)
-                    {
-                        case ColorType.Normal:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height;
-                            break;
-                        case ColorType.Dark:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height - 1;
-                            break;
-                        case ColorType.Light:
-                            BlockMap[i, j].Height = BlockMap[i, j - 1].Height + 1;
-                            break;
-                    }
-                    if (j != 1 && (j - 1) % 128 == 0)
-                        BlockMap[i, j].Height = 0;
-                    minHeight = BlockMap[i, j].Height < minHeight ? BlockMap[i, j].Height : minHeight;
-                }
-                for (int j = 0; j < RawScheme.GetLength(1) + 1; ++j)
-                {
-                    BlockMap[i, j].Height = BlockMap[i, j].Height - minHeight;
-                    maxHeight = BlockMap[i, j].Height > maxHeight ? BlockMap[i, j].Height : maxHeight;
-                }
-            }
-            return BlockMap;
-        }
-
-        SettedBlock[,] GenerateMinimal(ref UnsettedBlock[,] RawScheme, out int maxHeight)
-        {
-            SettedBlock[,] BlockMap = new SettedBlock[RawScheme.GetLength(0), RawScheme.GetLength(1) + 1];
-            for (int i = 0; i < RawScheme.GetLength(0); ++i)
-                BlockMap[i, 0] = new SettedBlock() { ID = -1, Height = 0 };
-
-            maxHeight = 0;
-            return null;
-        }
-
 
         public void SetProgress(ProgressBar progress) => this.progress = progress;
 
