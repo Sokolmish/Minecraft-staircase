@@ -40,13 +40,13 @@ namespace Minecraft_staircase
                         switch (RawScheme[i, j].Set)
                         {
                             case ColorType.Dark:
-                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).DarkColor);
+                                fbmp.SetPixel(i, j, _colors[RawScheme[i, j].ID - 1].DarkColor);
                                 break;
                             case ColorType.Normal:
-                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).NormalColor);
+                                fbmp.SetPixel(i, j, _colors[RawScheme[i, j].ID - 1].NormalColor);
                                 break;
                             case ColorType.Light:
-                                fbmp.SetPixel(i, j, _colors.Find((e) => { return e.ColorID == RawScheme[i, j].ID; }).LightColor);
+                                fbmp.SetPixel(i, j, _colors[RawScheme[i, j].ID - 1].LightColor);
                                 break;
                         }
                     }

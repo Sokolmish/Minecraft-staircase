@@ -42,7 +42,7 @@ namespace Minecraft_staircase
             LoadData();
             Controls.Add(textBoxHint);
             Controls.SetChildIndex(textBoxHint, 0);
-#if DEBUG
+#if true//DEBUG
             label4.Visible = true;
 #endif
         }
@@ -309,7 +309,7 @@ namespace Minecraft_staircase
                     for (short i = 0; i < blockMap.GetLength(0); ++i)
                         for (short j = 1; j < blockMap.GetLength(1); ++j)
                         {
-                            ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
+                            ColorNote col = colorsNote[blockMap[i, j].ID - 1];
                             schem.SetBlock(i, (short)blockMap[i, j].Height, (short)(j - 1), col.SelectedBlock.ID, col.SelectedBlock.Data);
                         }
                     using (System.IO.FileStream fs = new System.IO.FileStream(saveFileDialog1.FileName.Contains(".schematic") ? 
