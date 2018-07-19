@@ -306,16 +306,16 @@ namespace Minecraft_staircase
                 label4.Text = "Exporting";
                 convertTask = new Thread(() =>
                 {
-                    for (int i = 0; i < blockMap.GetLength(0); ++i)
-                        for (int j = 1; j < blockMap.GetLength(1); ++j)
+                    for (short i = 0; i < blockMap.GetLength(0); ++i)
+                        for (short j = 1; j < blockMap.GetLength(1); ++j)
                         {
                             ColorNote col = colorsNote.Find((x) => { return x.ColorID == blockMap[i, j].ID; });
-                            schem.SetBlock(i, blockMap[i, j].Height, j - 1, col.SelectedBlock.ID, col.SelectedBlock.Data);
+                            schem.SetBlock(i, (short)blockMap[i, j].Height, (short)(j - 1), col.SelectedBlock.ID, col.SelectedBlock.Data);
                         }
                     using (System.IO.FileStream fs = new System.IO.FileStream(saveFileDialog1.FileName.Contains(".schematic") ? 
                         saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic", System.IO.FileMode.Create))
                         schem.WriteToStream(fs);
-                        label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
+                    label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
                     MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information); //-V3038
                 });
                 convertTask.Start();

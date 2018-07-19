@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -7,32 +6,37 @@ namespace Minecraft_staircase
 {
     class Schematic
     {
-        short XDim { get; }
-        short ZDim { get; }
-        short YDim { get; }
+        public short XDim { get; }
+        public short ZDim { get; }
+        public short YDim { get; }
 
         byte[] _blocksId;
         byte[] _blocksData;
 
         Stream _stream;
-        Encoding encoding;
+        Encoding _encoding;
 
         /// <summary>
         /// Initialize new schematic
         /// </summary>
-        /// <param name="xDim">First horizontal coordinate</param>
-        /// <param name="zDim">Second horizontal coordinate</param>
-        /// <param name="yDim">Vertical coordinate</param>
+        /// <param name="xDim">First horizontal length</param>
+        /// <param name="zDim">Second horizontal length</param>
+        /// <param name="yDim">Vertical length</param>
         public Schematic(int xDim, int yDim, int zDim)
         {
-            if (xDim * yDim * zDim > int.MaxValue)
-                throw new Exception($"Too large scheme");
+            if (xDim <= 0 || yDim <= 0 || zDim <= 0)
+                throw new ArgumentException("Length in every dimensions must be greater than zero");
+            try
+            { uint overflow = checked((uint)(xDim * yDim * zDim)); }
+            catch (OverflowException)
+            { throw new OverflowException($"Too large scheme: {((ulong)(xDim * yDim * zDim))} blocks (maximum - {uint.MaxValue})"); }
+
             XDim = (short)xDim;
             YDim = (short)yDim;
             ZDim = (short)zDim;
             _blocksId = new byte[XDim * YDim * ZDim];
             _blocksData = new byte[XDim * YDim * ZDim];
-            encoding = Encoding.UTF8;
+            _encoding = Encoding.UTF8;
         }
 
         public void SetBlock(short X, short Y, short Z, byte ID, byte data)
@@ -40,8 +44,6 @@ namespace Minecraft_staircase
             _blocksId[GetIndex(X, Y, Z)] = ID;
             _blocksData[GetIndex(X, Y, Z)] = data;
         }
-
-        public void SetBlock(int X, int Y, int Z, byte ID, byte data) => SetBlock((short)X, (short)Y, (short)Z, ID, data);
 
         int GetIndex(short X, short Y, short Z) => (Y * ZDim + Z) * XDim + X;
 
@@ -99,7 +101,7 @@ namespace Minecraft_staircase
 
         void WriteStringValue(string value)
         {
-            byte[] buff = encoding.GetBytes(value);
+            byte[] buff = _encoding.GetBytes(value);
             WriteShortValue((short)buff.Length);
             _stream.Write(buff, 0, buff.Length);
         }
