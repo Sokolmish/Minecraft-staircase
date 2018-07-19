@@ -57,9 +57,27 @@ namespace Minecraft_staircase
         void LoadTextures()
         {
             textures = new Dictionary<int, Bitmap>();
-            textures.Add(-1, new Bitmap(@"data\Textures\overflow.png"));
+            Dictionary<string, Image> temp = new Dictionary<string, Image>(178);
+            using (MemoryStream stream = new MemoryStream(Properties.Resources.textures))
+            {
+                while (stream.Position < stream.Length)
+                {
+                    byte[] buff = new byte[2];
+                    stream.Read(buff, 0, 2);
+                    buff = new byte[BitConverter.ToUInt16(buff, 0)];
+                    stream.Read(buff, 0, buff.Length);
+                    string name = System.Text.Encoding.UTF8.GetString(buff);
+                    buff = new byte[2];
+                    stream.Read(buff, 0, 2);
+                    buff = new byte[BitConverter.ToUInt16(buff, 0)];
+                    stream.Read(buff, 0, buff.Length);
+                    Image img = Image.FromStream(new MemoryStream(buff));
+                    temp.Add(name, img);
+                }
+            }
+            textures.Add(-1, (Bitmap)temp["Overflow.png"]);
             foreach (ColorNote col in colors)
-                textures.Add(col.ColorID, Image.FromFile(@"data\Textures\" + col.SelectedBlock.TextureName) as Bitmap);
+                textures.Add(col.ColorID, (Bitmap)temp[col.SelectedBlock.TextureName]);
         }
 
         void CreateImage()

@@ -133,5 +133,15 @@ namespace Minecraft_staircase.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        public static byte[] textures {
+            get {
+                object obj = ResourceManager.GetObject("textures", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
