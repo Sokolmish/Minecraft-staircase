@@ -16,13 +16,17 @@ namespace Minecraft_staircase
             InitializeComponent();
             this.Text = String.Format("О программе {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
+#if DEBUG
+            this.labelVersion.Text = String.Format("Версия {0}_Debug", AssemblyVersion);
+#else
+            this.labelVersion.Text = String.Format("Версия {0}_Release", AssemblyVersion);
+#endif
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
         }
 
-        #region Методы доступа к атрибутам сборки
+#region Методы доступа к атрибутам сборки
 
         public string AssemblyTitle
         {
@@ -100,7 +104,7 @@ namespace Minecraft_staircase
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+#endregion
 
         private void okButton_Click(object sender, EventArgs e)
         {
