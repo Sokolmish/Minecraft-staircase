@@ -5,7 +5,7 @@ namespace Minecraft_staircase
 {
     class SchemeGenerator
     {
-        const int GlobalMaximumHeight = 150;
+        readonly int GlobalMaximumHeight = Properties.Settings.Default.MixedHeight;
 
         UnsettedBlock[,] rawScheme;
 
@@ -73,14 +73,12 @@ namespace Minecraft_staircase
                         {
                             isHigher = false;
                             for (int k = curStart; k < j; ++k)
-                                //layer[k].Height -= GlobalMaximumHeight;
                                 layer[k].Height %= GlobalMaximumHeight;
                         }
                     }
                 }
                 if (isHigher)
                     for (int k = curStart; k < layer.Length; ++k)
-                        //layer[k].Height -= GlobalMaximumHeight;
                         layer[k].Height %= GlobalMaximumHeight;
                 if (curMaxHeight > MaxHeight)
                     MaxHeight = curMaxHeight;
@@ -112,7 +110,7 @@ namespace Minecraft_staircase
                         layer[i].Height = layer[i - 1].Height + 1;
                         break;
                 }
-                if (i != 1 && (i - 1) % 128 == 0)
+                if (i != 1 && (i - 1) % Properties.Settings.Default.FlowLength == 0)
                     layer[i].Height = 0;
                 minHeight = layer[i].Height < minHeight ? layer[i].Height : minHeight;
             }
