@@ -5,7 +5,7 @@ namespace Minecraft_staircase
 {
     class SchemeGenerator
     {
-        const int GlobalMaximumHeight = 129;
+        const int GlobalMaximumHeight = 150;
 
         UnsettedBlock[,] rawScheme;
 
@@ -50,12 +50,38 @@ namespace Minecraft_staircase
         {
             SettedBlock[,] BlockMap = new SettedBlock[rawScheme.GetLength(0), rawScheme.GetLength(1) + 1];
             MaxHeight = 0;
+            int curMaxHeight = 0;
             for (int i = 0; i < rawScheme.GetLength(0); ++i)
             {
-                SettedBlock[] layer = GenerateSegmentedLayer(i, out int curMaxHeight);
-                if (curMaxHeight > GlobalMaximumHeight)
-                    layer = GenerateFlowLayer(i, out curMaxHeight);
-
+                SettedBlock[] layer = GenerateSegmentedLayer(i, out curMaxHeight);
+                bool isHigher = false;
+                int curStart = 0;
+                for (int j = 0; j < layer.Length; ++j)
+                {
+                    if (!isHigher)
+                    {
+                        if (layer[j].Height >= GlobalMaximumHeight)
+                        {
+                            isHigher = true;
+                            curStart = j;
+                            curMaxHeight = GlobalMaximumHeight - 1;
+                        }
+                    }
+                    else
+                    {
+                        if (layer[j].Height < GlobalMaximumHeight)
+                        {
+                            isHigher = false;
+                            for (int k = curStart; k < j; ++k)
+                                //layer[k].Height -= GlobalMaximumHeight;
+                                layer[k].Height %= GlobalMaximumHeight;
+                        }
+                    }
+                }
+                if (isHigher)
+                    for (int k = curStart; k < layer.Length; ++k)
+                        //layer[k].Height -= GlobalMaximumHeight;
+                        layer[k].Height %= GlobalMaximumHeight;
                 if (curMaxHeight > MaxHeight)
                     MaxHeight = curMaxHeight;
                 for (int j = 0; j < layer.Length; ++j)

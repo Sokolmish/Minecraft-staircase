@@ -42,7 +42,7 @@ namespace Minecraft_staircase
             LoadData();
             Controls.Add(textBoxHint);
             Controls.SetChildIndex(textBoxHint, 0);
-#if true//DEBUG
+#if DEBUG
             label4.Visible = true;
 #endif
         }
@@ -240,7 +240,7 @@ namespace Minecraft_staircase
                     UsedMaterialsButton.BeginInvoke(new Action(() => { UsedMaterialsButton.Enabled = true; }));
                     SchematicButton.BeginInvoke(new Action(() => { SchematicButton.Enabled = true; }));
                 };
-                convertedImage = rawImage.Clone() as Image;
+                convertedImage = (Image)rawImage.Clone();
                 ArtType type = ArtType.Flat;
                 if (radioButton2.Checked)
                     type = ArtType.Lite;
@@ -249,6 +249,11 @@ namespace Minecraft_staircase
                 blockMap = gen.CreateScheme(ref convertedImage, type, out maxHeight);
                 pictureBox1.Image = convertedImage;
                 GC.Collect();
+                if (maxHeight > 250)
+                    MessageBox.Show(Lang.GetHint("UnbuildArt").Replace("{0}", maxHeight.ToString()), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else if (maxHeight > 150)
+                    MessageBox.Show(Lang.GetHint("TooHeightArt").Replace("{0}", maxHeight.ToString()), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                label4.BeginInvoke(new Action(() => label4.Text += $" Max={maxHeight}"));
             });
             convertTask.Start();
         }
@@ -316,6 +321,8 @@ namespace Minecraft_staircase
                         saveFileDialog1.FileName : saveFileDialog1.FileName + ".schematic", System.IO.FileMode.Create))
                         schem.WriteToStream(fs);
                     label4.BeginInvoke(new Action(() => { label4.Text = DateTime.Now.Subtract(startTime).ToString(); }));
+                    schem = null;
+                    GC.Collect();
                     MessageBox.Show("Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information); //-V3038
                 });
                 convertTask.Start();

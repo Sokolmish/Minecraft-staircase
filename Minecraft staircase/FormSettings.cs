@@ -31,6 +31,9 @@ namespace Minecraft_staircase
                 comboBox1.Items.Add(str.Value);
             comboBox1.SelectedItem = langsList[properties.Language];
 
+            textBox4.Text = properties.FlowLength.ToString();
+            textBox5.Text = properties.MixedHeight.ToString();
+
             defMeshColor = properties.defMeshColor;
             chunkMeshColor = properties.chunkMeshColor;
             mapMeshColor = properties.mapMeshColor;
@@ -47,15 +50,23 @@ namespace Minecraft_staircase
         }
 
         private void ApplyButtonClick(object sender, EventArgs e)
-        {            
+        {
+            //FlowLenght and MixedHeight
+            if (int.TryParse(textBox4.Text, out int flowLength) && int.TryParse(textBox5.Text, out int mixedHeight))
+            {
+                properties.FlowLength = flowLength;
+                properties.MixedHeight = mixedHeight;
+            }
+            //HideTips
             properties.HideTips = checkBox2.Checked;
+            //Converting and generating methods
             properties.ConvertingMethod = comboBox2.SelectedIndex >= 0 ? (byte)comboBox2.SelectedIndex : properties.ConvertingMethod;
             properties.GeneratingMethod = comboBox3.SelectedIndex >= 0 ? (byte)comboBox3.SelectedIndex : properties.GeneratingMethod;
-
+            //Mesh colors
             properties.defMeshColor = defMeshColor;
             properties.chunkMeshColor = chunkMeshColor;
             properties.mapMeshColor = mapMeshColor;
-
+            //Language
             if (LangByName(comboBox1.SelectedItem as string) != properties.Language)
             {
                 properties.Language = LangByName(comboBox1.SelectedItem as string);
@@ -63,6 +74,7 @@ namespace Minecraft_staircase
                 System.Diagnostics.Process.Start("Minecraft staircase");
                 Environment.Exit(0);
             }
+
             properties.Save();
             Close();
         }
@@ -91,6 +103,17 @@ namespace Minecraft_staircase
         {
             MessageBox.Show(Lang.GetHint("GeneratingDesc"), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(Lang.GetHint("FlowLengthDesc"), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(Lang.GetHint("MixedHeightDesc"), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
 
         private void button3_Click(object sender, EventArgs e)
         {

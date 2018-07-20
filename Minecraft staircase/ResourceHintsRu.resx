@@ -141,6 +141,9 @@
   <data name="FlatRadio" xml:space="preserve">
     <value>Сгенерировать плосский арт</value>
   </data>
+  <data name="FlowLengthDesc" xml:space="preserve">
+    <value>Длинна, после которой блоки будут сдвигаться вниз</value>
+  </data>
   <data name="FullRadio" xml:space="preserve">
     <value>Сгенерировать трехмерный арт</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Начать процесс создания арта</value>
   </data>
   <data name="GeneratingDesc" xml:space="preserve">
-    <value>Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов)</value>
+    <value>Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов и искажения, применяемые для сглаживания скачков высоты)</value>
   </data>
   <data name="HeightTextBox" xml:space="preserve">
     <value>Задать высоту изображения</value>
@@ -161,6 +164,9 @@
   </data>
   <data name="MatOptionsButton" xml:space="preserve">
     <value>Настроить список используемых материалов</value>
+  </data>
+  <data name="MixedHeightDesc" xml:space="preserve">
+    <value>Height, above that blocks would moved down</value>
   </data>
   <data name="NoImage" xml:space="preserve">
     <value>Следует выбрать изображение. Показать дополнительную информацию об ошибке?</value>
@@ -177,6 +183,9 @@
   <data name="SizeCheckBox" xml:space="preserve">
     <value>Отмечено - размер указывается в блоках, Не отмечено - размер указывается в картах</value>
   </data>
+  <data name="TooHeightArt" xml:space="preserve">
+    <value>Высота этого арта - {0}, будьте внимательны, если захотите построить его</value>
+  </data>
   <data name="TopMost" xml:space="preserve">
     <value>Отображать поверх других окон</value>
   </data>
@@ -185,6 +194,9 @@
   </data>
   <data name="TopViewButton" xml:space="preserve">
     <value>Посмотреть на схему арта сверху (для плоских)</value>
+  </data>
+  <data name="UnbuildArt" xml:space="preserve">
+    <value>Высота этого арта больше 250 ({0}), вы не сможете построить его</value>
   </data>
   <data name="ViewImgButton" xml:space="preserve">
     <value>Посмотреть арт в реальном размере (так он будет выглядеть в игре)</value>

@@ -218,7 +218,7 @@ namespace Minecraft_staircase.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public byte GeneratingMethod {
             get {
                 return ((byte)(this["GeneratingMethod"]));
@@ -261,6 +261,30 @@ namespace Minecraft_staircase.Properties {
             }
             set {
                 this["mapMeshColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        public int FlowLength {
+            get {
+                return ((int)(this["FlowLength"]));
+            }
+            set {
+                this["FlowLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        public int MixedHeight {
+            get {
+                return ((int)(this["MixedHeight"]));
+            }
+            set {
+                this["MixedHeight"] = value;
             }
         }
     }

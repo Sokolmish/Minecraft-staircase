@@ -141,6 +141,9 @@
   <data name="FlatRadio" xml:space="preserve">
     <value>Create flat art</value>
   </data>
+  <data name="FlowLengthDesc" xml:space="preserve">
+    <value>Length, after whitch blocks will shift down</value>
+  </data>
   <data name="FullRadio" xml:space="preserve">
     <value>Create 3d art</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Start generating</value>
   </data>
   <data name="GeneratingDesc" xml:space="preserve">
-    <value>Select method of creating minecraft scheme (Affects the maximum height of the art)</value>
+    <value>Select method of creating minecraft scheme (Affects the maximum height of the art and the distortions of large art)</value>
   </data>
   <data name="HeightTextBox" xml:space="preserve">
     <value>Select height of image</value>
@@ -161,6 +164,9 @@
   </data>
   <data name="MatOptionsButton" xml:space="preserve">
     <value>Configure the list of used materials</value>
+  </data>
+  <data name="MixedHeightDesc" xml:space="preserve">
+    <value>Height, above whitch blocks will shift down</value>
   </data>
   <data name="NoImage" xml:space="preserve">
     <value>Please, select image. Show additional information about this exception?</value>
@@ -177,6 +183,9 @@
   <data name="SizeCheckBox" xml:space="preserve">
     <value>Checked - size will be in blocks, Else - size will be in maps</value>
   </data>
+  <data name="TooHeightArt" xml:space="preserve">
+    <value>Height of this art is {0}, be careful if you want build it</value>
+  </data>
   <data name="TopMost" xml:space="preserve">
     <value>Show above another windows</value>
   </data>
@@ -185,6 +194,9 @@
   </data>
   <data name="TopViewButton" xml:space="preserve">
     <value>Look at the art from the top (For flat)</value>
+  </data>
+  <data name="UnbuildArt" xml:space="preserve">
+    <value>Height of this art is more of 250 ({0}), you cant built it in minecraft world</value>
   </data>
   <data name="ViewImgButton" xml:space="preserve">
     <value>Look at the art in real size (Like image in game)</value>

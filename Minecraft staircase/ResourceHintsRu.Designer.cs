@@ -133,6 +133,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Длинна, после которой блоки будут сдвигаться вниз.
+        /// </summary>
+        internal static string FlowLengthDesc {
+            get {
+                return ResourceManager.GetString("FlowLengthDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сгенерировать трехмерный арт.
         /// </summary>
         internal static string FullRadio {
@@ -151,7 +160,7 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов).
+        ///   Ищет локализованную строку, похожую на Выбрать метод создания схемы из блоков (От этого зависит максимальная высота объемных артов и искажения, применяемые для сглаживания скачков высоты).
         /// </summary>
         internal static string GeneratingDesc {
             get {
@@ -192,6 +201,15 @@ namespace Minecraft_staircase {
         internal static string MatOptionsButton {
             get {
                 return ResourceManager.GetString("MatOptionsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Height, above that blocks would moved down.
+        /// </summary>
+        internal static string MixedHeightDesc {
+            get {
+                return ResourceManager.GetString("MixedHeightDesc", resourceCulture);
             }
         }
         
@@ -241,6 +259,15 @@ namespace Minecraft_staircase {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Высота этого арта - {0}, будьте внимательны, если захотите построить его.
+        /// </summary>
+        internal static string TooHeightArt {
+            get {
+                return ResourceManager.GetString("TooHeightArt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Отображать поверх других окон.
         /// </summary>
         internal static string TopMost {
@@ -264,6 +291,15 @@ namespace Minecraft_staircase {
         internal static string TopViewButton {
             get {
                 return ResourceManager.GetString("TopViewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Высота этого арта больше 250 ({0}), вы не сможете построить его.
+        /// </summary>
+        internal static string UnbuildArt {
+            get {
+                return ResourceManager.GetString("UnbuildArt", resourceCulture);
             }
         }
         

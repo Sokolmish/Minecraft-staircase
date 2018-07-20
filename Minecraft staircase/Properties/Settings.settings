@@ -65,7 +65,7 @@ True~hardened_clay_stained_black.png-Black terracota-159-15-False~hardened_clay_
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="GeneratingMethod" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="defMeshColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
@@ -75,6 +75,12 @@ True~hardened_clay_stained_black.png-Black terracota-159-15-False~hardened_clay_
     </Setting>
     <Setting Name="mapMeshColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Purple</Value>
+    </Setting>
+    <Setting Name="FlowLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">128</Value>
+    </Setting>
+    <Setting Name="MixedHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150</Value>
     </Setting>
   </Settings>
 </SettingsFile>
