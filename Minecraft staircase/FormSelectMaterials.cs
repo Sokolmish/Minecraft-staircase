@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Minecraft_staircase
 {
@@ -11,11 +12,13 @@ namespace Minecraft_staircase
         bool admin;
 
         List<ColorNote> colorsList;
+        Dictionary<string, Image> images;
 
         public FormSelectMaterials()
         {
             InitializeComponent();
             Height = 187;
+            LoadTextures();
             pictureBox1.Dock = DockStyle.Fill;
             switch (Properties.Settings.Default.Language)
             {
@@ -27,6 +30,28 @@ namespace Minecraft_staircase
                     break;
             }
             
+        }
+
+        void LoadTextures()
+        {
+            images = new Dictionary<string, Image>(178);
+            using (MemoryStream stream = new MemoryStream(Properties.Resources.textures))
+            {
+                while (stream.Position < stream.Length)
+                {
+                    byte[] buff = new byte[2];
+                    stream.Read(buff, 0, 2);
+                    buff = new byte[BitConverter.ToUInt16(buff, 0)];
+                    stream.Read(buff, 0, buff.Length);
+                    string name = System.Text.Encoding.UTF8.GetString(buff);
+                    buff = new byte[2];
+                    stream.Read(buff, 0, 2);
+                    buff = new byte[BitConverter.ToUInt16(buff, 0)];
+                    stream.Read(buff, 0, buff.Length);
+                    Image img = Image.FromStream(new MemoryStream(buff));
+                    images.Add(name, img);
+                }
+            }
         }
 
         #region admin
@@ -76,7 +101,8 @@ namespace Minecraft_staircase
             textBoxID.Text = colorsList[0].SelectedBlock.ID.ToString();
             textBoxData.Text = colorsList[0].SelectedBlock.Data.ToString();
             checkBox1.Checked = colorsList[0].SelectedBlock.IsTransparent;
-            pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[0].SelectedBlock.TextureName}");
+            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[0].SelectedBlock.TextureName}");
+            pictureBoxTexture.Image = images[colorsList[0].SelectedBlock.TextureName];
 
             pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
             Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
@@ -101,7 +127,8 @@ namespace Minecraft_staircase
             textBoxData.Text = colorsList[index].SelectedBlock.Data.ToString();
             checkBox1.Checked = colorsList[index].SelectedBlock.IsTransparent;
             button4.Text = colorsList[index].Use ? "Do not use" : "Use";
-            pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[index].SelectedBlock.TextureName}");
+            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[index].SelectedBlock.TextureName}");
+            pictureBoxTexture.Image = images[colorsList[index].SelectedBlock.TextureName];
 
             pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
             Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
@@ -112,7 +139,8 @@ namespace Minecraft_staircase
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName}");
+            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName}");
+            pictureBoxTexture.Image = images[colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName];
             textBoxName.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].Name;
             textBoxTexture.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName;
             textBoxID.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].ID.ToString();
