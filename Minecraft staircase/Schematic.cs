@@ -56,6 +56,8 @@ namespace Minecraft_staircase
             WriteShort("Height", YDim);
             WriteShort("Length", ZDim);
             WriteString("Materials", "Alpha");
+            WriteLishHead("Entities");
+            WriteLishHead("TileEntities");
             WriteByteArray("Blocks", _blocksId);
             WriteByteArray("Data", _blocksData);
             WriteTag(TagTypes.END);
@@ -90,6 +92,14 @@ namespace Minecraft_staircase
             WriteByteArrayValue(value);
         }
 
+        void WriteLishHead(string name)
+        {
+            WriteTag(TagTypes.LIST);
+            WriteStringValue(name);
+            WriteTag(TagTypes.COMPOUND);
+            WriteIntValue(0);
+        }
+
 
         void WriteShortValue(short value)
         {
@@ -97,6 +107,14 @@ namespace Minecraft_staircase
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(buff);
             _stream.Write(buff, 0, 2);
+        }
+
+        void WriteIntValue(int value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(buff);
+            _stream.Write(buff, 0, 4);
         }
 
         void WriteStringValue(string value)
@@ -122,6 +140,6 @@ namespace Minecraft_staircase
 
 
         enum TagTypes
-        { END = 0, SHORT = 2, BYTE_ARRAY = 7, STRING = 8, COMPOUND = 10 }
+        { END = 0, SHORT = 2, BYTE_ARRAY = 7, STRING = 8, LIST = 9, COMPOUND = 10 }
     }
 }
