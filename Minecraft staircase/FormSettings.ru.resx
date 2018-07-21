@@ -134,16 +134,16 @@
     <value>Скрыть подсказки</value>
   </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 91</value>
+    <value>201, 91</value>
   </data>
   <data name="comboBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 28</value>
+    <value>242, 28</value>
   </data>
   <data name="comboBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 132</value>
+    <value>201, 132</value>
   </data>
   <data name="comboBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 28</value>
+    <value>242, 28</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
@@ -161,10 +161,10 @@
     <value>Закрыть</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 95</value>
+    <value>163, 95</value>
   </data>
   <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 138</value>
+    <value>163, 135</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 20</value>
