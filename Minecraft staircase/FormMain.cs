@@ -38,6 +38,7 @@ namespace Minecraft_staircase
         public FormMain()
         {
             InitializeComponent();
+            new FormSelectMaterials();
             NewFormMain_Resize(null, null);  //?
             LoadData();
             Controls.Add(textBoxHint);
@@ -279,10 +280,10 @@ namespace Minecraft_staircase
         {
             //if (e.Button == MouseButtons.Right)
             {
-                Size = new Size(763, 575);
-                MinimumSize = new Size(763, 575);
-                panel1.Size = new Size(512, 512);
-                panel1.Location = new Point(223, 12);
+                Size = new Size(1158, 873);
+                MinimumSize = new Size(1158, 873);
+                panel1.Size = new Size(788, 788);
+                panel1.Location = new Point(334, 19);
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
@@ -339,10 +340,10 @@ namespace Minecraft_staircase
         {
             if (!noResize)
             {
-                progressBar1.Location = new Point(progressBar1.Location.X, Height - 74);
-                label4.Location = new Point(label4.Location.X, Height - 0b1011010);
-                panel1.Width = Width - 251;
-                panel1.Height = Height - 63;
+                progressBar1.Location = new Point(progressBar1.Location.X, Height - 102);
+                label4.Location = new Point(label4.Location.X, Height - 128);
+                panel1.Width = Width - 295;
+                panel1.Height = Height - 85;
             }
         }
 

@@ -66,7 +66,7 @@ namespace Minecraft_staircase
                 for (int j = 0; j < _colorsList[i].PossibleBlocks.Count; ++j)
                 {
                     control.AddItem(i, _colorsList[i].PossibleBlocks[j].Name, _images[_colorsList[i].PossibleBlocks[j].TextureName]);
-                    if (_colorsList[i].PossibleBlocks[j].Equals(_colorsList[i].SelectedBlock))
+                    if (_colorsList[i].Use && _colorsList[i].PossibleBlocks[j].Equals(_colorsList[i].SelectedBlock))
                         control.SelectItem(i, j + 1);
                 }
             }
@@ -89,7 +89,10 @@ namespace Minecraft_staircase
                 if (control.Get(i) == 0)
                     _colorsList[i].Use = false;
                 else
+                {
                     _colorsList[i].SelectedBlock = _colorsList[i].PossibleBlocks[control.Get(i) - 1];
+                    _colorsList[i].Use = true;
+                }
             WriteFile();
             GC.Collect();
         }

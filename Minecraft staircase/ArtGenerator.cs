@@ -92,12 +92,13 @@ namespace Minecraft_staircase
                     }
             List<int> notes1 = new List<int>(_colors.Count * 4);
             foreach (ColorNote col in _colors)
-            {
-                notes1.Add(col.ColorID);
-                notes1.Add(col.LightColor.R);
-                notes1.Add(col.LightColor.G);
-                notes1.Add(col.LightColor.B);
-            }
+                if (col.Use)
+                {
+                    notes1.Add(col.ColorID);
+                    notes1.Add(col.LightColor.R);
+                    notes1.Add(col.LightColor.G);
+                    notes1.Add(col.LightColor.B);
+                }
             stateLabel?.BeginInvoke(new Action(() => { stateLabel.Text = "Converting"; }));
             fixed (int* image = image1)
             fixed (int* notes = notes1.ToArray())
