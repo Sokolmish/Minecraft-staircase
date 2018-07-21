@@ -9,32 +9,30 @@ namespace Minecraft_staircase
 {
     public partial class FormSelectMaterials : Form
     {
-        bool admin;
+        List<ColorNote> _colorsList;
+        Dictionary<string, Image> _images;
 
-        List<ColorNote> colorsList;
-        Dictionary<string, Image> images;
+        System.Windows.Forms.Integration.ElementHost _host;
+
+        SelectMaterialsControl control;
 
         public FormSelectMaterials()
         {
             InitializeComponent();
-            Height = 187;
-            LoadTextures();
-            pictureBox1.Dock = DockStyle.Fill;
-            switch (Properties.Settings.Default.Language)
+            control = new SelectMaterialsControl(64);
+            _host = new System.Windows.Forms.Integration.ElementHost
             {
-                case "ru-RU":
-                    pictureBox1.Image = Properties.Resources.HelpSelectingMaterialsRu;
-                    break;
-                default:
-                    pictureBox1.Image = Properties.Resources.HelpSelectingMaterialsEn;
-                    break;
-            }
-            
+                Child = control,
+                Margin = new Padding(10),
+                AutoSize = true
+            };
+            Controls.Add(_host);
+            LoadTextures();
         }
 
         void LoadTextures()
         {
-            images = new Dictionary<string, Image>(178);
+            _images = new Dictionary<string, Image>(178);
             using (MemoryStream stream = new MemoryStream(Properties.Resources.textures))
             {
                 while (stream.Position < stream.Length)
@@ -49,155 +47,51 @@ namespace Minecraft_staircase
                     buff = new byte[BitConverter.ToUInt16(buff, 0)];
                     stream.Read(buff, 0, buff.Length);
                     Image img = Image.FromStream(new MemoryStream(buff));
-                    images.Add(name, img);
+                    _images.Add(name, img);
                 }
             }
         }
 
-        #region admin
-        private void pictureBoxTexture_DoubleClick(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex == 4)
-                admin = true;
-        }
-
-        private void pictureBoxColors_DoubleClick(object sender, EventArgs e)
-        {
-            if (admin && comboBox1.SelectedIndex == 4)
-                Height = 325;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //if (textBoxName.Text != null && textBoxTexture.Text != null && int.TryParse(textBoxID.Text, out int id) && int.TryParse(textBoxData.Text, out int data))
-            //{
-            //    BlockData[] temp = possibleBlocks[comboBox1.SelectedIndex];
-            //    possibleBlocks[comboBox1.SelectedIndex] = new BlockData[temp.Length + 1];
-            //    temp.CopyTo(possibleBlocks[comboBox1.SelectedIndex], 0);
-            //    possibleBlocks[comboBox1.SelectedIndex][possibleBlocks[comboBox1.SelectedIndex].Length - 1] =
-            //        new BlockData(comboBox1.SelectedIndex, textBoxTexture.Text, textBoxName.Text, id, data, checkBox1.Checked);
-            //    comboBox2.Items.Clear();
-            //    foreach (BlockData block in possibleBlocks[comboBox1.SelectedIndex])
-            //        comboBox2.Items.Add(block.Name);
-            //    comboBox2.SelectedIndex = comboBox2.Items.Count - 1;
-            //    WriteFile();
-            //}
-        }
-        #endregion
-
         public void ShowDialog(ref List<ColorNote> colorsList)
         {
-            this.colorsList = colorsList;
-            foreach (ColorNote note in colorsList)
-                comboBox1.Items.Add(note.SelectedBlock.Name);
-            foreach (BlockData block in colorsList[0].PossibleBlocks)
-                comboBox2.Items.Add(block.Name);
-            comboBox1.Text = comboBox1.Items[0].ToString();
-            comboBox2.Text = comboBox2.Items[0].ToString();
-            button4.Text = colorsList[0].Use ? "Do not use" : "Use";
-
-            textBoxName.Text = colorsList[0].SelectedBlock.Name;
-            textBoxTexture.Text = colorsList[0].SelectedBlock.TextureName;
-            textBoxID.Text = colorsList[0].SelectedBlock.ID.ToString();
-            textBoxData.Text = colorsList[0].SelectedBlock.Data.ToString();
-            checkBox1.Checked = colorsList[0].SelectedBlock.IsTransparent;
-            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[0].SelectedBlock.TextureName}");
-            pictureBoxTexture.Image = images[colorsList[0].SelectedBlock.TextureName];
-
-            pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
-            Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
-            graph.FillRectangle(new SolidBrush(colorsList[0].DarkColor), new Rectangle(0, 0, 50, 32));
-            graph.FillRectangle(new SolidBrush(colorsList[0].NormalColor), new Rectangle(50, 0, 50, 32));
-            graph.FillRectangle(new SolidBrush(colorsList[0].LightColor), new Rectangle(100, 0, 50, 32));
-            ShowDialog();
+            _colorsList = colorsList;
+            for (int i = 0; i < _colorsList.Count; ++i)
+            {
+                if (i == 3)
+                    control.AddRow(_colorsList[i].LightColor, Color.Blue);
+                else
+                    control.AddRow(_colorsList[i].LightColor);
+                if (!_colorsList[i].Use)
+                    control.SelectItem(i, 0);
+                for (int j = 0; j < _colorsList[i].PossibleBlocks.Count; ++j)
+                {
+                    control.AddItem(i, _colorsList[i].PossibleBlocks[j].Name, _images[_colorsList[i].PossibleBlocks[j].TextureName]);
+                    if (_colorsList[i].PossibleBlocks[j].Equals(_colorsList[i].SelectedBlock))
+                        control.SelectItem(i, j + 1);
+                }
+            }
+            base.ShowDialog();
         }
-
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = comboBox1.SelectedIndex;
-            comboBox2.Items.Clear();
-            foreach (BlockData block in colorsList[index].PossibleBlocks)
-                comboBox2.Items.Add(block.Name);
-            comboBox2.Text = comboBox2.Items[0].ToString();
-
-            textBoxName.Text = colorsList[index].SelectedBlock.Name;
-            textBoxTexture.Text = colorsList[index].SelectedBlock.TextureName;
-            textBoxID.Text = colorsList[index].SelectedBlock.ID.ToString();
-            textBoxData.Text = colorsList[index].SelectedBlock.Data.ToString();
-            checkBox1.Checked = colorsList[index].SelectedBlock.IsTransparent;
-            button4.Text = colorsList[index].Use ? "Do not use" : "Use";
-            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[index].SelectedBlock.TextureName}");
-            pictureBoxTexture.Image = images[colorsList[index].SelectedBlock.TextureName];
-
-            pictureBoxColors.Image = new Bitmap(pictureBoxColors.Width, pictureBoxColors.Height);
-            Graphics graph = Graphics.FromImage(pictureBoxColors.Image);
-            graph.FillRectangle(new SolidBrush(colorsList[index].DarkColor), new Rectangle(0, 0, 50, 32));
-            graph.FillRectangle(new SolidBrush(colorsList[index].NormalColor), new Rectangle(50, 0, 50, 32));
-            graph.FillRectangle(new SolidBrush(colorsList[index].LightColor), new Rectangle(100, 0, 50, 32));
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //pictureBoxTexture.Image = Image.FromFile($@"data\Textures\{colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName}");
-            pictureBoxTexture.Image = images[colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName];
-            textBoxName.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].Name;
-            textBoxTexture.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].TextureName;
-            textBoxID.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].ID.ToString();
-            textBoxData.Text = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].Data.ToString();
-            checkBox1.Checked = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex].IsTransparent;
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            colorsList[comboBox1.SelectedIndex].SelectedBlock = colorsList[comboBox1.SelectedIndex].PossibleBlocks[comboBox2.SelectedIndex];
-            comboBox1.Text = colorsList[comboBox1.SelectedIndex].SelectedBlock.Name;
-            comboBox1.Items[comboBox1.SelectedIndex] = colorsList[comboBox1.SelectedIndex].SelectedBlock.Name;
-            WriteFile();
-        }
-       
 
         void WriteFile()
         {
             string save = string.Empty;
-            foreach (ColorNote col in colorsList)
+            foreach (ColorNote col in _colorsList)
                 save += col.DataToString() + "\r\n";
             Properties.Settings.Default.PossibleBlocks = save;
             Properties.Settings.Default.Save();
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FormSelectMaterials_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                textBoxTexture.Text = openFileDialog1.SafeFileName;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            colorsList[comboBox1.SelectedIndex].Use = !colorsList[comboBox1.SelectedIndex].Use;
-            button4.Text = colorsList[comboBox1.SelectedIndex].Use ? "Do not use" : "Use";
+            for (int i = 0; i < _colorsList.Count; ++i)
+                if (control.Get(i) == 0)
+                    _colorsList[i].Use = false;
+                else
+                    _colorsList[i].SelectedBlock = _colorsList[i].PossibleBlocks[control.Get(i) - 1];
             WriteFile();
-        }
-
-
-        private void FormSelectMaterials_HelpButtonClicked(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            FormSelectMaterials_HelpRequested(new object(), new HelpEventArgs(new Point(0, 0)));
-        }
-
-        private void FormSelectMaterials_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            pictureBox1.Visible = true;
-            Size = new Size(549, 419);
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Size = new Size(264, 187);
-            pictureBox1.Visible = false;
+            GC.Collect();
         }
     }
 }
