@@ -82,6 +82,22 @@ namespace Minecraft_staircase
                 note.PossibleBlocks = blockDatas;
                 colorsNote.Add(note);
             }
+
+            #region FOR_JAVASCRIPT_VERSION
+            //string jsout = string.Empty;
+            //foreach (ColorNote cn in colorsNote)
+            //{
+            //    jsout += $"0~{cn.PossibleBlocks[0].ID}-{cn.PossibleBlocks[0].Data}-{cn.PossibleBlocks[0].Name}";
+            //    for (int i = 1; i < cn.PossibleBlocks.Count; ++i)
+            //        jsout += $"+{cn.PossibleBlocks[i].ID}-{cn.PossibleBlocks[i].Data}-{cn.PossibleBlocks[i].Name}";
+            //    jsout += ",";
+            //}
+            //using (System.IO.FileStream fs = new System.IO.FileStream("jsout.txt", System.IO.FileMode.Create))
+            //{
+            //    byte[] buff = System.Text.Encoding.UTF8.GetBytes(jsout);
+            //    fs.Write(buff, 0, buff.Length);
+            //}
+            #endregion
         }
 
 

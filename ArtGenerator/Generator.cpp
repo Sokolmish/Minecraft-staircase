@@ -52,10 +52,10 @@ int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *not
 			}
 			if (type != FLAT) {
 				if (Similarity(&notes[col * 4 + 1], &image[i * 3], LIGH) < betterSimilarity) {
-				betterSimilarity = Similarity(&notes[col * 4 + 1], &image[i * 3], LIGH);
-				betterId = notes[col * 4];
-				betterSet = LIGH;
-				betterIdNum = col;
+					betterSimilarity = Similarity(&notes[col * 4 + 1], &image[i * 3], LIGH);
+					betterId = notes[col * 4];
+					betterSet = LIGH;
+					betterIdNum = col;
 				}
 				if (type != LITE)
 					if (Similarity(&notes[col * 4 + 1], &image[i * 3], DARK) < betterSimilarity) {

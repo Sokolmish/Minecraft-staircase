@@ -9,9 +9,9 @@ namespace Minecraft_staircase
     unsafe class ArtGenerator
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void Progress();
+        delegate void Progress();
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void SaveUses(int* cou);
+        delegate void SaveUses(int* cou);
         [DllImport("ArtGenerator.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern int* Convert(int* image, int imageLen, int type, bool chromatic, int* notes, int notesCount, [MarshalAs(UnmanagedType.FunctionPtr)] Progress callback, [MarshalAs(UnmanagedType.FunctionPtr)] SaveUses callback1);
 
@@ -107,8 +107,12 @@ namespace Minecraft_staircase
                     () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
                     (e) =>
                     {
+                        int t = 0;
                         for (int j = 0; j < _colors.Count; ++j)
-                            _colors[j].Uses = e[j];
+                            if (_colors[j].Use)
+                                _colors[j].Uses = e[t++];
+                            else
+                                _colors[j].Uses = 0;
                     });
                 int i = 0;
                 for (int x = 0; x < h; ++x)
