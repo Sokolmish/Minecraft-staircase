@@ -30,16 +30,17 @@ double Similarity(int* col1, int* col2, int set) {
 }
 
 __declspec(dllexport)
-int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *notes/*=id-rgb=*/, int colCount, void(*Progress)(), void(*SaveUses)(int *cou)) {
+int* Convert(int *image/*r-g-b*/, int width, int height, int type, bool dithering, int *notes/*=id-rgb=*/, int colCount, void(*Progress)(), void(*SaveUses)(int *cou)) {
 	//>>r1,g1,b1,r2,g2,b2, ri,gi,bi
 	//<<id1,set1,id2,set2, idi,seti
 
+	int length = width * height * 3;
 	int* result = new int[length / 3 * 2];
 	int* uses = new int[colCount / 4];
 	for (int i = 0; i < colCount / 4; ++i)
 		uses[i] = 0;
 	for (int i = 0; i < length / 3; ++i) {
-		int betterSimilarity = 99999;
+		double betterSimilarity = 99999;
 		int betterId = 0;
 		int betterSet = NORM;
 		int betterIdNum = 0;
@@ -69,6 +70,31 @@ int* Convert(int *image/*r-g-b*/, int length, int type, bool chromatic, int *not
 		result[i * 2] = betterId;
 		result[i * 2 + 1] = betterSet;
 		++uses[betterIdNum];
+		if (dithering) {
+			int err[3] = {	(image[i * 3 + 0] - notes[betterIdNum * 4 + 1]) >> 4,
+							(image[i * 3 + 1] - notes[betterIdNum * 4 + 2]) >> 4,
+							(image[i * 3 + 2] - notes[betterIdNum * 4 + 3]) >> 4 };
+			if (i % width < width - 1) {
+				image[(i + 1) * 3 + 0] += 7 * err[0];
+				image[(i + 1) * 3 + 1] += 7 * err[1];
+				image[(i + 1) * 3 + 2] += 7 * err[2];
+			}
+			if (trunc(i / width) < height - 1) {
+				if (i % width > 0) {
+					image[(i + width) * 3 - 1 + 0] += 3 * err[0];
+					image[(i + width) * 3 - 1 + 1] += 3 * err[1];
+					image[(i + width) * 3 - 1 + 2] += 3 * err[2];
+				}
+				image[(i + width) * 3 + 0] += 5 * err[0];
+				image[(i + width) * 3 + 1] += 5 * err[1];
+				image[(i + width) * 3 + 2] += 5 * err[2];
+				if (i % width < width - 1) {
+					image[(i + width) * 3 + 1 + 0] += 1 * err[0];
+					image[(i + width) * 3 + 1 + 1] += 1 * err[1];
+					image[(i + width) * 3 + 1 + 2] += 1 * err[2];
+				}
+			}
+		}
 		if (i % 128 == 0)
 			Progress();
 	}

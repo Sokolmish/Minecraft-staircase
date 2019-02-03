@@ -122,37 +122,52 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
+    <value>42, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 24</value>
+    <value>147, 21</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value>Скрыть подсказки</value>
   </data>
+  <data name="comboBox2.Items" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="comboBox2.Items1" xml:space="preserve">
+    <value>Дизеринг</value>
+  </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 91</value>
+    <value>161, 73</value>
   </data>
   <data name="comboBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 28</value>
+    <value>194, 24</value>
+  </data>
+  <data name="comboBox3.Items" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="comboBox3.Items1" xml:space="preserve">
+    <value>Сегментированый</value>
+  </data>
+  <data name="comboBox3.Items2" xml:space="preserve">
+    <value>Смешанный (Рекомендуется)</value>
   </data>
   <data name="comboBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 132</value>
+    <value>161, 106</value>
   </data>
   <data name="comboBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 28</value>
+    <value>194, 24</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>95, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Конвертация</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 20</value>
+    <value>80, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Генерация</value>
@@ -161,70 +176,70 @@
     <value>Закрыть</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 95</value>
+    <value>130, 76</value>
   </data>
   <data name="linkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 135</value>
+    <value>130, 108</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 20</value>
+    <value>82, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Цвет сетки</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 269</value>
+    <value>181, 215</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 28</value>
+    <value>95, 23</value>
   </data>
   <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 312</value>
+    <value>181, 250</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 28</value>
+    <value>95, 23</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 20</value>
+    <value>132, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Цвет сетки чанков</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 354</value>
+    <value>181, 283</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 28</value>
+    <value>95, 23</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 20</value>
+    <value>116, 17</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Цвет сетки карт</value>
   </data>
   <data name="linkLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 222</value>
+    <value>243, 178</value>
   </data>
   <data name="linkLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 180</value>
+    <value>242, 144</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>97, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Высота Mixed</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 20</value>
+    <value>91, 17</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Длинна Flow</value>
   </data>
   <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 177</value>
+    <value>271, 142</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 219</value>
+    <value>273, 175</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

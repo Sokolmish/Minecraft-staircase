@@ -13,7 +13,7 @@ namespace Minecraft_staircase
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate void SaveUses(int* cou);
         [DllImport("ArtGenerator.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int* Convert(int* image, int imageLen, int type, bool chromatic, int* notes, int notesCount, [MarshalAs(UnmanagedType.FunctionPtr)] Progress callback, [MarshalAs(UnmanagedType.FunctionPtr)] SaveUses callback1);
+        static extern int* Convert(int* image, int width, int height, int type, bool dithering, int* notes, int notesCount, [MarshalAs(UnmanagedType.FunctionPtr)] Progress callback, [MarshalAs(UnmanagedType.FunctionPtr)] SaveUses callback1);
 
         List<ColorNote> _colors;
 
@@ -103,7 +103,7 @@ namespace Minecraft_staircase
             fixed (int* image = image1)
             fixed (int* notes = notes1.ToArray())
             {
-                int* res = Convert(image, image1.Length, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
+                int* res = Convert(image, sourceImage.Width, sourceImage.Height, (int)type, Properties.Settings.Default.ConvertingMethod == 1, notes, notes1.Count,
                     () => { progress.BeginInvoke(new Action(() => { progress?.Increment(1); })); },
                     (e) =>
                     {
